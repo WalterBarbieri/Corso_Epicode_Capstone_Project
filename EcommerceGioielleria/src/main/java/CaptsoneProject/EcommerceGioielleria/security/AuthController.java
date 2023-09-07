@@ -43,7 +43,7 @@ public class AuthController {
 
 		if (utente != null && bcrypt.matches(body.getPassword(), utente.getPassword())) {
 			String token = jt.createToken(utente);
-			return new ResponseEntity<>(new TokenResponse(token), HttpStatus.OK);
+			return new ResponseEntity<>(new TokenResponse(token, utente), HttpStatus.OK);
 
 		} else {
 			throw new UnauthorizedException(

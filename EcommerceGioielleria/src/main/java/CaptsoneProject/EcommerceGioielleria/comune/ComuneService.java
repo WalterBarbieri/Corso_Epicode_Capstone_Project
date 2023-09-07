@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import CaptsoneProject.EcommerceGioielleria.exceptions.NotFoundException;
+
 @Service
 public class ComuneService {
 	private final ComuneRepository cr;
@@ -30,6 +32,10 @@ public class ComuneService {
 
 	public List<Comune> findComuni() {
 		return cr.findAll();
+	}
+
+	public Comune findComuneByNome(String denominazione) {
+		return cr.findByDenominazione(denominazione).orElseThrow(() -> new NotFoundException(denominazione));
 	}
 
 }

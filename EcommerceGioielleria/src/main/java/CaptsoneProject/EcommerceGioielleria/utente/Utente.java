@@ -11,12 +11,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import CaptsoneProject.EcommerceGioielleria.indirizzo.Indirizzo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +47,12 @@ public class Utente implements UserDetails {
 	private String pIva;
 	@Enumerated(EnumType.STRING)
 	private Ruolo ruolo;
+	@OneToOne
+	private Indirizzo residenza;
+	@OneToOne
+	private Indirizzo domicilio;
+	@OneToMany(mappedBy = "utente")
+	private List<Indirizzo> indirizzi;
 
 	public Utente(String nome, String cognome, LocalDate dataNascita, String email, String password, Ruolo ruolo) {
 		super();
