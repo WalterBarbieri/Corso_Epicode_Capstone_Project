@@ -28,15 +28,21 @@ public class CsvConverter {
 			String line = scanner.nextLine();
 			line = line.trim();
 			String[] parts = line.split(";");
-			System.out.println(parts[6]);
-			System.out.println(parts[11]);
-			System.out.println(parts[12]);
-			System.out.println(parts[15]);
 
-			String denominazione = parts[6];
-			String nomeRegione = parts[11];
-			String nomeProvincia = parts[12];
-			String siglaProvincia = parts[15];
+			String denominazione = parts[5];
+			String nomeRegione = parts[10];
+			if (nomeRegione.startsWith("Valle d'Aosta")) {
+				nomeRegione = "Valle d'Aosta/Vallée d'Aoste";
+			} else if (nomeRegione.startsWith("Trentino-Alto")) {
+				nomeRegione = "Trentino-Alto Adige/Südtirol";
+			}
+			String nomeProvincia = parts[11];
+			if (nomeProvincia.startsWith("Valle d'Aosta")) {
+				nomeProvincia = "Valle d'Aosta/Vallée d'Aoste";
+			} else if (nomeProvincia.startsWith("Forl")) {
+				nomeProvincia = "Forlì-Cesena";
+			}
+			String siglaProvincia = parts[14];
 
 			Comune comune = new Comune(denominazione, nomeRegione, nomeProvincia, siglaProvincia);
 			cs.saveComune(comune);

@@ -12,7 +12,7 @@ public class ComuneRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		converter.convertCsv("Elenco-comuni-italiani.csv");
+//		converter.convertCsv("Elenco-comuni-italiani.csv");
 
 	}
 
