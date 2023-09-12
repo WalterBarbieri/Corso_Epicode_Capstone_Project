@@ -8,6 +8,7 @@ import CaptsoneProject.EcommerceGioielleria.prodotto.immagini.Immagine;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
@@ -15,6 +16,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -23,6 +25,7 @@ import lombok.Setter;
 @DiscriminatorColumn(name = "DTYPE")
 @Getter
 @Setter
+@NoArgsConstructor
 public abstract class Prodotto {
 	@Id
 	@GeneratedValue
@@ -31,7 +34,7 @@ public abstract class Prodotto {
 	private String descrizione;
 	private double price;
 	private int quantita;
-	@OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Immagine> immagini = new ArrayList<>();
 
 	public Prodotto(String nomeProdotto, String descrizione, double price, int quantita, List<Immagine> immagini) {

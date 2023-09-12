@@ -17,6 +17,7 @@ import CaptsoneProject.EcommerceGioielleria.exceptions.NotFoundException;
 import CaptsoneProject.EcommerceGioielleria.prodotto.Prodotto;
 import CaptsoneProject.EcommerceGioielleria.prodotto.immagini.Immagine;
 import CaptsoneProject.EcommerceGioielleria.prodotto.immagini.ImmagineService;
+import jakarta.transaction.Transactional;
 
 @Service
 public class GioielloService {
@@ -53,25 +54,30 @@ public class GioielloService {
 
 	}
 
+	@Transactional
 	public Gioiello findById(UUID id) {
 		return gr.findById(id).orElseThrow(() -> new NotFoundException(id));
 	}
 
+	@Transactional
 	public Page<Gioiello> findGioielliAndPage(int page, int size, String sort) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
 
 		return gr.findAll(pageable);
 	}
 
+	@Transactional
 	public List<Gioiello> findGioielli() {
 		return gr.findAll();
 	}
 
+	@Transactional
 	public Page<Gioiello> findByCategoria(Categoria categoria, int page, int size, String sort) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
 		return gr.findByCategoria(categoria, pageable);
 	}
 
+	@Transactional
 	public Page<Gioiello> cercaGioiello(String nomeProdotto, int page, int size, String sort) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
 		return gr.cercaGioielli(nomeProdotto, pageable);

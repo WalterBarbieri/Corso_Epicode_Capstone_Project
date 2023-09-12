@@ -15,4 +15,7 @@ public interface GioielloRepository extends JpaRepository<Gioiello, UUID> {
 
 	@Query("SELECT g FROM Gioiello g WHERE g.nomeProdotto ILIKE %:nomeProdotto%")
 	Page<Gioiello> cercaGioielli(@Param("nomeProdotto") String nomeProdotto, Pageable page);
+
+	@Query("SELECT g FROM Gioiello g JOIN FETCH g.immagini")
+	Page<Gioiello> findGioielliAndPage(Pageable page);
 }
