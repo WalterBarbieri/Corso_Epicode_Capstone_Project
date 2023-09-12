@@ -14,8 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import CaptsoneProject.EcommerceGioielleria.exceptions.IllegalArgumentException;
+import CaptsoneProject.EcommerceGioielleria.exceptions.NotFoundException;
 import CaptsoneProject.EcommerceGioielleria.prodotto.Prodotto;
-import CaptsoneProject.EcommerceGioielleria.prodotto.gioiello.GioielloService;
+import CaptsoneProject.EcommerceGioielleria.prodotto.gioiello.GioielloRepository;
 
 @Service
 public class ImmagineService {
@@ -24,26 +25,26 @@ public class ImmagineService {
 
 	private final ImmagineRepository ir;
 
-	private final GioielloService gs;
+	private final GioielloRepository gr;
 
 	@Autowired
-	public ImmagineService(ImmagineRepository ir, GioielloService gs) {
+	public ImmagineService(ImmagineRepository ir, GioielloRepository gr) {
 		super();
 		this.ir = ir;
-		this.gs = gs;
+		this.gr = gr;
 	}
 
-	public Immagine saveImmagine(UUID id, MultipartFile immagine) throws IOException {
+	public Immagine saveImmagine(UUID prodottoId, MultipartFile immagine) throws IOException {
 		if (!immagine.isEmpty()) {
-			String immagineNome = id.toString() + "_" + immagine.getOriginalFilename();
+			String nomeImmagine = prodottoId.toString() + "_" + immagine.getName();
 
-			Path immaginePath = Paths.get(immagineDirectory + immagineNome);
+			Path immaginePath = Paths.get(immagineDirectory + nomeImmagine);
 
 			Files.write(immaginePath, immagine.getBytes());
 
-			Prodotto prodotto = gs.findById(id);
+			Prodotto prodotto = gr.findById(prodottoId).orElseThrow(() -> new NotFoundException(prodottoId));
 
-			Immagine nuovaImmagine = new Immagine(immagine.getBytes(), immagineNome, prodotto);
+			Immagine nuovaImmagine = new Immagine(immagine.getBytes(), nomeImmagine, prodotto);
 
 			return ir.save(nuovaImmagine);
 		} else {
@@ -51,9 +52,9 @@ public class ImmagineService {
 		}
 	}
 
-	public List<byte[]> getImmagini(UUID id) throws IOException {
+	public List<byte[]> getImmagini(UUID prodottoId) throws IOException {
 		List<byte[]> immagini = new ArrayList<>();
-		String prodottoDirectory = id.toString() + "_";
+		String prodottoDirectory = prodottoId.toString() + "_";
 
 		try {
 			Files.walk(Paths.get(immagineDirectory)).filter(Files::isRegularFile)
@@ -71,5 +72,32 @@ public class ImmagineService {
 
 		return immagini;
 
+	}
+
+	public Immagine getImmagine(UUID id) {
+		return ir.findById(id).orElseThrow(() -> new NotFoundException(id));
+	}
+
+	public void deleteImmagine(UUID id) {
+		Immagine immagine = this.getImmagine(id);
+
+		Prodotto prodotto = immagine.getProdotto();
+
+		if (prodotto != null) {
+			prodotto.getImmagini().remove(immagine);
+		}
+
+		String nomeImmagine = immagine.getNomeImmagine();
+
+		Path immaginePath = Paths.get(immagineDirectory + nomeImmagine);
+
+		try {
+			Files.deleteIfExists(immaginePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Errore durante l'eliminazione del file");
+		}
+
+		ir.delete(immagine);
 	}
 }
