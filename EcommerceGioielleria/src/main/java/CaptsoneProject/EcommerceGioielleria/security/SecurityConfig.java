@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import CaptsoneProject.EcommerceGioielleria.exceptions.CustomAccessDeniedHandler;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -27,9 +29,10 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/utenti/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/comuni/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/indirizzi/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/gioielli/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 		http.addFilterBefore(jat, UsernamePasswordAuthenticationFilter.class);
-
+		http.exceptionHandling(handling -> handling.accessDeniedHandler(new CustomAccessDeniedHandler()));
 		return http.build();
 	}
 

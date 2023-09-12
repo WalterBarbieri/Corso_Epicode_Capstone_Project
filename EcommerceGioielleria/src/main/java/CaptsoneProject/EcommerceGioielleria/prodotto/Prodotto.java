@@ -31,7 +31,7 @@ public abstract class Prodotto {
 	private String descrizione;
 	private double price;
 	private int quantita;
-	@OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL)
 	private List<Immagine> immagini = new ArrayList<>();
 
 	public Prodotto(String nomeProdotto, String descrizione, double price, int quantita, List<Immagine> immagini) {

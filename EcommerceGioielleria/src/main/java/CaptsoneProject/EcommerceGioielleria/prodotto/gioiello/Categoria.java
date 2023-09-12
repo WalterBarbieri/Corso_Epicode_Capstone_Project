@@ -1,5 +1,5 @@
 package CaptsoneProject.EcommerceGioielleria.prodotto.gioiello;
 
 public enum Categoria {
-	COLLANA, ANELLI, ORECCHINI, BRACCIALE, ALTRO
+	COLLANE, PENDENTI, ANELLI, ORECCHINI, BRACCIALI, MATERIALE_CLIENTE
 }

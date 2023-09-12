@@ -36,7 +36,18 @@ public class ImmagineService {
 
 	public Immagine saveImmagine(UUID prodottoId, MultipartFile immagine) throws IOException {
 		if (!immagine.isEmpty()) {
-			String nomeImmagine = prodottoId.toString() + "_" + immagine.getName();
+
+			String timestamp = String.valueOf(System.currentTimeMillis());
+			String originalFileName = immagine.getOriginalFilename();
+			String estensione = "";
+			if (originalFileName != null) {
+				int lastDotIndex = originalFileName.lastIndexOf(".");
+				if (lastDotIndex != -1) {
+					estensione = originalFileName.substring(lastDotIndex);
+				}
+			}
+
+			String nomeImmagine = prodottoId.toString() + "_" + timestamp + estensione;
 
 			Path immaginePath = Paths.get(immagineDirectory + nomeImmagine);
 

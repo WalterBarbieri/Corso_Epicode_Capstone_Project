@@ -2,6 +2,8 @@ package CaptsoneProject.EcommerceGioielleria.prodotto.immagini;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import CaptsoneProject.EcommerceGioielleria.prodotto.Prodotto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class Immagine {
 
 	@ManyToOne
 	@JoinColumn(name = "prodotto_id")
+	@JsonIgnore
 	private Prodotto prodotto;
 
 	public Immagine(byte[] dati, String nomeImmagine, Prodotto prodotto) {
