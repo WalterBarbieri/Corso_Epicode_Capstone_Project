@@ -1,10 +1,13 @@
 package CaptsoneProject.EcommerceGioielleria.utente;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,10 +51,13 @@ public class Utente implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Ruolo ruolo;
 	@OneToOne
+	@Cascade(CascadeType.ALL)
 	private Indirizzo residenza;
 	@OneToOne
+	@Cascade(CascadeType.ALL)
 	private Indirizzo domicilio;
 	@OneToMany(mappedBy = "utente")
+	@Cascade(CascadeType.ALL)
 	private List<Indirizzo> indirizzi;
 
 	public Utente(String nome, String cognome, LocalDate dataNascita, String email, String password, Ruolo ruolo) {
@@ -62,6 +68,7 @@ public class Utente implements UserDetails {
 		this.email = email;
 		this.password = password;
 		this.ruolo = ruolo;
+		this.indirizzi = new ArrayList<>();
 	}
 
 	@Override

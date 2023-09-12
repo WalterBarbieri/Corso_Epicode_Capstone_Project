@@ -2,6 +2,8 @@ package CaptsoneProject.EcommerceGioielleria.indirizzo;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import CaptsoneProject.EcommerceGioielleria.comune.Comune;
 import CaptsoneProject.EcommerceGioielleria.utente.Utente;
 import jakarta.persistence.Entity;
@@ -11,12 +13,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "indirizzi")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Indirizzo {
 	@Id
 	@GeneratedValue
@@ -29,6 +33,7 @@ public class Indirizzo {
 	@ManyToOne
 	@JoinColumn(name = "comune_id")
 	private Comune comune;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "utente_id")
 	private Utente utente;

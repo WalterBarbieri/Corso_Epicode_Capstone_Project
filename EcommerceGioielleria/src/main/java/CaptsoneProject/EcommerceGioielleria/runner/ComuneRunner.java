@@ -10,11 +10,15 @@ import CaptsoneProject.EcommerceGioielleria.comune.CsvConverter;
 public class ComuneRunner implements CommandLineRunner {
 	@Autowired
 	private CsvConverter converter;
+	@Autowired
+	private RandomInstanceGenerator generator;
 
 	@Override
 	public void run(String... args) throws Exception {
 
 //		converter.convertCsv("Elenco-comuni-italiani.csv");
+
+//		generator.randomUtenteGenerator(10);
 
 	}
 

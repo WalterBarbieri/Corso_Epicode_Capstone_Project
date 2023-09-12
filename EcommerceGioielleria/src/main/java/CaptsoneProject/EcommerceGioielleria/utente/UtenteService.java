@@ -30,7 +30,7 @@ public class UtenteService {
 		});
 
 		Utente utente = new Utente(body.getNome(), body.getCognome(), body.getDataNascita(), body.getEmail(),
-				body.getPassword(), Ruolo.ADMIN);
+				body.getPassword(), Ruolo.USER);
 		return ur.save(utente);
 	}
 
@@ -51,7 +51,12 @@ public class UtenteService {
 
 	public Page<Utente> findByCognome(String cognome, int page, int size, String sort) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-		return ur.findByNome(cognome, pageable);
+		return ur.findByCognome(cognome, pageable);
+	}
+
+	public Page<Utente> cercaUtenti(String nome, String cognome, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return ur.cercaUtenti(nome, cognome, pageable);
 	}
 
 	public Utente findByEmail(String email) {
@@ -71,6 +76,10 @@ public class UtenteService {
 	public void deleteUtente(String email) {
 		Utente utente = this.findByEmail(email);
 		ur.delete(utente);
+	}
+
+	public Utente updateUtente(Utente utente) {
+		return ur.save(utente);
 	}
 
 }

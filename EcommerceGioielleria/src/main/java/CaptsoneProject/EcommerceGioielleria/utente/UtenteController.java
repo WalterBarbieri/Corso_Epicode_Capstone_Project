@@ -31,22 +31,30 @@ public class UtenteController {
 		return us.findUtentiAndPage(page, size, sortBy);
 	}
 
-	@GetMapping("/{nome}")
+	@GetMapping(params = "nome")
 
-	public Page<Utente> findByNome(@RequestParam String nome, @RequestParam(defaultValue = "0") int page,
+	public Page<Utente> findByNome(@RequestParam(name = "nome") String nome, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
 		return us.findByNome(nome, page, size, sortBy);
 	}
 
-	@GetMapping("/{cognome}")
-	public Page<Utente> findByCognome(@RequestParam String cognome, @RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+	@GetMapping(params = "cognome")
+	public Page<Utente> findByCognome(@RequestParam(name = "cognome") String cognome,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id") String sortBy) {
 		return us.findByCognome(cognome, page, size, sortBy);
 	}
 
-	@GetMapping("/{email}")
-	public Utente findByEmail(@RequestParam String email) {
+	@GetMapping(params = "email")
+	public Utente findByEmail(@RequestParam(name = "email") String email) {
 		return us.findByEmail(email);
+	}
+
+	@GetMapping("/cerca")
+	public Page<Utente> cercaUtenti(@RequestParam(required = false) String nome,
+			@RequestParam(required = false) String cognome, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return us.cercaUtenti(nome, cognome, page, size, sortBy);
 	}
 
 	@PutMapping("/{email}")
