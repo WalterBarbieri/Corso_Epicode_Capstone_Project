@@ -30,6 +30,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/comuni/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/indirizzi/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/gioielli/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/immagini/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 		http.addFilterBefore(jat, UsernamePasswordAuthenticationFilter.class);
 		http.exceptionHandling(handling -> handling.accessDeniedHandler(new CustomAccessDeniedHandler()));

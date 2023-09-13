@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +33,8 @@ public class ImmagineController {
 		this.gs = gs;
 	}
 
-	@GetMapping("/{prodottoId}")
-	public ResponseEntity<List<byte[]>> getImmaginiByProdotto(@PathVariable UUID prodottoId) {
+	@GetMapping(params = "prodottoId")
+	public ResponseEntity<List<byte[]>> getImmaginiByProdotto(@RequestParam(name = "prodottoId") UUID prodottoId) {
 		try {
 			List<byte[]> immagini = is.getImmagini(prodottoId);
 			return new ResponseEntity<>(immagini, HttpStatus.FOUND);
@@ -54,9 +55,10 @@ public class ImmagineController {
 		}
 	}
 
-	@PostMapping("/{prodottoId}")
-	public ResponseEntity<Prodotto> saveImmagine(@PathVariable UUID prodottoId,
-			@RequestParam("immagine") MultipartFile immagine) {
+	@PostMapping(params = "prodottoId")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public ResponseEntity<Prodotto> saveImmagine(@RequestParam(name = "prodottoId") UUID prodottoId,
+			@RequestParam(name = "immagine") MultipartFile immagine) {
 		try {
 			Immagine nuovaImmagine = is.saveImmagine(prodottoId, immagine);
 		} catch (IOException e) {
@@ -70,8 +72,10 @@ public class ImmagineController {
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteImmagine(@PathVariable UUID id) {
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public ResponseEntity<String> deleteImmagine(@PathVariable UUID id) {
 		is.deleteImmagine(id);
+		return ResponseEntity.ok("Immagine eliminata con successo");
 	}
 
 }

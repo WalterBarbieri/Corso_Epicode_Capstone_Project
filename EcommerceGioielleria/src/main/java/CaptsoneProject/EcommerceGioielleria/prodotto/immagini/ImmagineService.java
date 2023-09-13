@@ -1,5 +1,6 @@
 package CaptsoneProject.EcommerceGioielleria.prodotto.immagini;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,7 +54,9 @@ public class ImmagineService {
 
 			Path immaginePath = Paths.get(immagineDirectory + nomeImmagine);
 
-			Files.write(immaginePath, immagine.getBytes());
+			byte[] compressImage = compressor(immagine.getBytes());
+
+			Files.write(immaginePath, compressImage);
 
 			Prodotto prodotto = gr.findById(prodottoId).orElseThrow(() -> new NotFoundException(prodottoId));
 
@@ -72,7 +77,8 @@ public class ImmagineService {
 					.filter(path -> path.getFileName().toString().startsWith(prodottoDirectory)).forEach(path -> {
 						try {
 							byte[] immagine = Files.readAllBytes(path);
-							immagini.add(immagine);
+							byte[] decompressImage = decompressor(immagine);
+							immagini.add(decompressImage);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -111,4 +117,46 @@ public class ImmagineService {
 
 		ir.delete(immagine);
 	}
+
+	public byte[] compressor(byte[] dati) {
+		Deflater deflater = new Deflater();
+		deflater.setLevel(Deflater.BEST_SPEED);
+		deflater.setInput(dati);
+		deflater.finish();
+
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(dati.length);
+		byte[] tmp = new byte[4 * 1024];
+		while (!deflater.finished()) {
+			int size = deflater.deflate(tmp);
+			outputStream.write(tmp, 0, size);
+		}
+		try {
+			outputStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Errore durante la compressione dei dati");
+		}
+
+		return outputStream.toByteArray();
+	}
+
+	public byte[] decompressor(byte[] dati) {
+		Inflater inflater = new Inflater();
+		inflater.setInput(dati);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(dati.length);
+		byte[] tmp = new byte[4 * 1024];
+		try {
+			while (!inflater.finished()) {
+				int count = inflater.inflate(tmp);
+				outputStream.write(tmp, 0, count);
+			}
+			outputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Errore durante la decompressione dei dati");
+		}
+
+		return outputStream.toByteArray();
+	}
+
 }

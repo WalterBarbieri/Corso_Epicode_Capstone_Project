@@ -83,4 +83,9 @@ public class GioielloService {
 		return gr.cercaGioielli(nomeProdotto, pageable);
 	}
 
+	public void deleteGioiello(UUID id) {
+		Gioiello gioiello = this.findById(id);
+		gr.delete(gioiello);
+	}
+
 }

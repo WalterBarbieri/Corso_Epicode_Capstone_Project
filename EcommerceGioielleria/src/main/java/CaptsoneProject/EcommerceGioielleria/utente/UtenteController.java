@@ -3,6 +3,7 @@ package CaptsoneProject.EcommerceGioielleria.utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,19 +27,21 @@ public class UtenteController {
 	}
 
 	@GetMapping
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Page<Utente> findUtenti(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
 		return us.findUtentiAndPage(page, size, sortBy);
 	}
 
 	@GetMapping(params = "nome")
-
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Page<Utente> findByNome(@RequestParam(name = "nome") String nome, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
 		return us.findByNome(nome, page, size, sortBy);
 	}
 
 	@GetMapping(params = "cognome")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Page<Utente> findByCognome(@RequestParam(name = "cognome") String cognome,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
 			@RequestParam(defaultValue = "id") String sortBy) {
@@ -51,6 +54,7 @@ public class UtenteController {
 	}
 
 	@GetMapping("/cerca")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Page<Utente> cercaUtenti(@RequestParam(required = false) String nome,
 			@RequestParam(required = false) String cognome, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
