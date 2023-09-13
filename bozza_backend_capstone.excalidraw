@@ -1532,8 +1532,8 @@
     },
     {
       "type": "text",
-      "version": 66,
-      "versionNonce": 923152515,
+      "version": 116,
+      "versionNonce": 973241822,
       "isDeleted": false,
       "id": "yGKI60xiZtEsEUyJMGBHn",
       "fillStyle": "hachure",
@@ -1542,27 +1542,27 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 871,
-      "y": 305,
-      "strokeColor": "#1e1e1e",
+      "x": 781,
+      "y": 372,
+      "strokeColor": "#e03131",
       "backgroundColor": "#b2f2bb",
-      "width": 57.79197692871094,
+      "width": 62.35197448730469,
       "height": 40,
       "seed": 15928730,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1694546080331,
+      "updated": 1694600616971,
       "link": null,
       "locked": false,
       "fontSize": 16,
       "fontFamily": 1,
-      "text": "List in \nutenti",
+      "text": "List in \nutenti ?",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "List in \nutenti",
+      "originalText": "List in \nutenti ?",
       "lineHeight": 1.25,
       "baseline": 34
     },
@@ -1774,44 +1774,33 @@
       "baseline": 18
     },
     {
-      "id": "oxfXe1iVcCrrqlrl9adOH",
       "type": "arrow",
-      "x": 1031,
-      "y": 549.875,
-      "width": 159,
-      "height": 3,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
+      "version": 30,
+      "versionNonce": 1470277901,
+      "isDeleted": false,
+      "id": "oxfXe1iVcCrrqlrl9adOH",
       "fillStyle": "hachure",
       "strokeWidth": 1,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": 1031,
+      "y": 549.875,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 159,
+      "height": 3,
+      "seed": 1340232067,
       "groupIds": [],
       "frameId": null,
       "roundness": {
         "type": 2
       },
-      "seed": 1340232067,
-      "version": 30,
-      "versionNonce": 1470277901,
-      "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1694546102280,
       "link": null,
       "locked": false,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          159,
-          -3
-        ]
-      ],
-      "lastCommittedPoint": null,
       "startBinding": {
         "elementId": "a0p8oerZVWhOiwlaIjwmE",
         "focus": 0.26100063465199913,
@@ -1822,8 +1811,19 @@
         "focus": -0.11889147450814468,
         "gap": 5.5
       },
+      "lastCommittedPoint": null,
       "startArrowhead": null,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          159,
+          -3
+        ]
+      ]
     }
   ],
   "appState": {
