@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+            <div class="navbarButtonContainer d-lg-none">
+                <button
+                    class="menu__icon navbar-toggler border-0"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarCentralSection"
+                    aria-controls="navbarCentralSection"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    (click)="toggleHamburgerMenu()"
+                    [class.isActive]="isOpen"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="m-auto m-lg-0">
+                <a [routerLink]="'/'">
+                    <img
+                        src="assets/logo.png"
+                        alt="Pepe Factory Logo"
+                        class="logo"
+                    />
+                </a>
+            </div>
+
+            <div class="d-flex justify-content-center" id="centralSectionContainer">
+                <div class="collapse navbar-collapse" id="navbarCentralSection">
+                    <div>
+                        <a [routerLink]="'/'" class="nav-item">Home</a>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle z-1 position-relative"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Shop
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#"
+                                    >Tutti i prodotti</a
+                                >
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Collane</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Anelli</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Bracciali</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Orecchini</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <a href="">Contatti</a>
+                    </div>
+                    <div>
+                        <a href="">Pepe History</a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column flex-lg-row">
+                <img
+                    src="assets/person-circle.svg"
+                    alt="UserLogo"
+                    class="icon"
+                />
+                <img src="assets/cart.svg" alt="CartLogo" class="icon" />
+            </div>
+        </div>
+    </div>
+</nav>

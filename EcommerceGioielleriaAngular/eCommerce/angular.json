@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ecommerceGioielleria": {
+    "eCommerce": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ecommerce-gioielleria",
+            "outputPath": "dist/e-commerce",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ecommerceGioielleria:build:production"
+              "browserTarget": "eCommerce:build:production"
             },
             "development": {
-              "browserTarget": "ecommerceGioielleria:build:development"
+              "browserTarget": "eCommerce:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ecommerceGioielleria:build"
+            "browserTarget": "eCommerce:build"
           }
         },
         "test": {
@@ -105,6 +105,6 @@
     }
   },
   "cli": {
-    "analytics": "6255ba78-55f2-4b89-b0f9-ff6de15890bc"
+    "analytics": "cfa4afc9-0f72-40db-a1f8-cfa225c1ac46"
   }
 }
