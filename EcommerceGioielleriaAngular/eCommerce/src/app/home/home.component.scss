@@ -1,9 +1,30 @@
 #section1{
-    width: 100vw;
-    height: 70%;
-    background-image: url(/assets/i_fossi_di_livorno_4121342459-scaled.jpg);
+    width: 100%;
+    height: 80%;
+    background-image: url(/assets/immagini/repertorio/IMG-20221214-WA0010.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position-y: center;
+    background-position-x: center;
+
+}
+
+#section2{
+    width: 100%;
+    height: 80%;
+    background-image: url(/assets/immagini/repertorio/b00000072_resized_20230916_051554974.JPG);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center ;
+
+}
+
+.homeCardTitle{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: -webkit-fill-available;
 
 }

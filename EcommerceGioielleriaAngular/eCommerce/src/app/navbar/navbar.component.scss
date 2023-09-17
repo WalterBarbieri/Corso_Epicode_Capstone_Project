@@ -7,7 +7,7 @@
     margin: 0.5em 1em;
 }
 .navbar{
-    background-color: black;
+    background-color: #1A1A1A;
     color: white;
     a {
         color: white;
@@ -22,8 +22,8 @@
 }
 @media screen and (max-width: 991px){
     .dropdown-menu{
-        top: 0;
-        left: 9em;
+        top: 1em;
+        left: -1em;
         padding-top: 1em !important;
     }
 
@@ -41,9 +41,9 @@
     pointer-events: none;
 }
 .dropdown-menu{
-    background-color: black;
+    background-color: #1A1A1A;
     li, :hover {
-        background-color: black;
+        background-color: #1A1A1A;
         a{
             text-decoration: none;
             &:hover {
@@ -63,8 +63,8 @@
     #centralSectionContainer{
         position: absolute;
         left: 0;
-        top: 7em;
-        background-color: black;
+        top: 9em;
+        background-color: #1A1A1A;
     }
 
     #navbarCentralSection div{
@@ -85,10 +85,10 @@
 /*Codice per trasformazione menu hamburger in X, credits @ ArturCodeCraft: https://uiverse.io/ArturCodeCraft/selfish-fish-82*/
   .navbarButtonContainer {
     border-radius: 16px;
-    border: 1px solid black;
-    background: black;
+    border: 1px solid #1A1A1A;
+    background: #1A1A1A;
     mix-blend-mode: luminosity;
-    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.20);
+    box-shadow: 0px 0px 0px 1px #1A1A1A;
     backdrop-filter: blur(15px);
     width: 65px;
     height: 65px;
