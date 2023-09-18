@@ -20,17 +20,7 @@
     }
     padding: 0;
 }
-@media screen and (max-width: 991px){
-    .dropdown-menu{
-        top: 1em;
-        left: -1em;
-        padding-top: 1em !important;
-    }
 
-    .dropdown-menu li{
-        margin-bottom: 1em;
-    }
-}
 .dropdown:hover .dropdown-menu{
     display: block;
     margin-top: 0em;
@@ -60,6 +50,15 @@
 }
 
 @media screen and (max-width: 991px) {
+    .dropdown-menu{
+        top: 1em;
+        left: -1em;
+        padding-top: 1em !important;
+    }
+
+    .dropdown-menu li{
+        margin-bottom: 1em;
+    }
     #centralSectionContainer{
         position: absolute;
         left: 0;

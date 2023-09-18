@@ -20,8 +20,11 @@ const route: Route[] = [
     {
         path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     }
-
 ]
 @NgModule({
   declarations: [

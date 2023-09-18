@@ -1,0 +1,28 @@
+.registerBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 47%;
+    background-color: ghostwhite;
+}
+
+.card {
+    border: none;
+    background-color: ghostwhite;
+}
+@media screen and (min-width: 768px) {
+    .card {
+        width: 50%;
+    }
+}
+
+.btn {
+    background-color: lightcoral;
+
+    & :disabled {
+        background-color: lightpink;
+    }
+}
+.anchorColor{
+    color: lightcoral;
+}
