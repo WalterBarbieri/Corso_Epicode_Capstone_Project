@@ -1,5 +1,6 @@
 .loginBody{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 46.8%;
@@ -9,4 +10,11 @@
     border: none;
     background-color: ghostwhite;
 }
+
+
+.anchorColor{
+    color: #7c83bc;
+    cursor: pointer;
+}
+
 

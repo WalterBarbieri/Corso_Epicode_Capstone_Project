@@ -1,5 +1,6 @@
 .registerBody {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 47%;
@@ -16,13 +17,8 @@
     }
 }
 
-.btn {
-    background-color: lightcoral;
+anchorColor{
+    color: #7c83bc;
+    cursor: pointer;
+}
 
-    & :disabled {
-        background-color: lightpink;
-    }
-}
-.anchorColor{
-    color: lightcoral;
-}

@@ -69,7 +69,7 @@
                 >
                     <button
                         type="submit"
-                        class="btn mt-2 me-2"
+                        class="btn button mt-2 me-2"
                         [disabled]="form.invalid"
                     >
                         Signup
@@ -83,19 +83,20 @@
             </form>
         </div>
     </div>
-</div>
-<div *ngIf="error">
-    <div
-        class="alert alert-danger d-flex justify-content-between"
-        role="alert"
-        *ngIf="showAlert"
-    >
-        <span> {{ error }} </span>
-        <button
-            type="button"
-            class="btn-close"
-            aria-label="Close"
-            (click)="chiudiAlert()"
-        ></button>
+    <div *ngIf="error">
+        <div
+            class="alert alert-danger d-flex justify-content-between align-items-center"
+            role="alert"
+            *ngIf="showAlert"
+        >
+            <span class="me-2 pt-1"> {{ error }} </span>
+            <button
+                type="button"
+                class="btn-close"
+                aria-label="Close"
+                (click)="chiudiAlert()"
+            ></button>
+        </div>
     </div>
 </div>
+

@@ -23,9 +23,10 @@ export class RegisterComponent implements OnInit {
     console.log(form.value);
 
     this.authService.signUp(form.value).pipe(
-        catchError(error => {
-            console.error(error);
-            this.error = error;
+        catchError(() => {
+            console.error(this.authService.errorMessage);
+
+            this.error = this.authService.errorMessage;
             form.reset;
             return of(null);
 

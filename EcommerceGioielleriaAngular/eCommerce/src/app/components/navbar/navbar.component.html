@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light position-sticky top-0 z-2">
     <div class="container-fluid">
         <div class="d-flex w-100 align-items-center justify-content-between">
             <div class="navbarButtonContainer d-lg-none">
@@ -28,14 +28,17 @@
                 </a>
             </div>
 
-            <div class="d-flex justify-content-center" id="centralSectionContainer">
+            <div
+                class="d-flex justify-content-center"
+                id="centralSectionContainer"
+            >
                 <div class="collapse navbar-collapse" id="navbarCentralSection">
                     <div>
-                        <a [routerLink]="'/'" class="nav-item">Home</a>
+                        <a [routerLink]="'/'" class="nav-item" (click)="toggleHamburgerMenu()">Home</a>
                     </div>
                     <div class="nav-item dropdown">
                         <a
-                            class="nav-link dropdown-toggle z-1 position-relative"
+                            class="nav-link dropdown-toggle  position-relative z-2"
                             href="#"
                             role="button"
                             data-bs-toggle="dropdown"
@@ -64,10 +67,10 @@
                         </ul>
                     </div>
                     <div>
-                        <a href="">Contatti</a>
+                        <a [routerLink]="['/contatti']" class="nav-item" (click)="toggleHamburgerMenu()">Contatti</a>
                     </div>
                     <div>
-                        <a href="">Pepe History</a>
+                        <a [routerLink]="'/'" class="nav-item" (click)="toggleHamburgerMenu()">Pepe History</a>
                     </div>
                 </div>
             </div>
@@ -75,10 +78,86 @@
                 <img
                     src="assets/immagini/icons/person-circle.svg"
                     alt="UserLogo"
-                    class="icon"
+                    class="icon addCursor"
+                    data-bs-toggle="modal"
+                    data-bs-target="#navbarModal"
                 />
-                <img src="assets/immagini/icons/cart.svg" alt="CartLogo" class="icon" />
+                <img
+                    src="assets/immagini/icons/cart.svg"
+                    alt="CartLogo"
+                    class="icon addCursor"
+                />
             </div>
         </div>
     </div>
 </nav>
+
+<div *ngIf="!user; else userModal">
+<div
+    class="modal fade"
+    id="navbarModal"
+    tabindex="-1"
+    aria-labelledby="navbarModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 pt-1" id="navbarModalLabel">
+                    Area Personale
+                </h1>
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <h2 class="fs-5 addCursor addUnderline" [routerLink]="['/login']" data-bs-dismiss="modal"
+                aria-label="Close" >Accedi</h2>
+                <hr>
+                <h2 class="fs-5 addCursor addUnderline" [routerLink]="['/register']" data-bs-dismiss="modal"
+                aria-label="Close">Registrati</h2>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<ng-template #userModal id="userModal">
+    <div
+    class="modal fade"
+    id="navbarModal"
+    tabindex="-1"
+    aria-labelledby="navbarModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 pt-1" id="navbarModalLabel">
+                    Benvenuto {{user!.utenteTokenResponse!.nome}} {{user!.utenteTokenResponse.cognome}}
+                </h1>
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <h2 class="fs-5 addCursor addUnderline" data-bs-dismiss="modal"
+                aria-label="Close" >Impostazioni</h2>
+                <hr>
+                <h2 class="fs-5 addCursor addUnderline" data-bs-dismiss="modal"
+                aria-label="Close">Carrello</h2>
+                <hr>
+                <h2 class="fs-5 addCursor addUnderline text-danger" data-bs-dismiss="modal"
+                aria-label="Close" (click)="logout()" >Logout</h2>
+            </div>
+
+        </div>
+    </div>
+</div>
+</ng-template>

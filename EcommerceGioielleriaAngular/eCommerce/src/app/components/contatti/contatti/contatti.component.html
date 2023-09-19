@@ -1,0 +1,93 @@
+<div class="contattiBody py-3">
+    <h1 class="text-center pt-2">Contatti</h1>
+    <div class="container-fluid row">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title text-center">
+                        <h3>Pepe Factory di Barbara Pepe</h3>
+                    </div>
+                </div>
+                <div class="card-text">
+                    <h5>Orari:</h5>
+                    <p>dal lunedì al venerdì 9:00 - 13:00 & 14:00 - 18:00</p>
+                    <p>sabato 9:00 - 13:00</p>
+
+                    <h5>Vieni a trovarci</h5>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.8985186174364!2d10.301982676670358!3d43.54615725934673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5e982ae0cdc3f%3A0x93fe6bc952e2c673!2sPepe%20Factory!5e0!3m2!1sit!2sit!4v1695150957715!5m2!1sit!2sit"
+                        width="100%"
+                        height="400em"
+                        style="border: 0"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="m-auto pe-2"
+                    ></iframe>
+
+                    <p>Telefono: 0586 834446</p>
+                    <p>Email: samigiachi@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title text-center">
+                        <h3>Contattaci per ulteriori informazioni</h3>
+                    </div>
+                </div>
+                <form
+                    class="card-text w-75 m-auto"
+                    #form="ngForm"
+                    (submit)="inviaRichiesta(form)"
+                >
+                    <input
+                        type="text"
+                        name="nome"
+                        id="nome"
+                        class="form-control"
+                        placeholder="Nome"
+                        required
+                        ngModel
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        class="form-control"
+                        placeholder="Email"
+                        required
+                        ngModel
+                    />
+                    <textarea
+                        name="messaggio"
+                        id="messaggio"
+                        class="form-control"
+                        placeholder="Messaggio"
+                        required
+                        rows="1"
+                        autocomplete="off"
+                        ngModel
+                        appTextareaAutoresize
+                    ></textarea>
+                    <div
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center"
+                    >
+                        <button
+                            type="submit"
+                            class="btn button mt-2"
+                            [disabled]="form.invalid"
+                        >
+                            Invia Messaggio
+                        </button>
+
+                        <button type="button" class="btn button mt-2" (click)="resetForm(form)">
+                            Reset Form
+                        </button>
+                   </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

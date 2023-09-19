@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
             .login(form.value)
             .pipe(
                 catchError((error) => {
-                    console.error(error);
-                    this.error = error;
+                    console.log(error);
+                    this.error = this.authService.errorMessage;
                     form.reset;
                     return of(null);
                 })

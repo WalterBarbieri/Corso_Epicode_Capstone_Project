@@ -1,6 +1,6 @@
 export interface AuthData {
-    accessToken: string;
-    user: {
+    token: string;
+    utenteTokenResponse: {
         id: string;
         nome: string;
         cognome: string;

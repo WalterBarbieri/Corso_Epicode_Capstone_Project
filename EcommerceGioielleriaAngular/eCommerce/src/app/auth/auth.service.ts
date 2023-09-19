@@ -14,7 +14,7 @@ export class AuthService {
 
     baseUrl = environment.baseURL;
 
-    authSubj = new BehaviorSubject<null | AuthData>(null);
+    private authSubj = new BehaviorSubject<null | AuthData>(null);
 
     utente!: AuthData;
 
@@ -22,8 +22,11 @@ export class AuthService {
 
     timeOutLogout: any;
 
+    errorMessage: string = "";
+
     constructor(private http: HttpClient, private router: Router) {
-        this.restore;
+        this.restore();
+
     }
 
     login(data: { email: string; password: string }) {
@@ -35,10 +38,11 @@ export class AuthService {
                 localStorage.setItem('user', JSON.stringify(data));
             }),
             catchError((error) => {
-                console.error(error);
+                console.error(error.message);
                 if (error instanceof HttpErrorResponse) {
                     console.error('Status Code: ', error.status);
                     console.error('Response Body: ', error.error);
+                    this.errorMessage = error.error.message;
                     return throwError(() => new Error(error.message));
                 }
                 return throwError(() => new Error('Errore nella chiamata'));
@@ -47,13 +51,21 @@ export class AuthService {
     }
 
     restore() {
+
         const user = localStorage.getItem('user');
         if (!user) {
             return;
         }
 
         const userData: AuthData = JSON.parse(user);
-        if (this.jwtHelper.isTokenExpired(userData.accessToken)) {
+        console.log("tokerecuperato: " + userData.token);
+        console.log("nome token: " + userData.utenteTokenResponse.nome);
+
+        if (this.jwtHelper.isTokenExpired(userData.token)) {
+            console.log(userData.token);
+
+            console.log("token è expired");
+
             return;
         }
 
@@ -71,7 +83,11 @@ export class AuthService {
     }) {
         return this.http
             .post(`${this.baseUrl}auth/register`, data)
-            .pipe(catchError((err) => throwError(() => new Error(err.error))));
+            .pipe(catchError((err) => throwError(() => {
+
+           new Error(err.error);
+        this.errorMessage = err.error.message;   }
+           )));
     }
 
     logout() {
@@ -86,7 +102,7 @@ export class AuthService {
 
     autoLogout(data: AuthData) {
         const expirationDate = this.jwtHelper.getTokenExpirationDate(
-            data.accessToken
+            data.token
         ) as Date;
         const expirationMillisecond =
             expirationDate.getTime() - new Date().getTime();

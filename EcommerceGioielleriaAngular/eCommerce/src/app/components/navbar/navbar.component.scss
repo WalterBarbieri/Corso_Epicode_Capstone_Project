@@ -8,9 +8,9 @@
 }
 .navbar{
     background-color: #1A1A1A;
-    color: white;
+    color: ghostwhite;
     a {
-        color: white;
+        color: ghostwhite;
         font-weight: bold;
         &:hover{
             text-decoration: underline;
@@ -25,7 +25,7 @@
     display: block;
     margin-top: 0em;
     padding-top: 3em;
-    z-index: 0;
+    z-index: 1;
 }
 .dropdown>.dropdown-toggle:active{
     pointer-events: none;
@@ -49,10 +49,39 @@
 
 }
 
+
+
+.navbar .nav-item.dropdown .nav-link.dropdown-toggle::after {
+    display: none;
+  }
+
+  .navbar-toggler .navbar-toggler-icon {
+    color: ghostwhite;
+  }
+
+  .modal-dialog {
+    position: absolute;
+    top: 8em;
+    right: 1em;
+  }
+  .modal-content {
+    background-color: #1A1A1A;
+    color: ghostwhite;
+
+  }
+.addCursor {
+    cursor: pointer;
+}
+
+.addUnderline:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+            text-underline-offset: 0.3em;
+}
 @media screen and (max-width: 991px) {
     .dropdown-menu{
-        top: 1em;
-        left: -1em;
+        top: 2em;
+        left: -2em;
         padding-top: 1em !important;
     }
 
@@ -72,15 +101,15 @@
     }
 }
 
+@media screen and (max-width: 575px){
+    .modal-dialog {
+        top: 9.25em;
+    }
+}
 
 
-.navbar .nav-item.dropdown .nav-link.dropdown-toggle::after {
-    display: none;
-  }
 
-  .navbar-toggler .navbar-toggler-icon {
-    color: white;
-  }
+
 /*Codice per trasformazione menu hamburger in X, credits @ ArturCodeCraft: https://uiverse.io/ArturCodeCraft/selfish-fish-82*/
   .navbarButtonContainer {
     border-radius: 16px;
@@ -107,8 +136,8 @@
     width: 100%;
     height: 0.125rem;
     border-radius: 2px;
-    background-color: white;
-    box-shadow: 0 .5px 2px 0 white;
+    background-color: ghostwhite;
+    box-shadow: 0 .5px 2px 0 ghostwhite;
     transition: background-color .4s;
     position: relative;
   }

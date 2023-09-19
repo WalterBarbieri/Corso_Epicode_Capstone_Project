@@ -1,21 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&family=Special+Elite&display=swap');
-html, body {
+
+html,
+body {
     height: 100vh;
     margin: 0;
     padding: 0;
     font-family: 'Special Elite', cursive;
     overflow-x: hidden;
-  }
-  a{
+}
+
+a {
     text-decoration: none;
-  }
-  button {
+}
+
+button {
     border: none;
     background: none;
     padding: 0;
     margin: 0;
     cursor: pointer;
     font-family: inherit;
-  }
+}
 
+input {
+    background-color: ghostwhite !important;
+    margin-bottom: 1em;
+    border: none !important;
+    border-bottom: solid 1px !important;
+    border-radius: 0 !important;
+    border-color: #1A1A1A !important;
+
+    &:focus {
+        background-color: ghostwhite !important;
+    }
+}
+
+textarea {
+    background-color: ghostwhite !important;
+    border: none !important;
+    border-bottom: solid 1px !important;
+    border-radius: 0 !important;
+    border-color: #1A1A1A !important;
+    resize: none;
+    overflow-y: hidden;
+    margin-bottom: 1em;
+
+    &:focus {
+        background-color: ghostwhite !important;
+    }
+}
+
+.button {
+    background-color: #7c83bc;
+    border: none;
+    transition: all 0.2s ;
+    &:disabled {
+        background-color: #ccccff;
+    }
+    &:active {
+        background-color: #7c83bc !important;
+        transform: scale(1.05);
+    }
+    &:hover {
+        background-color: #7c83bc;
+        text-decoration: underline;
+        text-decoration-thickness: 0.1em;
+        text-underline-offset: 0.3em;
+    }
+}
