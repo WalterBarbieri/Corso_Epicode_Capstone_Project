@@ -1,0 +1,159 @@
+<div class="userpageBody py-3">
+    <h1 class="text-center pt-2">Il Mio Account</h1>
+    <h3 class="text-center pt-2">
+        Benvenuta/o {{ utente?.nome }} {{ utente?.cognome }}
+    </h3>
+    <div class="container-fluid row">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body userInfoBody">
+                    <div
+                        class="card-title d-flex justify-content-center align-items-center"
+                    >
+                        <h3>Informazioni Personali</h3>
+                        <div class="buttonTooltip">
+                            <button type="button" class="ms-4 mb-3 ">
+                                <img
+                                    class="changeUser"
+                                    src="assets/immagini/icons/vector-pen.svg"
+                                    alt="PenIcon"
+                                />
+                            </button>
+                            <div class="changeUserTooltip button">
+                                Modifica
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-text userFormBody">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-3 pe-0">
+                                <p class="me-2">Nome:</p>
+                            </div>
+                            <div class="col-9">
+                                <input
+                                    type="text"
+                                    name="nome"
+                                    id="nome"
+                                    class="form-control"
+                                    placeholder="{{ utente?.nome }}"
+                                    disabled
+                                    required
+                                    ngModel
+                                />
+                            </div>
+                        </div>
+                        <div class="row d-flex align-items-center">
+                            <div class="col-3 pe-0"><p>Cognome:</p></div>
+                            <div class="col-9">
+                                <input
+                                    type="text"
+                                    name="nome"
+                                    id="nome"
+                                    class="form-control"
+                                    placeholder="{{ utente?.cognome }}"
+                                    disabled
+                                    required
+                                    ngModel
+                                />
+                            </div>
+                        </div>
+                        <div class="row d-flex align-items-center">
+                            <div class="col-3 pe-0">
+                                <p>Data di Nascita:</p>
+                            </div>
+                            <div class="col-9">
+                                <input
+                                    type="date"
+                                    name="dataNascita"
+                                    id="dataNascita"
+                                    class="form-control"
+                                    [ngModel]="utente?.dataNascita"
+                                    disabled
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="row d-flex align-items-center">
+                            <div class="col-3 pe-0"><p>Email:</p></div>
+                            <div class="col-9">
+                                <input
+                                    type="text"
+                                    name="nome"
+                                    id="nome"
+                                    class="form-control"
+                                    placeholder="{{ utente?.email }}"
+                                    disabled
+                                    required
+                                    ngModel
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body userInfoBody">
+                    <div class="card-title text-center">
+                        <h3>Indirizzi di consegna</h3>
+                    </div>
+                    <div class="card-text userFormBody">
+                        <div
+                            *ngIf="
+                                utente?.indirizzi &&
+                                    utente?.indirizzi?.length === 0;
+                                else indirizziUtente
+                            "
+                            class="text-center"
+                        >
+                            <p>Nessun indirizzo trovato.</p>
+                            <p>Aggiungi un indirizzo</p>
+                        </div>
+                        <ng-template #indirizziUtente id="indirizziUtente">
+                            <div *ngFor="let indirizzo of utente?.indirizzi; let i = index">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div
+                                            class="row card-text text-decoration-underline"
+                                        >
+                                        <div class="col-1">
+                                            <p>{{i + 1}}</p>
+                                        </div>
+                                        <div class="col-11">
+                                            <p>
+                                                Via {{ indirizzo.via }}
+                                                {{ indirizzo.civico }}
+                                            </p>
+                                            <p>
+                                                Località
+                                                <span
+                                                    *ngIf="
+                                                        indirizzo.localita !=
+                                                            null;
+                                                        else noLocalita
+                                                    "
+                                                >
+                                                    {{
+                                                        indirizzo.localita
+                                                    }}</span
+                                                >
+                                                <ng-template
+                                                    #noLocalita
+                                                    id="noLocalita"
+                                                >//</ng-template>
+                                                Cap {{ indirizzo.cap }}
+                                            </p>
+                                            <p> {{ indirizzo.comune.denominazione }}, {{ indirizzo.comune.siglaProvincia }} {{ indirizzo.comune.nomeRegione }}</p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

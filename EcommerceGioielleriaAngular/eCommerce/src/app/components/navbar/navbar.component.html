@@ -137,7 +137,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 pt-1" id="navbarModalLabel">
-                    Benvenuto {{user!.utenteTokenResponse!.nome}} {{user!.utenteTokenResponse.cognome}}
+                    Benvenuta/o {{user!.utenteTokenResponse!.nome}} {{user!.utenteTokenResponse.cognome}}
                 </h1>
                 <button
                     type="button"
@@ -147,10 +147,12 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <h2 class="fs-5 addCursor addUnderline" data-bs-dismiss="modal"
-                aria-label="Close" >Impostazioni</h2>
+                <h2 class="fs-5 addCursor addUnderline"
+                [routerLink]="['/userpage']"
+                data-bs-dismiss="modal"
+                aria-label="Close" >Il mio Account</h2>
                 <hr>
-                <h2 class="fs-5 addCursor addUnderline" data-bs-dismiss="modal"
+                <h2 class="fs-5 addCursor addUnderline"  data-bs-dismiss="modal"
                 aria-label="Close">Carrello</h2>
                 <hr>
                 <h2 class="fs-5 addCursor addUnderline text-danger" data-bs-dismiss="modal"

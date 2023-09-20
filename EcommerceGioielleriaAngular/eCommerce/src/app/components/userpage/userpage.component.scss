@@ -1,0 +1,40 @@
+.userpageBody {
+    background-color: ghostwhite;
+}
+
+.card {
+    border: none;
+    background-color: ghostwhite;
+}
+
+.changeUser {
+    width: 1.5em;
+}
+.changeUserTooltip {
+    position: absolute;
+    border-radius: 20px;
+    padding: 0em 1em;
+    display: none;
+}
+.buttonTooltip:hover .changeUserTooltip{
+    display: block;
+    text-decoration: none;
+}
+
+@media screen and (min-width: 576px){
+    .userInfoBody {
+        width: 90%;
+        margin: auto;
+    }
+    .userFormBody {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .userFormBody {
+        width: 70%;
+        margin: auto;
+    }
+}

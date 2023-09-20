@@ -12,8 +12,13 @@ import { RegisterComponent } from './auth/register/register/register.component';
 import { LoginComponent } from './auth/login/login/login.component';
 import { AuthService } from './auth/auth.service';
 import { TokenInterceptor } from './auth/token.interceptor';
-import { ContattiComponent } from './components/contatti/contatti/contatti.component';
+import { ContattiComponent } from './components/contatti/contatti.component';
 import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
+import { UserpageComponent } from './components/userpage/userpage.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalindirizzoComponent } from './components/modalindirizzo/modalindirizzo.component';
+
+
 
 const route: Route[] = [
     {
@@ -32,6 +37,10 @@ const route: Route[] = [
     {
         path: 'contatti',
         component: ContattiComponent
+    },
+    {
+        path: 'userpage',
+        component: UserpageComponent
     }
 ]
 @NgModule({
@@ -43,13 +52,16 @@ const route: Route[] = [
     RegisterComponent,
     LoginComponent,
     ContattiComponent,
-    TextareaAutoresizeDirective
+    TextareaAutoresizeDirective,
+    UserpageComponent,
+    ModalindirizzoComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(route)
+    RouterModule.forRoot(route),
+    BrowserAnimationsModule
   ],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],

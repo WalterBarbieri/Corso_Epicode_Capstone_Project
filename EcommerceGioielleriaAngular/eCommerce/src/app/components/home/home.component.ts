@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { Utente } from 'src/app/models/utente.interface';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,26 +11,16 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
     baseUrl = environment.baseURL;
-    users!: any[];
-    sub!: Subscription;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-/**
-    this.sub = this.recuperaProdotti().subscribe((testUsers: any[]) => {
-        console.log(testUsers);
 
-        this.users = testUsers;
-    })
-    console.log(this.users);
-    */
+
+
 
   }
 
-  recuperaProdotti():Observable<any>{
-    console.log("chiamata partita");
 
-    return this.http.get<any[]>(`${this.baseUrl}utenti`)
-  }
 
 }
