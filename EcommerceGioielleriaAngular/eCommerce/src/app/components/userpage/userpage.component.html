@@ -12,14 +12,14 @@
                     >
                         <h3>Informazioni Personali</h3>
                         <div class="buttonTooltip">
-                            <button type="button" class="ms-4 mb-3 ">
+                            <button type="button" class="ms-4 mb-3">
                                 <img
                                     class="changeUser"
                                     src="assets/immagini/icons/vector-pen.svg"
                                     alt="PenIcon"
                                 />
                             </button>
-                            <div class="changeUserTooltip button">
+                            <div class="myTooltip button px-2 pt-1">
                                 Modifica
                             </div>
                         </div>
@@ -96,7 +96,7 @@
             <div class="card">
                 <div class="card-body userInfoBody">
                     <div class="card-title text-center">
-                        <h3>Indirizzi di consegna</h3>
+                        <h3>Gestione indirizzi</h3>
                     </div>
                     <div class="card-text userFormBody">
                         <div
@@ -108,44 +108,108 @@
                             class="text-center"
                         >
                             <p>Nessun indirizzo trovato.</p>
-                            <p>Aggiungi un indirizzo</p>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <p class="mb-0 me-3">Aggiungi un indirizzo</p>
+                                <button type="button" (click)="toggleModal()">
+                                    <img
+                                        class="changeUser"
+                                        src="assets/immagini/icons/plus-lg.svg"
+                                        alt="PlusIcon"
+                                    />
+                                </button>
+                            </div>
+
                         </div>
                         <ng-template #indirizziUtente id="indirizziUtente">
-                            <div *ngFor="let indirizzo of utente?.indirizzi; let i = index">
+                            <div
+                                *ngFor="
+                                    let indirizzo of utente?.indirizzi;
+                                    let i = index
+                                "
+                            >
                                 <div class="card">
                                     <div class="card-body">
                                         <div
                                             class="row card-text text-decoration-underline"
                                         >
-                                        <div class="col-1">
-                                            <p>{{i + 1}}</p>
-                                        </div>
-                                        <div class="col-11">
-                                            <p>
-                                                Via {{ indirizzo.via }}
-                                                {{ indirizzo.civico }}
-                                            </p>
-                                            <p>
-                                                Località
-                                                <span
-                                                    *ngIf="
-                                                        indirizzo.localita !=
-                                                            null;
-                                                        else noLocalita
-                                                    "
-                                                >
+                                            <div
+                                                class="col-2 col-xxl-3 p-0 text-center"
+                                            >
+                                                <p>{{ i + 1 }}</p>
+                                            </div>
+                                            <div class="col-8 col-xxl-7 p-0">
+                                                <p>
+                                                    Via {{ indirizzo.via }}
+                                                    {{ indirizzo.civico }}
+                                                </p>
+                                                <p>
+                                                    Località
+                                                    <span
+                                                        *ngIf="
+                                                            indirizzo.localita !=
+                                                                null;
+                                                            else noLocalita
+                                                        "
+                                                    >
+                                                        {{
+                                                            indirizzo.localita
+                                                        }}</span
+                                                    >
+                                                    <ng-template
+                                                        #noLocalita
+                                                        id="noLocalita"
+                                                        >//</ng-template
+                                                    >
+                                                    Cap {{ indirizzo.cap }}
+                                                </p>
+                                                <p>
                                                     {{
-                                                        indirizzo.localita
-                                                    }}</span
-                                                >
-                                                <ng-template
-                                                    #noLocalita
-                                                    id="noLocalita"
-                                                >//</ng-template>
-                                                Cap {{ indirizzo.cap }}
-                                            </p>
-                                            <p> {{ indirizzo.comune.denominazione }}, {{ indirizzo.comune.siglaProvincia }} {{ indirizzo.comune.nomeRegione }}</p>
-                                        </div>
+                                                        indirizzo.comune
+                                                            .denominazione
+                                                    }},
+                                                    {{
+                                                        indirizzo.comune
+                                                            .siglaProvincia
+                                                    }}
+                                                    {{
+                                                        indirizzo.comune
+                                                            .nomeRegione
+                                                    }}
+                                                </p>
+                                            </div>
+                                            <div
+                                                class="col-2 d-flex flex-column p-0 justify-content-around align-items-center"
+                                            >
+                                                <div class="buttonTooltip">
+                                                    <button type="button">
+                                                        <img
+                                                            class="changeUser"
+                                                            src="assets/immagini/icons/vector-pen.svg"
+                                                            alt="PenIcon"
+                                                        />
+                                                    </button>
+                                                    <div
+                                                        class="myTooltip button px-2 pt-1 top-0"
+                                                    >
+                                                        Modifica
+                                                    </div>
+                                                </div>
+                                                <div class="buttonTooltip">
+                                                    <button type="button" (click)="eliminaIndirizzo(indirizzo.id!)">
+                                                        <img
+                                                            class="changeUser"
+                                                            src="assets/immagini/icons/x-lg.svg"
+                                                            alt="X Icon"
+                                                        />
+                                                    </button>
+                                                    <div
+                                                        class="myTooltip button px-2 pt-1 bg-danger-subtle"
+                                                        id="eliminaTooltip"
+                                                    >
+                                                        Elimina
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -157,3 +221,5 @@
         </div>
     </div>
 </div>
+
+<app-modalindirizzo *ngIf="isModalOpen"></app-modalindirizzo>

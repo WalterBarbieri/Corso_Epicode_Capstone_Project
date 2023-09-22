@@ -10,15 +10,19 @@
 .changeUser {
     width: 1.5em;
 }
-.changeUserTooltip {
+.myTooltip {
     position: absolute;
     border-radius: 20px;
-    padding: 0em 1em;
     display: none;
+    top: -1em;
 }
-.buttonTooltip:hover .changeUserTooltip{
+.buttonTooltip:hover .myTooltip{
     display: block;
     text-decoration: none;
+}
+
+#eliminaTooltip {
+    top: 3.8em;
 }
 
 @media screen and (min-width: 576px){

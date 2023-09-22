@@ -36,7 +36,7 @@ public class IndirizzoService {
 
 	public Indirizzo saveResidenza(IndirizzoPayload body) {
 		try {
-			Utente utente = us.findById(body.getId());
+			Utente utente = us.findByEmail(body.getEmail());
 			Indirizzo checkResidenza = utente.getResidenza();
 			if (checkResidenza != null) {
 				utente.setResidenza(null);
@@ -57,7 +57,7 @@ public class IndirizzoService {
 
 	public Indirizzo saveDomicilio(IndirizzoPayload body) {
 		try {
-			Utente utente = us.findById(body.getId());
+			Utente utente = us.findByEmail(body.getEmail());
 			Indirizzo checkDomicilio = utente.getDomicilio();
 			if (checkDomicilio != null) {
 				utente.setDomicilio(null);
@@ -78,7 +78,7 @@ public class IndirizzoService {
 
 	public Indirizzo saveIndirizzi(IndirizzoPayload body) {
 		try {
-			Utente utente = us.findById(body.getId());
+			Utente utente = us.findByEmail(body.getEmail());
 			Indirizzo indirizzoConsegna = this.addIndirizzo(body);
 			indirizzoConsegna.setUtente(utente);
 			utente.getIndirizzi().add(indirizzoConsegna);

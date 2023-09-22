@@ -18,6 +18,8 @@ export class TextareaAutoresizeDirective {
     }
   }
 
+  /** Credits @ https://medium.com/@chandrahasstvs/building-your-own-text-area-auto-resize-directive-in-angular-bbe3e5144e97 */
+
   resize(){
     this.elementRef.nativeElement.style.height = '0';
     this.elementRef.nativeElement.style.height = this.elementRef.nativeElement.scrollHeight + 'px';
@@ -26,4 +28,4 @@ export class TextareaAutoresizeDirective {
 }
 
 
-/** Credits @ https://medium.com/@chandrahasstvs/building-your-own-text-area-auto-resize-directive-in-angular-bbe3e5144e97 */
+

@@ -38,9 +38,15 @@ public class ComuneService {
 		return cr.findByDenominazione(denominazione).orElseThrow(() -> new NotFoundException(denominazione));
 	}
 
-	public Page<Comune> findComuneByDenominazione(String denominazione, int page, int size, String sort) {
-		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-		return cr.findByDenominazioneIgnoreCaseContaining(denominazione, pageable);
+	public List<Comune> findComuneByDenominazione(String denominazione, String provincia, String regione) {
+		if (provincia != null) {
+			return cr.findByDenominazioneIgnoreCaseContainingAndNomeProvincia(denominazione, provincia);
+		} else if (provincia == null && regione != null) {
+			return cr.findByDenominazioneIgnoreCaseContainingAndNomeRegione(denominazione, regione);
+		} else if (provincia == null && regione == null) {
+			return cr.findByDenominazioneIgnoreCaseContaining(denominazione);
+		}
+		return null;
 	}
 
 }

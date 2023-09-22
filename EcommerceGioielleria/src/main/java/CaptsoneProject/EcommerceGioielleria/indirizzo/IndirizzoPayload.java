@@ -1,7 +1,5 @@
 package CaptsoneProject.EcommerceGioielleria.indirizzo;
 
-import java.util.UUID;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +17,6 @@ public class IndirizzoPayload {
 	private String localita;
 	private int cap;
 	private String nomeComune;
-	private UUID id;
+	private String email;
 
 }

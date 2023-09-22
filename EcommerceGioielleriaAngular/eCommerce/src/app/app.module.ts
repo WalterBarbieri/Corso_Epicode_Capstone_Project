@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Route, RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -61,7 +61,7 @@ const route: Route[] = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(route),
-    BrowserAnimationsModule
+    ReactiveFormsModule
   ],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],

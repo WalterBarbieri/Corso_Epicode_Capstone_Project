@@ -1,0 +1,26 @@
+.comuni-list {
+    max-height: 150px; /* Altezza massima della lista */
+    overflow-y: auto; /* Abilita lo scroll verticale se necessario */
+    border: 1px solid #ccc; /* Stile bordo */
+    padding: 5px; /* Spaziatura interna */
+}
+
+.comuni-list ul {
+    list-style: none; /* Rimuovi i punti elenco */
+    padding: 0;
+    border-radius: 7px;
+}
+
+.comuni-list li {
+    margin: 0;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.comuni-list li:hover {
+    background-color: #f0f0f0; /* Cambia il colore di sfondo al passaggio del mouse */
+}
+
+.cardBody {
+    background-color: ghostwhite;
+}

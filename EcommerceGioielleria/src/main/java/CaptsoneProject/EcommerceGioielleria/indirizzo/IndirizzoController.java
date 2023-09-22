@@ -54,7 +54,7 @@ public class IndirizzoController {
 	public ResponseEntity<String> deleteIndirizzo(@PathVariable UUID id) {
 		is.deleteIndirizzo(id);
 
-		return ResponseEntity.ok("Indirizzo eliminato con successo");
+		return ResponseEntity.noContent().build();
 	}
 
 }

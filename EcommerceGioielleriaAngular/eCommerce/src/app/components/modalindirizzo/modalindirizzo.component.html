@@ -1,20 +1,154 @@
-<!-- modal.component.html -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Titolo del Modale</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<div class="container">
+    <div class="card">
+        <div class="card-body cardBody">
+            <div class="card-title text-center">
+                <h3>Nuovo Indirizzo</h3>
+            </div>
+            <form [formGroup]="indirizzoForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="regione">Regione</label>
+                            <select
+                                id="regione"
+                                class="form-control"
+                                formControlName="regione"
+                                (change)="onRegioneChange()"
+                            >
+                                <option value="">*******</option>
+                                <option value="Abruzzo">Abruzzo</option>
+                                <option value="Basilicata">Basilicata</option>
+                                <option value="Calabria">Calabria</option>
+                                <option value="Campania">Campania</option>
+                                <option value="Emilia-Romagna">
+                                    Emilia Romagna
+                                </option>
+                                <option value="Friuli-Venezia Giulia">
+                                    Friuli Venezia Giulia
+                                </option>
+                                <option value="Lazio">Lazio</option>
+                                <option value="Liguria">Liguria</option>
+                                <option value="Lombardia">Lombardia</option>
+                                <option value="Marche">Marche</option>
+                                <option value="Molise">Molise</option>
+                                <option value="Piemonte">Piemonte</option>
+                                <option value="Puglia">Puglia</option>
+                                <option value="Sardegna">Sardegna</option>
+                                <option value="Sicilia">Sicilia</option>
+                                <option value="Toscana">Toscana</option>
+                                <option value="Trentino-Alto Adige/Südtirol">
+                                    Trentino Alto Adige
+                                </option>
+                                <option value="Umbria">Umbria</option>
+                                <option value="Valle d'Aosta/Vallée d'Aoste">
+                                    Val d'Aosta
+                                </option>
+                                <option value="Veneto">Veneto</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="provincia">Provincia</label>
+                            <select
+                                id="provincia"
+                                class="form-control"
+                                formControlName="provincia"
+                                (change)="onProvinciaChange()"
+                            >
+                                <option value="">*******</option>
+                                <option
+                                    *ngFor="let provincia of province"
+                                    [value]="provincia"
+                                >
+                                    {{ provincia }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="comune">Comune</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                formControlName="comune"
+                                required
+                                (input)="onComuneChange()"
+                            />
+                        </div>
+                        <div
+                            class="comuni-list"
+                            *ngIf="
+                                indirizzoForm.get('comune')?.value &&
+                                listaComuniFiltrata &&
+                                listaComuniFiltrata.length > 0
+                            "
+                        >
+                            <ul>
+                                <li
+                                    *ngFor="let comune of listaComuniFiltrata"
+                                    (click)="selectComune(comune)"
+                                >
+                                    {{ comune.denominazione }} ({{
+                                        comune.siglaProvincia
+                                    }})
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <label for="via">Via</label>
+                <input
+                    type="text"
+                    name="via"
+                    id="via"
+                    class="form-control"
+                    formControlName="via"
+                    required
+                />
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <label for="civico">Civico</label>
+                <input
+                    type="text"
+                    name="civico"
+                    id="civico"
+                    class="form-control"
+                    required
+                    formControlName="civico"
+                />
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="localita">Localita</label>
+                <input
+                    type="text"
+                    name="localita"
+                    id="localita"
+                    class="form-control"
+                    formControlName="localita"
+                    required
+                />
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <label for="cap">Cap</label>
+                <input
+                    type="text"
+                    name="cap"
+                    id="cap"
+                    class="form-control"
+                    formControlName="cap"
+                    required
+
+                />
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Salva</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-body">
-          Contenuto del modale qui...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-          <button type="button" class="btn btn-primary">Salva modifiche</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
