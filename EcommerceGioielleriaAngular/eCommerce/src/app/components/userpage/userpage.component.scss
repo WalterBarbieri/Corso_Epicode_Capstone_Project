@@ -42,3 +42,11 @@
         margin: auto;
     }
 }
+@media screen and (min-height: 1000px) {
+    .userpageBody {
+        min-height: 65%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

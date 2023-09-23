@@ -1,6 +1,6 @@
-<div class="container">
-    <div class="card">
-        <div class="card-body cardBody">
+<div class="container-fluid modalContainer">
+    <div class="card cardContainer">
+        <div class="card-body">
             <div class="card-title text-center">
                 <h3>Nuovo Indirizzo</h3>
             </div>
@@ -11,7 +11,7 @@
                             <label for="regione">Regione</label>
                             <select
                                 id="regione"
-                                class="form-control"
+                                class="form-control mySelect"
                                 formControlName="regione"
                                 (change)="onRegioneChange()"
                             >
@@ -52,7 +52,7 @@
                             <label for="provincia">Provincia</label>
                             <select
                                 id="provincia"
-                                class="form-control"
+                                class="form-control mySelect"
                                 formControlName="provincia"
                                 (change)="onProvinciaChange()"
                             >
@@ -129,7 +129,6 @@
                     id="localita"
                     class="form-control"
                     formControlName="localita"
-                    required
                 />
                     </div>
                     <div class="col-12 col-md-2">
@@ -145,10 +144,14 @@
                 />
                     </div>
                 </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Salva</button>
+                <div class="d-flex justify-content-evenly">
+                    <button type="submit" class="btn button" [disabled]="indirizzoForm.invalid">Salva</button>
+
+
+                    <button type="button" class="btn button" (click)="closeModal()" >Chiudi</button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

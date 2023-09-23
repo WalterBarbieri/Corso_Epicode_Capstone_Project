@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthData } from 'src/app/auth/auth.interface';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -35,6 +34,10 @@ export class NavbarComponent implements OnInit {
     }
     if (!this.isOpen) {
         document.querySelector('.navbar-collapse.show')?.classList.remove('show');
+        const dropdownMenu = document.querySelector('.dropdown-menu.show');
+      if (dropdownMenu) {
+        dropdownMenu.classList.remove('show');
+      }
     }
 
   }

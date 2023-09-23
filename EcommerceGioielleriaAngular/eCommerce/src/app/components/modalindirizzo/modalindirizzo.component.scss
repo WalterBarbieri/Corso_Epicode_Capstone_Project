@@ -1,12 +1,12 @@
 .comuni-list {
-    max-height: 150px; /* Altezza massima della lista */
-    overflow-y: auto; /* Abilita lo scroll verticale se necessario */
-    border: 1px solid #ccc; /* Stile bordo */
-    padding: 5px; /* Spaziatura interna */
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #1A1A1A;
+    padding: 5px;
 }
 
 .comuni-list ul {
-    list-style: none; /* Rimuovi i punti elenco */
+    list-style: none;
     padding: 0;
     border-radius: 7px;
 }
@@ -18,9 +18,30 @@
 }
 
 .comuni-list li:hover {
-    background-color: #f0f0f0; /* Cambia il colore di sfondo al passaggio del mouse */
+    background-color: #ccccff;
 }
 
-.cardBody {
+.cardContainer {
     background-color: ghostwhite;
+    border-color: #1A1A1A;
+}
+.modalContainer {
+    position: absolute;
+    top: 11em;
+    height: -webkit-fill-available;
+    background-color: rgb(248, 248, 255, 0.8);
+}
+
+@media screen and (min-width: 768px) {
+    .cardContainer {
+        width: 70%;
+        margin: auto;
+    }
+    .modalContainer {
+        top: 14em;
+    }
+}
+
+@media screen and (min-height: 1000px) {
+
 }

@@ -18,3 +18,14 @@
 }
 
 
+@media screen and (min-height: 1000px) {
+    .loginBody {
+        min-height: 55%;
+    }
+}
+@media screen and (min-height: 1300px) {
+    .loginBody {
+        min-height: 65%;
+    }
+}
+

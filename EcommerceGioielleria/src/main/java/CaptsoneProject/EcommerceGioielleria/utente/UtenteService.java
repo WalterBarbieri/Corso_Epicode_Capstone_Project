@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import CaptsoneProject.EcommerceGioielleria.exceptions.BadRequestException;
 import CaptsoneProject.EcommerceGioielleria.exceptions.NotFoundException;
+import CaptsoneProject.EcommerceGioielleria.utente.payloads.UtentePatchPayload;
 import CaptsoneProject.EcommerceGioielleria.utente.payloads.UtenteRequestPayload;
 
 @Service
@@ -63,13 +64,28 @@ public class UtenteService {
 		return ur.findByEmail(email).orElseThrow(() -> new NotFoundException(email));
 	}
 
-	public Utente findByEmailAndUpdate(String email, UtenteRequestPayload body) {
+	public Utente findByEmailAndUpdate(String email, UtentePatchPayload body) {
 		Utente utente = this.findByEmail(email);
-		utente.setNome(body.getNome());
-		utente.setCognome(body.getCognome());
-		utente.setDataNascita(body.getDataNascita());
-		utente.setEmail(body.getEmail());
-		utente.setPassword(body.getPassword());
+		if (body.getNome() != null) {
+			utente.setNome(body.getNome());
+		}
+		if (body.getCognome() != null) {
+			utente.setCognome(body.getCognome());
+		}
+		if (body.getDataNascita() != null) {
+			utente.setDataNascita(body.getDataNascita());
+		}
+		if (body.getEmail() != null) {
+			utente.setEmail(body.getEmail());
+		}
+
+		if (body.getRagioneSociale() != null) {
+			utente.setRagioneSociale(body.getRagioneSociale());
+		}
+
+		if (body.getPIva() != null) {
+			utente.setPIva(body.getPIva());
+		}
 		return ur.save(utente);
 	}
 

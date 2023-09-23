@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Comune } from 'src/app/models/comune.interface';
-import { Indirizzo } from 'src/app/models/indirizzo.interface';
 import { IndirizzoService } from 'src/app/service/indirizzo.service';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { IndirizzoPayload } from 'src/app/models/indirizzo-payload.interface';
+import { ModalService } from 'src/app/service/modal.service';
 
 @Component({
   selector: 'app-modalindirizzo',
@@ -29,7 +28,7 @@ province: String[] = [];
 email!: string;
 
 
-  constructor(private formBuilder: FormBuilder, private indirizzoService: IndirizzoService) {
+  constructor(private formBuilder: FormBuilder, private indirizzoService: IndirizzoService, private modalService: ModalService) {
     this.indirizzoForm = this.formBuilder.group({
         regione: [null, Validators.required],
         provincia: [null, Validators.required],
@@ -67,6 +66,8 @@ email!: string;
 
         this.indirizzoService.aggiungiIndirizzo(indirizzo).subscribe((response) => {
             console.log("Indirizzo aggiunto con successo", response);
+            this.modalService.sendIndirizzoAggiuntoMessage();
+            this.closeModal();
 
         }, (error)=> {
             console.error('Errore durante l\'inserimento dell\'indirizzo', error);
@@ -134,6 +135,10 @@ email!: string;
 
     this.listaComuniFiltrata = [];
 
+  }
+
+  closeModal() {
+    this.modalService.close();
   }
 
 }

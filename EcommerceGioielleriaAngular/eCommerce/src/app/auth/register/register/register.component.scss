@@ -22,3 +22,9 @@ anchorColor{
     cursor: pointer;
 }
 
+@media screen and (min-height: 1300px) {
+    .registerBody {
+        min-height: 65%;
+    }
+}
+

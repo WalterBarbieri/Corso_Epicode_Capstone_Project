@@ -43,26 +43,33 @@
                             role="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
+                            data-bs-auto-close="true"
                         >
                             Shop
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="#"
+                                <a class="dropdown-item" [routerLink]="'/prodotti'" (click)="toggleHamburgerMenu()"
                                     >Tutti i prodotti</a
                                 >
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Collane</a>
+                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'COLLANE'}]" (click)="toggleHamburgerMenu()">Collane</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Anelli</a>
+                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'PENDENTI'}]" (click)="toggleHamburgerMenu()">Pendenti</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Bracciali</a>
+                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'ANELLI'}]" (click)="toggleHamburgerMenu()">Anelli</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Orecchini</a>
+                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'ORECCHINI'}]" (click)="toggleHamburgerMenu()">Orecchini</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'BRACCIALI'}]" (click)="toggleHamburgerMenu()">Bracciali</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'MATERIALE_CLIENTE'}]">Materiale del Cliente</a>
                             </li>
                         </ul>
                     </div>

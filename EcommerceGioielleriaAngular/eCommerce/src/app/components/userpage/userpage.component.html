@@ -12,7 +12,11 @@
                     >
                         <h3>Informazioni Personali</h3>
                         <div class="buttonTooltip">
-                            <button type="button" class="ms-4 mb-3">
+                            <button
+                                type="button"
+                                class="ms-4 mb-3"
+                                (click)="attivaModifiche()"
+                            >
                                 <img
                                     class="changeUser"
                                     src="assets/immagini/icons/vector-pen.svg"
@@ -24,7 +28,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-text userFormBody">
+                    <form
+                        class="card-text userFormBody"
+                        [formGroup]="utenteForm"
+                        (ngSubmit)="modificaUtente()"
+                    >
                         <div class="row d-flex align-items-center">
                             <div class="col-3 pe-0">
                                 <p class="me-2">Nome:</p>
@@ -32,13 +40,9 @@
                             <div class="col-9">
                                 <input
                                     type="text"
-                                    name="nome"
-                                    id="nome"
+                                    formControlName="nome"
                                     class="form-control"
-                                    placeholder="{{ utente?.nome }}"
-                                    disabled
-                                    required
-                                    ngModel
+                                    [value]="utente?.nome"
                                 />
                             </div>
                         </div>
@@ -47,13 +51,9 @@
                             <div class="col-9">
                                 <input
                                     type="text"
-                                    name="nome"
-                                    id="nome"
+                                    formControlName="cognome"
                                     class="form-control"
-                                    placeholder="{{ utente?.cognome }}"
-                                    disabled
-                                    required
-                                    ngModel
+                                    [value]="utente?.cognome"
                                 />
                             </div>
                         </div>
@@ -63,13 +63,11 @@
                             </div>
                             <div class="col-9">
                                 <input
-                                    type="date"
                                     name="dataNascita"
-                                    id="dataNascita"
+                                    type="date"
                                     class="form-control"
-                                    [ngModel]="utente?.dataNascita"
-                                    disabled
-                                    required
+                                    formControlName="dataNascita"
+                                    [value]="utente?.dataNascita"
                                 />
                             </div>
                         </div>
@@ -78,17 +76,35 @@
                             <div class="col-9">
                                 <input
                                     type="text"
-                                    name="nome"
-                                    id="nome"
+                                    formControlName="email"
+                                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                                     class="form-control"
-                                    placeholder="{{ utente?.email }}"
-                                    disabled
-                                    required
-                                    ngModel
+                                    [value]="utente?.email"
                                 />
                             </div>
                         </div>
-                    </div>
+
+                    </form>
+                </div>
+                <div
+                    class="d-flex justify-content-evenly"
+                    *ngIf="utenteForm.enabled"
+                >
+                    <button
+                        type="submit"
+                        class="btn button"
+                        (click)="modificaUtente()"
+                        [disabled]="utenteForm.invalid"
+                    >
+                        Modifca
+                    </button>
+                    <button
+                        type="button"
+                        class="btn button"
+                        (click)="annullaModifiche()"
+                    >
+                        Annulla
+                    </button>
                 </div>
             </div>
         </div>
@@ -107,18 +123,7 @@
                             "
                             class="text-center"
                         >
-                            <p>Nessun indirizzo trovato.</p>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <p class="mb-0 me-3">Aggiungi un indirizzo</p>
-                                <button type="button" (click)="toggleModal()">
-                                    <img
-                                        class="changeUser"
-                                        src="assets/immagini/icons/plus-lg.svg"
-                                        alt="PlusIcon"
-                                    />
-                                </button>
-                            </div>
-
+                            <p>Nessun indirizzo trovato</p>
                         </div>
                         <ng-template #indirizziUtente id="indirizziUtente">
                             <div
@@ -163,10 +168,10 @@
                                                     Cap {{ indirizzo.cap }}
                                                 </p>
                                                 <p>
-                                                    {{
+                                                   <span class="fw-bold">{{
                                                         indirizzo.comune
                                                             .denominazione
-                                                    }},
+                                                    }}</span>,
                                                     {{
                                                         indirizzo.comune
                                                             .siglaProvincia
@@ -195,7 +200,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="buttonTooltip">
-                                                    <button type="button" (click)="eliminaIndirizzo(indirizzo.id!)">
+                                                    <button
+                                                        type="button"
+                                                        (click)="
+                                                            eliminaIndirizzo(
+                                                                indirizzo.id!
+                                                            )
+                                                        "
+                                                    >
                                                         <img
                                                             class="changeUser"
                                                             src="assets/immagini/icons/x-lg.svg"
@@ -215,6 +227,18 @@
                                 </div>
                             </div>
                         </ng-template>
+                        <div
+                            class="d-flex align-items-center justify-content-center"
+                        >
+                            <p class="mb-0 me-3">Aggiungi un indirizzo</p>
+                            <button type="button" (click)="toggleModal()">
+                                <img
+                                    class="changeUser"
+                                    src="assets/immagini/icons/plus-lg.svg"
+                                    alt="PlusIcon"
+                                />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

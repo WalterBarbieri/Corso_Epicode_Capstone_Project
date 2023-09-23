@@ -15,8 +15,8 @@ import { TokenInterceptor } from './auth/token.interceptor';
 import { ContattiComponent } from './components/contatti/contatti.component';
 import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 import { UserpageComponent } from './components/userpage/userpage.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalindirizzoComponent } from './components/modalindirizzo/modalindirizzo.component';
+import { ProdottiComponent } from './components/prodotti/prodotti.component';
 
 
 
@@ -41,6 +41,14 @@ const route: Route[] = [
     {
         path: 'userpage',
         component: UserpageComponent
+    },
+    {
+        path: 'prodotti',
+        component: ProdottiComponent
+    },
+    {
+        path: 'prodotti/:categoria',
+        component: ProdottiComponent
     }
 ]
 @NgModule({
@@ -54,7 +62,8 @@ const route: Route[] = [
     ContattiComponent,
     TextareaAutoresizeDirective,
     UserpageComponent,
-    ModalindirizzoComponent
+    ModalindirizzoComponent,
+    ProdottiComponent
   ],
   imports: [
     BrowserModule,

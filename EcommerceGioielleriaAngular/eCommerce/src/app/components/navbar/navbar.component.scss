@@ -1,41 +1,43 @@
-.logo{
+.logo {
     width: 6em;
     margin: 1em;
 }
-.icon{
+
+.icon {
     width: 2em;
     margin: 0.5em 1em;
 }
-.navbar{
+
+.navbar {
     background-color: #1A1A1A;
     color: ghostwhite;
+
     a {
         color: ghostwhite;
         font-weight: bold;
-        &:hover{
+
+        &:hover {
             text-decoration: underline;
             text-decoration-thickness: 0.2em;
             text-underline-offset: 1em;
         }
     }
+
     padding: 0;
 }
 
-.dropdown:hover .dropdown-menu{
-    display: block;
-    margin-top: 0em;
-    padding-top: 3em;
-    z-index: 1;
-}
-.dropdown>.dropdown-toggle:active{
-    pointer-events: none;
-}
-.dropdown-menu{
+
+
+.dropdown-menu {
     background-color: #1A1A1A;
-    li, :hover {
+
+    li,
+    :hover {
         background-color: #1A1A1A;
-        a{
+
+        a {
             text-decoration: none;
+
             &:hover {
                 color: gainsboro;
             }
@@ -44,7 +46,7 @@
 }
 
 
-#navbarCentralSection div{
+#navbarCentralSection div {
     margin: 0em 3em;
 
 }
@@ -53,22 +55,24 @@
 
 .navbar .nav-item.dropdown .nav-link.dropdown-toggle::after {
     display: none;
-  }
+}
 
-  .navbar-toggler .navbar-toggler-icon {
+.navbar-toggler .navbar-toggler-icon {
     color: ghostwhite;
-  }
+}
 
-  .modal-dialog {
+.modal-dialog {
     position: absolute;
     top: 8em;
     right: 1em;
-  }
-  .modal-content {
+}
+
+.modal-content {
     background-color: #1A1A1A;
     color: ghostwhite;
 
-  }
+}
+
 .addCursor {
     cursor: pointer;
 }
@@ -76,34 +80,49 @@
 .addUnderline:hover {
     text-decoration: underline;
     text-decoration-thickness: 0.1em;
-            text-underline-offset: 0.3em;
+    text-underline-offset: 0.3em;
 }
+
 @media screen and (max-width: 991px) {
-    .dropdown-menu{
-        top: 2em;
+    .dropdown-menu {
+        top: 1em;
         left: -2em;
-        padding-top: 1em !important;
+        padding-top: 2em !important;
     }
 
-    .dropdown-menu li{
+    .dropdown-menu li {
         margin-bottom: 1em;
     }
-    #centralSectionContainer{
+
+    #centralSectionContainer {
         position: absolute;
         left: 0;
         top: 9em;
         background-color: #1A1A1A;
     }
 
-    #navbarCentralSection div{
+    #navbarCentralSection div {
         margin: 3em 3em;
 
     }
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
     .modal-dialog {
         top: 9.25em;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0em;
+        padding-top: 3em;
+        z-index: 1;
+    }
+
+    .dropdown>.dropdown-toggle:active {
+        pointer-events: none;
     }
 }
 
@@ -111,7 +130,7 @@
 
 
 /*Codice per trasformazione menu hamburger in X, credits @ ArturCodeCraft: https://uiverse.io/ArturCodeCraft/selfish-fish-82*/
-  .navbarButtonContainer {
+.navbarButtonContainer {
     border-radius: 16px;
     border: 1px solid #1A1A1A;
     background: #1A1A1A;
@@ -123,15 +142,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .menu__icon {
+.menu__icon {
     width: 32px;
     height: 32px;
     padding: 4px;
-  }
+}
 
-  .menu__icon span {
+.menu__icon span {
     display: block;
     width: 100%;
     height: 0.125rem;
@@ -140,126 +159,126 @@
     box-shadow: 0 .5px 2px 0 ghostwhite;
     transition: background-color .4s;
     position: relative;
-  }
+}
 
-  .menu__icon span+span {
+.menu__icon span+span {
     margin-top: .375rem;
-  }
+}
 
-  .menu__icon span:nth-child(1) {
+.menu__icon span:nth-child(1) {
     animation: ease .8s menu-icon-top-2 forwards;
-  }
+}
 
-  .menu__icon span:nth-child(2) {
+.menu__icon span:nth-child(2) {
     animation: ease .8s menu-icon-scaled-2 forwards;
-  }
+}
 
-  .menu__icon span:nth-child(3) {
+.menu__icon span:nth-child(3) {
     animation: ease .8s menu-icon-bottom-2 forwards;
-  }
+}
 
-  .menu__icon.isActive span:nth-child(1) {
+.menu__icon.isActive span:nth-child(1) {
     animation: ease .8s menu-icon-top forwards;
-  }
+}
 
-  .menu__icon.isActive span:nth-child(2) {
+.menu__icon.isActive span:nth-child(2) {
     animation: ease .8s menu-icon-scaled forwards;
 
-  }
+}
 
 
-  .menu__icon.isActive span:nth-child(3) {
+.menu__icon.isActive span:nth-child(3) {
     animation: ease .8s menu-icon-bottom forwards;
-  }
+}
 
-  @keyframes menu-icon-top {
+@keyframes menu-icon-top {
     0% {
-      top: 0;
-      transform: rotate(0);
+        top: 0;
+        transform: rotate(0);
     }
 
     50% {
-      top: .5rem;
-      transform: rotate(0);
+        top: .5rem;
+        transform: rotate(0);
     }
 
     100% {
-      top: .5rem;
-      transform: rotate(45deg);
+        top: .5rem;
+        transform: rotate(45deg);
     }
-  }
+}
 
-  @keyframes menu-icon-top-2 {
+@keyframes menu-icon-top-2 {
     0% {
-      top: .5rem;
-      transform: rotate(45deg);
+        top: .5rem;
+        transform: rotate(45deg);
     }
 
     50% {
-      top: .5rem;
-      transform: rotate(0);
+        top: .5rem;
+        transform: rotate(0);
     }
 
     100% {
-      top: 0;
-      transform: rotate(0);
+        top: 0;
+        transform: rotate(0);
     }
-  }
+}
 
-  @keyframes menu-icon-bottom {
+@keyframes menu-icon-bottom {
     0% {
-      bottom: 0;
-      transform: rotate(0);
+        bottom: 0;
+        transform: rotate(0);
     }
 
     50% {
-      bottom: .5rem;
-      transform: rotate(0);
+        bottom: .5rem;
+        transform: rotate(0);
     }
 
     100% {
-      bottom: .5rem;
-      transform: rotate(135deg);
+        bottom: .5rem;
+        transform: rotate(135deg);
     }
-  }
+}
 
-  @keyframes menu-icon-bottom-2 {
+@keyframes menu-icon-bottom-2 {
     0% {
-      bottom: .5rem;
-      transform: rotate(135deg);
+        bottom: .5rem;
+        transform: rotate(135deg);
     }
 
     50% {
-      bottom: .5rem;
-      transform: rotate(0);
+        bottom: .5rem;
+        transform: rotate(0);
     }
 
     100% {
-      bottom: 0;
-      transform: rotate(0);
+        bottom: 0;
+        transform: rotate(0);
     }
-  }
+}
 
-  @keyframes menu-icon-scaled {
+@keyframes menu-icon-scaled {
     50% {
-      transform: scale(0);
+        transform: scale(0);
     }
 
     100% {
-      transform: scale(0);
+        transform: scale(0);
     }
-  }
+}
 
-  @keyframes menu-icon-scaled-2 {
+@keyframes menu-icon-scaled-2 {
     0% {
-      transform: scale(0);
+        transform: scale(0);
     }
 
     50% {
-      transform: scale(0);
+        transform: scale(0);
     }
 
     100% {
-      transform: scale(1);
+        transform: scale(1);
     }
-  }
+}

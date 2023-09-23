@@ -1,0 +1,39 @@
+<div class="prodottiBody">
+    <h1 class="text-center pt-3">Pepe Jewels</h1>
+    <select id="categoria" class="form-control categoriaSelect" [(ngModel)]="categoriaSelezionata" (change)="filterByCategoria()">
+        <option value="">Tutti i Prodotti</option>
+        <option value="COLLANE">Collane</option>
+        <option value="PENDENTI">Pendenti</option>
+        <option value="ANELLI">Anelli</option>
+        <option value="ORECCHINI">Orecchini</option>
+        <option value="BRACCIALI">Bracciali</option>
+        <option value="MATERIALE_CLIENTE">Materiale del Cliente</option>
+
+    </select>
+    <div class="container-fluid p-5">
+        <div class="row">
+            <div
+                class="col-12 col-lg-6 col-xxl-4 mb-5"
+                *ngFor="let gioiello of gioielli"
+            >
+                <div class="card productCard">
+                    <div
+                        class="productCardImage"
+                        [ngStyle]="{
+                            'background-image':
+                                'url(' +
+                                convertFormat(gioiello.immagini[0]) +
+                                gioiello.immagini[0].dati +
+                                ')'
+                        }"
+                    ></div>
+                    <div class="card-footer productCardInfo">
+                        <h5>{{ gioiello.nomeProdotto }}</h5>
+
+                        <p>{{ gioiello.price }}€</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

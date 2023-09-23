@@ -3,7 +3,6 @@ package CaptsoneProject.EcommerceGioielleria.runner;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -77,8 +76,8 @@ public class RandomInstanceGenerator {
 		List<Comune> comuni = cs.findComuni();
 		Comune comune = comuni.get(rnd.nextInt(comuni.size()));
 		String nomeComune = comune.getDenominazione();
-		UUID id = utente.getId();
-		IndirizzoPayload rndIndirizzo = new IndirizzoPayload(via, civico, localita, cap, nomeComune, id);
+		String email = utente.getEmail();
+		IndirizzoPayload rndIndirizzo = new IndirizzoPayload(via, civico, localita, cap, nomeComune, email);
 		return rndIndirizzo;
 	}
 

@@ -50,14 +50,35 @@ textarea {
     }
 }
 
-select {
-    background-color: ghostwhite !important;
+.mySelect {
+    background-color: ghostwhite;
+    border: none ;
+    border-bottom: solid 1px !important;
+    border-radius: 0;
+    border-color: #1A1A1A;
+    background-image:
+    linear-gradient(45deg, transparent 50%, #1A1A1A 50%),
+    linear-gradient(135deg, #1A1A1A 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+option {
+    background-color: ghostwhite;
+
 }
 
 .button {
     background-color: #7c83bc;
     border: none;
-    transition: all 0.2s ;
+    transition: all 0.2s !important;
     &:disabled {
         background-color: #ccccff;
     }

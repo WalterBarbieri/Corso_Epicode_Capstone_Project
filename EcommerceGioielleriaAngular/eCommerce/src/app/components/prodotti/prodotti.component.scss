@@ -1,0 +1,31 @@
+.productCard {
+    height: 40em;
+    border: none;
+}
+.productCardImage {
+    background-repeat:no-repeat ;
+    background-size: contain;
+    background-position: center;
+    background-color: #1A1A1A;
+    height: 85%;
+}
+.productCardInfo{
+    height: 15%;
+    background-color: ghostwhite;
+}
+.prodottiBody {
+    background-color: ghostwhite;
+}
+
+.categoriaSelect {
+    width: fit-content;
+    margin: auto;
+    text-align: center;
+    font-size: larger;
+    background-color: ghostwhite;
+    border: none;
+    border-bottom: solid 1px #1A1A1A;
+    border-radius: 0;
+}
+
+

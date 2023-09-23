@@ -20,3 +20,9 @@
     cursor: pointer;
 
 }
+
+@media screen and (min-height: 1300px) {
+    .contattiBody {
+        min-height: 65%;
+    }
+}
