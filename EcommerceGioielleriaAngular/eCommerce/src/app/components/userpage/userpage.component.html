@@ -96,7 +96,7 @@
                         (click)="modificaUtente()"
                         [disabled]="utenteForm.invalid"
                     >
-                        Modifca
+                        Modifica
                     </button>
                     <button
                         type="button"
@@ -185,28 +185,11 @@
                                             <div
                                                 class="col-2 d-flex flex-column p-0 justify-content-around align-items-center"
                                             >
-                                                <div class="buttonTooltip">
-                                                    <button type="button">
-                                                        <img
-                                                            class="changeUser"
-                                                            src="assets/immagini/icons/vector-pen.svg"
-                                                            alt="PenIcon"
-                                                        />
-                                                    </button>
-                                                    <div
-                                                        class="myTooltip button px-2 pt-1 top-0"
-                                                    >
-                                                        Modifica
-                                                    </div>
-                                                </div>
+
                                                 <div class="buttonTooltip">
                                                     <button
                                                         type="button"
-                                                        (click)="
-                                                            eliminaIndirizzo(
-                                                                indirizzo.id!
-                                                            )
-                                                        "
+                                                        (click)="openToast(indirizzo.id)"
                                                     >
                                                         <img
                                                             class="changeUser"
@@ -225,6 +208,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <ngb-toast class="eliminaToast" *ngIf="indirizzoToasts[indirizzo.id]" [autohide]="false">
+                                    <div class="toast-header text-danger">
+                                      <h6 class="me-auto fw-bold">Attenzione</h6>
+                                      <button type="button" class="btn-close" (click)="closeToast(indirizzo.id)"></button>
+                                    </div>
+                                    <div class="toast-body">
+                                      Sei sicuro di voler eliminare questo indirizzo?
+                                      <div>
+                                        <button type="button" class="btn button bg-danger-subtle" (click)="eliminaIndirizzo(indirizzo.id)">
+                                            Elimina
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </ngb-toast>
                             </div>
                         </ng-template>
                         <div

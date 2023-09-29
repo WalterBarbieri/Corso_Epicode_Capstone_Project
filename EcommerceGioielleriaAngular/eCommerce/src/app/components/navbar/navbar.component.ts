@@ -28,6 +28,13 @@ export class NavbarComponent implements OnInit {
     document.removeEventListener('click', this.onClickOutside.bind(this))
   }
 
+  rechargeUser() {
+    this.authService.user$.subscribe(_user => {
+        this.user = _user;
+    })
+
+  }
+
   toggleHamburgerMenu(){
     if (window.innerWidth <= 991) {
         this.isOpen = !this.isOpen;

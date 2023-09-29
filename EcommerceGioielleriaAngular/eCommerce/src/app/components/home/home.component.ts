@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { Utente } from 'src/app/models/utente.interface';
+import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,16 +9,25 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
     baseUrl = environment.baseURL;
+    showToast = false;
+    toastMessage: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
+    this.route.queryParams.subscribe(params => {
+        const message = params['message'];
 
-
-
+        if (message === 'Login effettuato con successo!') {
+            this.toastMessage = message;
+            this.showToast = true;
+        }
+      });
   }
 
-
+  chiudiToast() {
+    this.showToast = false;
+}
 
 }

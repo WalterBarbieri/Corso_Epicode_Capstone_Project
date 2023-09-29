@@ -1,5 +1,7 @@
 package CaptsoneProject.EcommerceGioielleria.security;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,7 @@ public class AuthController {
 
 	@PostMapping("/register")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Utente saveUtente(@RequestBody UtenteRequestPayload body) {
+	public Utente saveUtente(@RequestBody UtenteRequestPayload body) throws IOException {
 		body.setPassword(bcrypt.encode(body.getPassword()));
 		Utente newUtente = us.saveUtente(body);
 		return newUtente;
@@ -43,12 +45,14 @@ public class AuthController {
 
 		if (utente != null && bcrypt.matches(body.getPassword(), utente.getPassword())) {
 			String token = jt.createToken(utente);
+
 			return new ResponseEntity<>(new TokenResponse(token, utente), HttpStatus.OK);
 
 		} else {
 			throw new UnauthorizedException(
 					"Credenziali non valide, verifica che la password o Email ed Username siano corrette");
 		}
+
 	}
 
 }

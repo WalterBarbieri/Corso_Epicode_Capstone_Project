@@ -1,0 +1,30 @@
+.adminpageBody {
+    background-color: ghostwhite;
+    min-height: 45%;
+}
+ul {
+    margin: 0;
+    padding-bottom: 3em;
+}
+ul li {
+    list-style: none;
+    margin-right: 2em;
+    a {
+        cursor: pointer;
+        color: #1A1A1A;
+    }
+    a.selected {
+        text-decoration: underline;
+        color: #1A1A1A;
+    }
+}
+a {
+    cursor: pointer;
+    color: #1A1A1A;
+}
+
+@media screen and (min-height: 1200px) {
+    .adminpageBody {
+        min-height: 65%;
+    }
+}

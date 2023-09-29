@@ -1,6 +1,7 @@
 .productCard {
     height: 40em;
     border: none;
+    cursor: pointer;
 }
 .productCardImage {
     background-repeat:no-repeat ;
@@ -17,15 +18,45 @@
     background-color: ghostwhite;
 }
 
+
 .categoriaSelect {
+    width: fit-content;    font-size: larger;
+    background-color: ghostwhite;
+    border: none;
+    border-bottom: solid 1px #1A1A1A;
+    border-radius: 0;
+}
+
+.sortSelect {
     width: fit-content;
-    margin: auto;
-    text-align: center;
     font-size: larger;
     background-color: ghostwhite;
     border: none;
     border-bottom: solid 1px #1A1A1A;
     border-radius: 0;
+}
+.selectContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+    h5 {
+        margin: 0;
+    }
+}
+option {
+    margin-bottom: 0.5em;
+}
+.button {
+    border-radius: 90px;
+    height: 3em;
+    width: 3em;
+    margin-right: 1em;
+}
+.activePageButton {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.3em;
 }
 
 

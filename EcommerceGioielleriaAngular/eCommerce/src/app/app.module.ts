@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Route, RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,6 +19,12 @@ import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 import { UserpageComponent } from './components/userpage/userpage.component';
 import { ModalindirizzoComponent } from './components/modalindirizzo/modalindirizzo.component';
 import { ProdottiComponent } from './components/prodotti/prodotti.component';
+import { AdminpageComponent } from './components/adminpage/adminpage.component';
+import { HistoryComponent } from './components/history/history.component';
+import { DettaglioComponent } from './components/dettaglio/dettaglio.component';
+import { GestioneProdottiComponent } from './components/adminpage/gestione-prodotti/gestione-prodotti.component';
+import { GestioneUtentiComponent } from './components/adminpage/gestione-utenti/gestione-utenti.component';
+import { CarrelloComponent } from './components/carrello/carrello.component';
 
 
 
@@ -30,10 +38,17 @@ const route: Route[] = [
         path: 'register',
         component: RegisterComponent
     },
+
     {
         path: 'login',
         component: LoginComponent
     },
+
+    {
+        path: 'login/:message',
+        component: LoginComponent
+    },
+
     {
         path: 'contatti',
         component: ContattiComponent
@@ -49,6 +64,22 @@ const route: Route[] = [
     {
         path: 'prodotti/:categoria',
         component: ProdottiComponent
+    },
+    {
+        path: 'adminpage',
+        component: AdminpageComponent
+    },
+    {
+        path: 'history',
+        component: HistoryComponent
+    },
+    {
+        path: 'dettaglio/:id',
+        component: DettaglioComponent
+    },
+    {
+        path: 'carrello',
+        component: CarrelloComponent
     }
 ]
 @NgModule({
@@ -63,14 +94,21 @@ const route: Route[] = [
     TextareaAutoresizeDirective,
     UserpageComponent,
     ModalindirizzoComponent,
-    ProdottiComponent
+    ProdottiComponent,
+    AdminpageComponent,
+    HistoryComponent,
+    DettaglioComponent,
+    GestioneProdottiComponent,
+    GestioneUtentiComponent,
+    CarrelloComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(route),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],

@@ -17,6 +17,38 @@
     cursor: pointer;
 }
 
+.registrazioneToast {
+    position: absolute;
+    z-index: 3;
+    width: 80%;
+    margin-top: 150px;
+    margin-right: 2em;
+    background-color: #ccccff;
+    .toast-header {
+        background-color: #ccccff;
+        h6 {
+            color: #1A1A1A;
+        }
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .registrazioneToast{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .registrazioneToast{
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .registrazioneToast{
+        width: 20%;
+    }
+}
 
 @media screen and (min-height: 1000px) {
     .loginBody {

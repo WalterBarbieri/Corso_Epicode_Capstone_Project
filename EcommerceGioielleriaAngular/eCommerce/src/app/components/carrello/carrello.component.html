@@ -1,0 +1,108 @@
+<div class="carrelloBody">
+    <h1 class="text-center">Il tuo Carrello</h1>
+    <h3 class="text-center">Benvenuto nel tuo carrello {{ user?.utenteTokenResponse?.nome }} {{ user?.utenteTokenResponse?.cognome }}</h3>
+    <div class="container">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body userInfoBody">
+                    <div class="card-title text-center">
+                        <h3>I miei Indirizzi</h3>
+                    </div>
+                    <div class="card-text userFormBody">
+                        <div
+                            *ngIf="
+                                utente?.indirizzi &&
+                                    utente?.indirizzi?.length === 0;
+                                else indirizziUtente
+                            "
+                            class="text-center"
+                        >
+                            <p>Nessun indirizzo trovato</p>
+                        </div>
+                        <ng-template #indirizziUtente id="indirizziUtente">
+                            <div
+                                *ngFor="
+                                    let indirizzo of utente?.indirizzi;
+                                    let i = index
+                                "
+                            >
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div
+                                            class="row card-text text-decoration-underline"
+                                        >
+                                            <div
+                                                class="col-2 col-xxl-3 p-0 text-center"
+                                            >
+                                                <p>{{ i + 1 }}</p>
+                                            </div>
+                                            <div class="col-8 col-xxl-7 p-0">
+                                                <p>
+                                                    Via {{ indirizzo.via }}
+                                                    {{ indirizzo.civico }}
+                                                </p>
+                                                <p>
+                                                    Località
+                                                    <span
+                                                        *ngIf="
+                                                            indirizzo.localita !=
+                                                                null;
+                                                            else noLocalita
+                                                        "
+                                                    >
+                                                        {{
+                                                            indirizzo.localita
+                                                        }}</span
+                                                    >
+                                                    <ng-template
+                                                        #noLocalita
+                                                        id="noLocalita"
+                                                        >//</ng-template
+                                                    >
+                                                    Cap {{ indirizzo.cap }}
+                                                </p>
+                                                <p>
+                                                   <span class="fw-bold">{{
+                                                        indirizzo.comune
+                                                            .denominazione
+                                                    }}</span>,
+                                                    {{
+                                                        indirizzo.comune
+                                                            .siglaProvincia
+                                                    }}
+                                                    {{
+                                                        indirizzo.comune
+                                                            .nomeRegione
+                                                    }}
+                                                </p>
+                                            </div>
+                                            <div
+                                                class="col-2 d-flex flex-column p-0 justify-content-around align-items-center"
+                                            >
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                        <div
+                            class="d-flex align-items-center justify-content-center"
+                        >
+                            <p class="mb-0 me-3">Aggiungi un indirizzo</p>
+                            <button type="button" (click)="toggleModal()">
+                                <img
+                                    class="changeUser"
+                                    src="assets/immagini/icons/plus-lg.svg"
+                                    alt="PlusIcon"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-modalindirizzo *ngIf="isModalOpen"></app-modalindirizzo>

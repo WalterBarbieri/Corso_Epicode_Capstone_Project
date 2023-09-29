@@ -1,5 +1,6 @@
 package CaptsoneProject.EcommerceGioielleria.prodotto.gioiello;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -13,8 +14,8 @@ public class GioielloFactory extends ProdottoFactory {
 
 	@Override
 	public Prodotto createProdotto(String nomeProdotto, String descrizione, double price, int quantita,
-			List<Immagine> immagini) {
-		Prodotto gioiello = new Gioiello(nomeProdotto, descrizione, price, quantita, immagini);
+			LocalDateTime dataInserimento, List<Immagine> immagini) {
+		Prodotto gioiello = new Gioiello(nomeProdotto, descrizione, price, quantita, dataInserimento, immagini);
 		return gioiello;
 	}
 

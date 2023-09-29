@@ -1,5 +1,6 @@
 package CaptsoneProject.EcommerceGioielleria.prodotto.gioiello;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import CaptsoneProject.EcommerceGioielleria.prodotto.Prodotto;
@@ -19,8 +20,9 @@ public class Gioiello extends Prodotto {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 
-	public Gioiello(String nomeProdotto, String descrizione, double price, int quantita, List<Immagine> immagini) {
-		super(nomeProdotto, descrizione, price, quantita, immagini);
+	public Gioiello(String nomeProdotto, String descrizione, double price, int quantita, LocalDateTime dataInserimento,
+			List<Immagine> immagini) {
+		super(nomeProdotto, descrizione, price, quantita, dataInserimento, immagini);
 
 	}
 

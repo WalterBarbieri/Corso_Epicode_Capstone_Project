@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
         })
     ).subscribe(response => {
         if (response) {
-            this.router.navigate(['/login'])
+            this.router.navigate(['/login', 'Registrazione effettuata con successo!'])
         }
     })
 

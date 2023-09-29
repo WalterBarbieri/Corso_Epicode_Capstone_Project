@@ -1,0 +1,143 @@
+<div class="container-fluid m-auto">
+    <div class="row p-4">
+        <div
+            id="productCarousel"
+            class="carousel slide carousel-fade col-12 col-lg-8 mb-5 mb-lg-0 d-flex align-items-center"
+            *ngIf="immagini.length > 0"
+        >
+            <div class="carousel-indicators">
+                <button
+                    type="button"
+                    class="carouselButton"
+                    *ngFor="let immagine of immagini; let i = index"
+                    data-bs-target="#productCarousel"
+                    [attr.data-bs-slide-to]="i"
+                    [class.active]="i === 0"
+                    [attr.aria-label]="'Slide ' + (i + 1)"
+                ></button>
+            </div>
+
+            <div class="carousel-inner">
+                <ng-container *ngFor="let immagine of immagini; let i = index">
+                    <div
+                        class="carousel-item"
+                        [class.active]="i === 0"
+                        *ngIf="immagine"
+                        [ngStyle]="{
+                            'background-image':
+                                'url(' + convertFormat(immagine) + ')'
+                        }"
+                    ></div>
+                </ng-container>
+            </div>
+
+            <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#productCarousel"
+                data-bs-slide="prev"
+            >
+                <span
+                    class="carousel-control-prev-icon carouselButton"
+                    aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#productCarousel"
+                data-bs-slide="next"
+            >
+                <span
+                    class="carousel-control-next-icon carouselButton"
+                    aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div
+            class="col-12 col-lg-4 d-flex justify-content-center align-items-center"
+        >
+            <div class="prodottoInfo" *ngIf="gioiello">
+                <h3>{{ gioiello.nomeProdotto }}</h3>
+                <h5>Categoria: {{ gioiello.categoria }}</h5>
+                <p>{{ gioiello.descrizione }}</p>
+                <h5 class="mb-4">Prezzo: {{ gioiello.price }}€</h5>
+                <div class="d-flex align-items-center mb-4">
+                    <h5 class="mb-0 me-2">Quantita:</h5>
+                    <select class="w-25 text-center form-control " name="quantitaSelect" id="quantitaSelect"  [(ngModel)]="quantitaSelezionata">
+                        <option
+                            *ngFor="let disponibile of quantita"
+                            value="{{ disponibile }}"
+                        >
+                            {{ disponibile }}
+                        </option>
+                    </select>
+                </div>
+
+                <h5 class="mb-4">Totale: {{ calcolaTotale() }}€</h5>
+                <button type="button" class="btn button mb-5" (click)="aggiungiAlCarrello()" [attr.data-bs-toggle]="user ? '' : 'modal'" [attr.data-bs-target]="user ? '' : '#carrelloModal'">
+                    Aggiungi al Carrello
+                </button>
+                <p>* Tutti i gioielli sono prodotti artigianali, completamente fatti a mano. I nostri prodotti potrebbero presentare minori differenze rispetto alle foto mostrate. I tempi di consegna possono variare in base agli ordini ricevuti. <a [routerLink]="'/contatti'">Contattaci</a> se vuoi ulteriori informazioni rispetto ai nostri gioielli, i tempi di consegna, o qualsiasi altra informazione.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+    class="modal fade"
+    id="carrelloModal"
+    tabindex="-1"
+    aria-labelledby="carrelloModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 pt-1" id="carrelloModalLabel">
+                    Accedi o Registrati per aggiungere il prodotto al carrello!
+                </h1>
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <h2 class="fs-5 addCursor addUnderline" [routerLink]="['/login']" data-bs-dismiss="modal"
+                aria-label="Close" (click)="ricordaOggetto()" >Accedi</h2>
+                <hr>
+                <h2 class="fs-5 addCursor addUnderline" [routerLink]="['/register']" data-bs-dismiss="modal"
+                aria-label="Close" (click)="ricordaOggetto()">Registrati</h2>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div *ngIf="showToast">
+    <ngb-toast class="registrazioneToast top-0 end-0" [autohide]="true">
+        <div class="toast-header">
+            <h6 class="me-auto">{{ toastMessage }}</h6>
+            <button
+                type="button"
+                class="btn-close"
+                (click)="chiudiToast()"
+            ></button>
+        </div>
+    </ngb-toast>
+</div>
+<div *ngIf="showCartToast">
+    <ngb-toast class="registrazioneToast top-0 end-0" [autohide]="true">
+        <div class="toast-header">
+            <h6 class="me-auto">Prodotto aggiunto con successo al carrello</h6>
+            <button
+                type="button"
+                class="btn-close"
+                (click)="chiudiToast()"
+            ></button>
+        </div>
+    </ngb-toast>
+</div>
+

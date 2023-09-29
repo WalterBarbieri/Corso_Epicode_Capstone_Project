@@ -12,8 +12,10 @@ import { GioielloService } from 'src/app/service/gioiello.service';
 })
 export class ProdottiComponent implements OnInit {
     gioielli!: Gioiello[];
-    sub!: Subscription;
+    pages: number[] = [];
     categoriaSelezionata: string = '';
+    sortSelezionato: string = '';
+    paginaSelezionata: number = 1;
 
   constructor(private gioielloService: GioielloService,private route: ActivatedRoute) { }
 
@@ -33,21 +35,27 @@ export class ProdottiComponent implements OnInit {
 
   filterByCategoria() {
     if(this.categoriaSelezionata != '') {
-        this.gioielloService.recuperaProdottyByCategoria(this.categoriaSelezionata).subscribe((response: any) => {
-            console.log(response.content);
+        this.gioielloService.recuperaProdottyByCategoria(this.categoriaSelezionata, this.paginaSelezionata -1, this.sortSelezionato).subscribe((response: any) => {
+            this.pages = Array.from({length: response.totalPages}, (_, i) => i + 1)
 
             this.gioielli = response.content;
 
         })
 
     } else {
-        this.gioielloService.recuperaProdotti().subscribe((response: any) => {
-            console.log(response.content);
+        this.gioielloService.recuperaProdotti(this.paginaSelezionata -1, this.sortSelezionato).subscribe((response: any) => {
+            this.pages = Array.from({length: response.totalPages}, (_, i) => i + 1)
 
             this.gioielli = response.content;
 
         })
     }
+  }
+
+  selectPage(page: number) {
+    this.paginaSelezionata = page;
+
+    this.filterByCategoria();
   }
 
 }

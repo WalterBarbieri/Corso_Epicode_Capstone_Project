@@ -5,21 +5,23 @@
                 <h2>Registrati</h2>
             </div>
             <form class="card-text" #form="ngForm" (submit)="register(form)">
-                <label for="nome">Nome</label>
+
                 <input
                     type="text"
                     name="nome"
                     id="nome"
                     class="form-control"
+                    placeholder="Nome"
                     required
                     ngModel
                 />
-                <label for="cognome">Cognome</label>
+
                 <input
                     type="text"
                     name="cognome"
                     id="cognome"
                     class="form-control"
+                    placeholder="Cognome"
                     required
                     ngModel
                 />
@@ -32,17 +34,16 @@
                     required
                     ngModel
                 />
-                <label for="email">Email</label>
                 <input
                     type="email"
                     name="email"
                     id="email"
                     class="form-control"
                     pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    placeholder="Email"
                     required
                     ngModel
                 />
-                <label for="password">Password</label>
                 <input
                     type="password"
                     name="password"
@@ -52,6 +53,7 @@
                     minlength="5"
                     maxlength="12"
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).+$"
+                    placeholder="Password"
                     required
                     ngModel
                 />
@@ -99,4 +101,5 @@
         </div>
     </div>
 </div>
+
 

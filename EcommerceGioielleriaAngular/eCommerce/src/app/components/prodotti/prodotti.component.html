@@ -1,22 +1,38 @@
 <div class="prodottiBody">
-    <h1 class="text-center pt-3">Pepe Jewels</h1>
-    <select id="categoria" class="form-control categoriaSelect" [(ngModel)]="categoriaSelezionata" (change)="filterByCategoria()">
-        <option value="">Tutti i Prodotti</option>
-        <option value="COLLANE">Collane</option>
-        <option value="PENDENTI">Pendenti</option>
-        <option value="ANELLI">Anelli</option>
-        <option value="ORECCHINI">Orecchini</option>
-        <option value="BRACCIALI">Bracciali</option>
-        <option value="MATERIALE_CLIENTE">Materiale del Cliente</option>
+    <h1 class="text-center pt-2">Pepe Jewels</h1>
+    <div class="d-flex justify-content-center flex-column flex-md-row">
+        <div class="selectContainer pe-md-4">
+            <h5>Filtra per: </h5>
+            <select id="categoria" name="categoria" class="form-control categoriaSelect" [(ngModel)]="categoriaSelezionata" (change)="filterByCategoria()">
+                <option value="">Tutti i Prodotti</option>
+                <option value="COLLANE">Collane</option>
+                <option value="PENDENTI">Pendenti</option>
+                <option value="ANELLI">Anelli</option>
+                <option value="ORECCHINI">Orecchini</option>
+                <option value="BRACCIALI">Bracciali</option>
+                <option value="MATERIALE_CLIENTE">Materiale del Cliente</option>
 
-    </select>
+            </select>
+        </div>
+        <div class="selectContainer">
+            <h5>Ordina per: </h5>
+            <select id="sort" name="sort" class="form-control sortSelect" [(ngModel)]="sortSelezionato" (change)="filterByCategoria()">
+                <option value="">Più Recente</option>
+                <option value="dataInserimento">Meno Recente</option>
+                <option value="price">Prezzo Crescente</option>
+                <option value="price,desc">Prezzo Decrescente</option>
+                <option value="nomeProdotto">Ordine Alfabetico A-Z</option>
+                <option value="nomeProdotto,desc">Ordine Alfabetico Z-A</option>
+            </select>
+        </div>
+    </div>
     <div class="container-fluid p-5">
         <div class="row">
             <div
                 class="col-12 col-lg-6 col-xxl-4 mb-5"
                 *ngFor="let gioiello of gioielli"
             >
-                <div class="card productCard">
+                <div class="card productCard" [routerLink]="['/dettaglio', gioiello.id]">
                     <div
                         class="productCardImage"
                         [ngStyle]="{
@@ -35,5 +51,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-center pb-5">
+        <button type="button" class="btn button" *ngFor="let page of pages" (click)="selectPage(page)" [ngClass]="{'activePageButton': page === paginaSelezionata}">{{page}}</button>
     </div>
 </div>

@@ -34,11 +34,22 @@
             >
                 <div class="collapse navbar-collapse" id="navbarCentralSection">
                     <div>
-                        <a [routerLink]="'/'" class="nav-item" (click)="toggleHamburgerMenu()">Home</a>
-                    </div>
-                    <div class="nav-item dropdown">
                         <a
-                            class="nav-link dropdown-toggle  position-relative z-2"
+                            [routerLink]="'/'"
+                            class="nav-item"
+                            (click)="toggleHamburgerMenu()"
+                            routerLinkActive="activeNavbarLink"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            >Home</a
+                        >
+                    </div>
+                    <div
+                        class="nav-item dropdown"
+                        routerLinkActive="activeNavbarLink"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <a
+                            class="nav-link dropdown-toggle position-relative z-2"
                             href="#"
                             role="button"
                             data-bs-toggle="dropdown"
@@ -49,35 +60,99 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" [routerLink]="'/prodotti'" (click)="toggleHamburgerMenu()"
+                                <a
+                                    class="dropdown-item"
+                                    [routerLink]="'/prodotti'"
+                                    (click)="toggleHamburgerMenu()"
                                     >Tutti i prodotti</a
                                 >
                             </li>
                             <li>
-                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'COLLANE'}]" (click)="toggleHamburgerMenu()">Collane</a>
+                                <a
+                                    class="dropdown-item"
+                                    [routerLink]="[
+                                        '/prodotti',
+                                        { categoria: 'COLLANE' }
+                                    ]"
+                                    (click)="toggleHamburgerMenu()"
+                                    >Collane</a
+                                >
                             </li>
                             <li>
-                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'PENDENTI'}]" (click)="toggleHamburgerMenu()">Pendenti</a>
+                                <a
+                                    class="dropdown-item"
+                                    [routerLink]="[
+                                        '/prodotti',
+                                        { categoria: 'PENDENTI' }
+                                    ]"
+                                    (click)="toggleHamburgerMenu()"
+                                    >Pendenti</a
+                                >
                             </li>
                             <li>
-                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'ANELLI'}]" (click)="toggleHamburgerMenu()">Anelli</a>
+                                <a
+                                    class="dropdown-item"
+                                    [routerLink]="[
+                                        '/prodotti',
+                                        { categoria: 'ANELLI' }
+                                    ]"
+                                    (click)="toggleHamburgerMenu()"
+                                    >Anelli</a
+                                >
                             </li>
                             <li>
-                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'ORECCHINI'}]" (click)="toggleHamburgerMenu()">Orecchini</a>
+                                <a
+                                    class="dropdown-item"
+                                    [routerLink]="[
+                                        '/prodotti',
+                                        { categoria: 'ORECCHINI' }
+                                    ]"
+                                    (click)="toggleHamburgerMenu()"
+                                    >Orecchini</a
+                                >
                             </li>
                             <li>
-                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'BRACCIALI'}]" (click)="toggleHamburgerMenu()">Bracciali</a>
+                                <a
+                                    class="dropdown-item"
+                                    [routerLink]="[
+                                        '/prodotti',
+                                        { categoria: 'BRACCIALI' }
+                                    ]"
+                                    (click)="toggleHamburgerMenu()"
+                                    >Bracciali</a
+                                >
                             </li>
                             <li>
-                                <a class="dropdown-item" [routerLink]="['/prodotti', { categoria: 'MATERIALE_CLIENTE'}]">Materiale del Cliente</a>
+                                <a
+                                    class="dropdown-item"
+                                    [routerLink]="[
+                                        '/prodotti',
+                                        { categoria: 'MATERIALE_CLIENTE' }
+                                    ]"
+                                    >Materiale del Cliente</a
+                                >
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <a [routerLink]="['/contatti']" class="nav-item" (click)="toggleHamburgerMenu()">Contatti</a>
+                        <a
+                            [routerLink]="['/contatti']"
+                            class="nav-item"
+                            (click)="toggleHamburgerMenu()"
+                            routerLinkActive="activeNavbarLink"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            >Contatti</a
+                        >
                     </div>
                     <div>
-                        <a [routerLink]="'/'" class="nav-item" (click)="toggleHamburgerMenu()">Pepe History</a>
+                        <a
+                            [routerLink]="'/history'"
+                            class="nav-item"
+                            (click)="toggleHamburgerMenu()"
+                            routerLinkActive="activeNavbarLink"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            >Pepe History</a
+                        >
                     </div>
                 </div>
             </div>
@@ -88,11 +163,14 @@
                     class="icon addCursor"
                     data-bs-toggle="modal"
                     data-bs-target="#navbarModal"
+                    (click)="rechargeUser()"
                 />
                 <img
                     src="assets/immagini/icons/cart.svg"
                     alt="CartLogo"
                     class="icon addCursor"
+                    *ngIf="user"
+                    [routerLink]="'/carrello'"
                 />
             </div>
         </div>
@@ -100,73 +178,100 @@
 </nav>
 
 <div *ngIf="!user; else userModal">
-<div
-    class="modal fade"
-    id="navbarModal"
-    tabindex="-1"
-    aria-labelledby="navbarModalLabel"
-    aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 pt-1" id="navbarModalLabel">
-                    Area Personale
-                </h1>
-                <button
-                    type="button"
-                    class="btn-close btn-close-white"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                ></button>
+    <div
+        class="modal fade"
+        id="navbarModal"
+        tabindex="-1"
+        aria-labelledby="navbarModalLabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 pt-1" id="navbarModalLabel">
+                        Area Personale
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <h2
+                        class="fs-5 addCursor addUnderline"
+                        [routerLink]="['/login']"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        Accedi
+                    </h2>
+                    <hr />
+                    <h2
+                        class="fs-5 addCursor addUnderline"
+                        [routerLink]="['/register']"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        Registrati
+                    </h2>
+                </div>
             </div>
-            <div class="modal-body">
-                <h2 class="fs-5 addCursor addUnderline" [routerLink]="['/login']" data-bs-dismiss="modal"
-                aria-label="Close" >Accedi</h2>
-                <hr>
-                <h2 class="fs-5 addCursor addUnderline" [routerLink]="['/register']" data-bs-dismiss="modal"
-                aria-label="Close">Registrati</h2>
-            </div>
-
         </div>
     </div>
-</div>
 </div>
 <ng-template #userModal id="userModal">
     <div
-    class="modal fade"
-    id="navbarModal"
-    tabindex="-1"
-    aria-labelledby="navbarModalLabel"
-    aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 pt-1" id="navbarModalLabel">
-                    Benvenuta/o {{user!.utenteTokenResponse!.nome}} {{user!.utenteTokenResponse.cognome}}
-                </h1>
-                <button
-                    type="button"
-                    class="btn-close btn-close-white"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                ></button>
+        class="modal fade"
+        id="navbarModal"
+        tabindex="-1"
+        aria-labelledby="navbarModalLabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 pt-1" id="navbarModalLabel">
+                        Benvenuta/o {{ user!.utenteTokenResponse!.nome }}
+                        {{ user!.utenteTokenResponse.cognome }}
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <h2
+                        class="fs-5 addCursor addUnderline"
+                        [routerLink]="['/userpage']"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        Il mio Account
+                    </h2>
+                    <hr />
+                    <h2
+                        class="fs-5 addCursor addUnderline"
+                        [routerLink]="'/carrello'"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        Carrello
+                    </h2>
+                    <hr />
+                    <h2
+                        class="fs-5 addCursor addUnderline text-danger"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        (click)="logout()"
+                    >
+                        Logout
+                    </h2>
+                </div>
             </div>
-            <div class="modal-body">
-                <h2 class="fs-5 addCursor addUnderline"
-                [routerLink]="['/userpage']"
-                data-bs-dismiss="modal"
-                aria-label="Close" >Il mio Account</h2>
-                <hr>
-                <h2 class="fs-5 addCursor addUnderline"  data-bs-dismiss="modal"
-                aria-label="Close">Carrello</h2>
-                <hr>
-                <h2 class="fs-5 addCursor addUnderline text-danger" data-bs-dismiss="modal"
-                aria-label="Close" (click)="logout()" >Logout</h2>
-            </div>
-
         </div>
     </div>
-</div>
 </ng-template>

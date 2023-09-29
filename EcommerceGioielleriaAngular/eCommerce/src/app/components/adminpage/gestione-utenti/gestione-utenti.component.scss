@@ -1,0 +1,66 @@
+.myTooltip {
+    display: none;
+    width: fit-content;
+}
+
+
+
+.buttonTooltip:hover .myTooltip{
+    display: block;
+    text-decoration: none;
+}
+
+#eliminaTooltip {
+    top: 3.8em;
+}
+.changeUser {
+    width: 1.5em;
+}
+
+.accordion-item {
+    background-color: ghostwhite;
+}
+
+.accordion-button.collapsed {
+    background-color: #ccccff;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #7c83bc;
+    ;
+}
+
+.utenteCard {
+    border-bottom: solid 1px #1A1A1A;
+    margin-bottom: 1em;
+}
+
+.paginationButton {
+    border-radius: 90px;
+    height: 3em;
+    width: 3em;
+    margin-right: 1em;
+}
+
+.activePageButton {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.3em;
+}
+
+.eliminaToast {
+    background-color: ghostwhite;
+}
+.eliminaToast .toast-header {
+    background-color: ghostwhite;
+}
+
+.searchUtenteInput{
+    width: 100%;
+}
+
+@media screen and (min-width: 769px){
+    .searchUtenteInput{
+        width: 50%;
+    }
+}

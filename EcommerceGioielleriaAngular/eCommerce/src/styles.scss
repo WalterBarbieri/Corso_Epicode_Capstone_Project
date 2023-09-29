@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
+
+
 html,
 body {
     height: 100vh;
@@ -93,5 +95,10 @@ option {
         text-underline-offset: 0.3em;
     }
 }
+
+select {
+    cursor: pointer;
+}
+
 
 

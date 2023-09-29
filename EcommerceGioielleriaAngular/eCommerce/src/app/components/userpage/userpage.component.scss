@@ -22,7 +22,7 @@
 }
 
 #eliminaTooltip {
-    top: 3.8em;
+    top: 2em;
 }
 
 @media screen and (min-width: 576px){
@@ -35,6 +35,8 @@
         margin: auto;
     }
 }
+
+
 
 @media screen and (min-width: 1200px){
     .userFormBody {
@@ -49,4 +51,15 @@
         flex-direction: column;
         align-items: center;
     }
+}
+
+.eliminaToast {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    background-color: ghostwhite;
+
+}
+.eliminaToast .toast-header {
+    background-color: ghostwhite;
 }

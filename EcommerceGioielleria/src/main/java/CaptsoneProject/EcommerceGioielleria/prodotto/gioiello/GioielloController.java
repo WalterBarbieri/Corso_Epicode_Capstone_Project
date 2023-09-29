@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,8 +33,8 @@ public class GioielloController {
 
 	@GetMapping
 	public ResponseEntity<Page<Gioiello>> findGioielli(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sort)
-			throws NotFoundException {
+			@RequestParam(defaultValue = "12") int size,
+			@RequestParam(defaultValue = "dataInserimento,desc") String sort) throws NotFoundException {
 		Page<Gioiello> gioielli = gs.findGioielliAndPage(page, size, sort);
 		return ResponseEntity.ok(gioielli);
 
@@ -43,7 +44,7 @@ public class GioielloController {
 	public ResponseEntity<Gioiello> findGioiello(@PathVariable UUID id) {
 		Gioiello gioiello = gs.findById(id);
 		if (gioiello != null) {
-			return new ResponseEntity<>(gioiello, HttpStatus.FOUND);
+			return new ResponseEntity<>(gioiello, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -51,8 +52,8 @@ public class GioielloController {
 
 	@GetMapping(params = "categoria")
 	public ResponseEntity<Page<Gioiello>> findByCategoria(@RequestParam(name = "categoria") Categoria categoria,
-			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
-			@RequestParam(defaultValue = "id") String sort) throws NotFoundException {
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size,
+			@RequestParam(defaultValue = "dataInserimento,desc") String sort) throws NotFoundException {
 		Page<Gioiello> gioielli = gs.findByCategoria(categoria, page, size, sort);
 		return ResponseEntity.ok(gioielli);
 
@@ -60,17 +61,17 @@ public class GioielloController {
 
 	@GetMapping(params = "nomeProdotto")
 	public ResponseEntity<Page<Gioiello>> findByName(@RequestParam(name = "nomeProdotto") String nomeProdotto,
-			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
-			@RequestParam(defaultValue = "id") String sort) throws NotFoundException {
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size,
+			@RequestParam(defaultValue = "dataInserimento,desc") String sort) throws NotFoundException {
 		Page<Gioiello> gioielli = gs.cercaGioiello(nomeProdotto, page, size, sort);
 		return ResponseEntity.ok(gioielli);
 	}
 
-	@PostMapping
-	@PreAuthorize("hasAuthority('ADMIN')")
+	@PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	public ResponseEntity<Gioiello> saveGioiello(@RequestParam String nomeProdotto, @RequestParam String descrizione,
 			@RequestParam double price, @RequestParam int quantita, @RequestParam MultipartFile[] immagini,
 			@RequestParam Categoria categoria) throws IOException {
+		System.out.println(nomeProdotto);
 
 		try {
 			Gioiello gioiello = gs.saveGioiello(nomeProdotto, descrizione, price, quantita, immagini, categoria);

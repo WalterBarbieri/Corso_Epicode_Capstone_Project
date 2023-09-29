@@ -1,11 +1,13 @@
 package CaptsoneProject.EcommerceGioielleria.prodotto;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import CaptsoneProject.EcommerceGioielleria.prodotto.immagini.Immagine;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,18 +33,23 @@ public abstract class Prodotto {
 	@GeneratedValue
 	private UUID id;
 	private String nomeProdotto;
+	@Column(length = 2000)
 	private String descrizione;
 	private double price;
 	private int quantita;
+	private LocalDateTime dataInserimento;
 	@OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Immagine> immagini = new ArrayList<>();
 
-	public Prodotto(String nomeProdotto, String descrizione, double price, int quantita, List<Immagine> immagini) {
+	public Prodotto(String nomeProdotto, String descrizione, double price, int quantita, LocalDateTime dataInserimento,
+			List<Immagine> immagini) {
 		super();
 		this.nomeProdotto = nomeProdotto;
 		this.descrizione = descrizione;
 		this.price = price;
 		this.quantita = quantita;
+
+		this.dataInserimento = dataInserimento;
 		this.immagini = immagini;
 	}
 

@@ -1,7 +1,10 @@
-#section1{
+.pepeInfo {
+    background-color: ghostwhite;
+}
+#section3{
     width: 100%;
     height: 80%;
-    background-image: url(/assets/immagini/repertorio/IMG-20221214-WA0010.jpg);
+    background-image: url(/assets/immagini/repertorio/homePage/IMG-20221013-WA0028.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position-y: center;
@@ -12,7 +15,18 @@
 #section2{
     width: 100%;
     height: 80%;
-    background-image: url(/assets/immagini/repertorio/b00000072_resized_20230916_051554974.JPG);
+    background-image: url(/assets/immagini/repertorio/homePage/b00000072_resized_20230916_051554974.JPG);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center ;
+
+}
+
+#section1{
+    width: 100%;
+    height: 80%;
+    background-image: url(/assets/immagini/repertorio/homePage/IMG-20230408-WA0034.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position-y: center;
@@ -27,4 +41,48 @@
     align-items: center;
     height: -webkit-fill-available;
 
+}
+
+.registrazioneToast {
+    position: absolute;
+    z-index: 3;
+    width: 80%;
+    margin-top: 150px;
+    margin-right: 2em;
+    background-color: #ccccff;
+    .toast-header {
+        background-color: #ccccff;
+        h6 {
+            color: #1A1A1A;
+        }
+    }
+}
+
+a {
+    color: #1A1A1A;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 0.1em;
+        text-underline-offset: 0.5em;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .registrazioneToast{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .registrazioneToast{
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .registrazioneToast{
+        width: 20%;
+    }
 }

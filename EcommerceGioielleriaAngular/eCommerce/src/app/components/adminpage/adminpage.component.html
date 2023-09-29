@@ -1,0 +1,24 @@
+<div class="adminpageBody">
+    <h1 class="text-center pt-2"><a (click)="chiudiTutto()">Admin Page</a></h1>
+    <ul
+        class="d-flex flex-column flex-sm-row justify-content-center align-items-center"
+    >
+        <li><a (click)="gestisciProdotti()" [class.selected]="showProdotti"><h3>Prodotti</h3></a></li>
+        <li><a (click)="gestisciUtenti()" [class.selected]="showUtenti"><h3>Utenti</h3></a></li>
+        <li><a [class.selected]="showOrdini"><h3>Ordini</h3></a></li>
+    </ul>
+    <div class="text-center" *ngIf="!showProdotti && !showUtenti && !showOrdini">
+        <h5>Nessuna categoria selezionata
+        </h5>
+        <h6>Seleziona una categoria per esercitare il tuo ADMIN POWER!</h6>
+    </div>
+    <div *ngIf="showProdotti">
+        <app-gestione-prodotti></app-gestione-prodotti>
+    </div>
+    <div *ngIf="showUtenti">
+        <app-gestione-utenti></app-gestione-utenti>
+    </div>
+    <div *ngIf="showOrdini">
+
+    </div>
+</div>

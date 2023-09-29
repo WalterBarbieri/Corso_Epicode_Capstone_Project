@@ -1,0 +1,72 @@
+.productCard {
+    height: 15em;
+    border: none;
+}
+
+.productCardImage {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: #1A1A1A;
+    height: 85%;
+}
+
+.productCardInfo {
+    height: 15%;
+    background-color: ghostwhite;
+}
+
+.paginationButton {
+    border-radius: 90px;
+    height: 3em;
+    width: 3em;
+    margin-right: 1em;
+}
+
+.activePageButton {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.3em;
+}
+
+.categoriaSelect {
+    width: fit-content;
+    font-size: larger;
+    background-color: ghostwhite;
+    border: none;
+    border-bottom: solid 1px #1A1A1A;
+    border-radius: 0;
+}
+
+.sortSelect {
+    width: fit-content;
+    font-size: larger;
+    background-color: ghostwhite;
+    border: none;
+    border-bottom: solid 1px #1A1A1A;
+    border-radius: 0;
+}
+
+.selectContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+
+    h5 {
+        margin: 0;
+    }
+}
+
+.accordion-item {
+    background-color: ghostwhite;
+}
+
+.accordion-button.collapsed {
+    background-color: #ccccff;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #7c83bc;
+    ;
+}

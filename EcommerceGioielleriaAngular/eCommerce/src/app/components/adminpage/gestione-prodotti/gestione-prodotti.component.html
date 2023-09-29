@@ -1,0 +1,299 @@
+<div class="container gestioneProdottoBody">
+    <div>
+        <div class="accordion accordion-flush" id="accordionProdotti">
+            <div class="accordion-item pb-2">
+                <h2 class="accordion-header">
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseProdotti"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseProdotti"
+                    >
+                        Aggiungi Prodotto
+                    </button>
+                </h2>
+                <div
+                    id="flush-collapseProdotti"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionProdotti"
+                >
+                    <div class="accordion-body">
+                        <form
+                            class="card-body newProductFormBody"
+                            [formGroup]="newProductForm"
+                            enctype="multipart/form-data"
+                            (ngSubmit)="creaProdotto()"
+                        >
+                            <div class="card-title">
+                                <h4>Nuovo Prodotto</h4>
+                            </div>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-8 col-lg-4 form-group">
+                                        <input
+                                            type="text"
+                                            formControlName="nomeProdotto"
+                                            id="nomeProdotto"
+                                            class="form-control"
+                                            name="nomeProdotto"
+                                            placeholder="Nome Prodotto"
+                                        />
+                                    </div>
+                                    <div class="col-4 col-lg-2">
+                                        <input
+                                            type="number"
+                                            formControlName="price"
+                                            id="price"
+                                            name="price"
+                                            class="form-control"
+                                            placeholder="Prezzo"
+                                        />
+                                    </div>
+                                    <div class="col-4 col-lg-2">
+                                        <input
+                                            type="number"
+                                            formControlName="quantita"
+                                            id="quantita"
+                                            name="quantita"
+                                            class="form-control"
+                                            placeholder="Quantità"
+                                        />
+                                    </div>
+                                    <div class="col-8 col-lg-4">
+                                        <select
+                                            formControlName="categoria"
+                                            id="categoria"
+                                            name="categoria"
+                                            class="form-control mySelect"
+                                        >
+                                            <option value="" disabled selected>
+                                                Categoria
+                                            </option>
+                                            <option value="COLLANE">
+                                                Collane
+                                            </option>
+                                            <option value="PENDENTI">
+                                                Pendenti
+                                            </option>
+                                            <option value="ANELLI">
+                                                Anelli
+                                            </option>
+                                            <option value="ORECCHINI">
+                                                Orecchini
+                                            </option>
+                                            <option value="BRACCIALI">
+                                                Bracciali
+                                            </option>
+                                            <option value="MATERIALE_CLIENTE">
+                                                Materiale del Cliente
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <textarea
+                                            formControlName="descrizione"
+                                            id="descrizione"
+                                            name="descrizione"
+                                            class="form-control"
+                                            placeholder="Descrizione"
+                                            rows="1"
+                                            maxlength="1000"
+                                            autocomplete="off"
+                                            appTextareaAutoresize
+                                        ></textarea>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <input
+                                            type="file"
+                                            formControlName="immagini"
+                                            id="immagini"
+                                            name="immagini"
+                                            class="form-control"
+                                            multiple
+                                            (change)="onFileSelected($event)"
+                                            accept="image/*"
+                                        />
+                                        <div class="image-preview">
+                                            <div
+                                                class="card-body row"
+                                                *ngFor="
+                                                    let image of previewImages;
+                                                    let i = index
+                                                "
+                                            >
+                                                <img
+                                                    [src]="image"
+                                                    class="preview-image col-10"
+                                                />
+                                                <button
+                                                    class="col-2"
+                                                    (click)="eliminaImmagine(i)"
+                                                >
+                                                    <img
+                                                        src="assets/immagini/icons/x-lg.svg"
+                                                        alt="X Icon"
+                                                    />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-evenly">
+                                <button
+                                    type="submit"
+                                    class="btn button"
+                                    [disabled]="newProductForm.invalid"
+                                >
+                                    Crea Prodotto
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn button"
+                                    (click)="resetForm()"
+                                >
+                                    Svuota i campi
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item pb-2">
+                <h2 class="accordion-header">
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseProdotti2"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseProdotti2"
+                        (click)="mostraProdotti()"
+                    >
+                        Visualizza Lista Prodotti
+                    </button>
+                </h2>
+                <div
+                    id="flush-collapseProdotti2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionProdotti"
+                >
+                    <div class="accordion-body">
+                        <div class="container-fluid mb-5">
+                            <div
+                                class="d-flex justify-content-center flex-column flex-md-row"
+                            >
+                                <div class="selectContainer pe-md-4">
+                                    <h5>Filtra per:</h5>
+                                    <select
+                                        id="categoria"
+                                        name="categoria"
+                                        class="form-control categoriaSelect"
+                                        [(ngModel)]="categoriaSelezionata"
+                                        (change)="filterByCategoria()"
+                                    >
+                                        <option value="">
+                                            Tutti i Prodotti
+                                        </option>
+                                        <option value="COLLANE">Collane</option>
+                                        <option value="PENDENTI">
+                                            Pendenti
+                                        </option>
+                                        <option value="ANELLI">Anelli</option>
+                                        <option value="ORECCHINI">
+                                            Orecchini
+                                        </option>
+                                        <option value="BRACCIALI">
+                                            Bracciali
+                                        </option>
+                                        <option value="MATERIALE_CLIENTE">
+                                            Materiale del Cliente
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="selectContainer">
+                                    <h5>Ordina per:</h5>
+                                    <select
+                                        id="sort"
+                                        name="sort"
+                                        class="form-control sortSelect"
+                                        [(ngModel)]="sortSelezionato"
+                                        (change)="filterByCategoria()"
+                                    >
+                                        <option value="">Più Recente</option>
+                                        <option value="dataInserimento">
+                                            Meno Recente
+                                        </option>
+                                        <option value="price">
+                                            Prezzo Crescente
+                                        </option>
+                                        <option value="price,desc">
+                                            Prezzo Decrescente
+                                        </option>
+                                        <option value="nomeProdotto">
+                                            Ordine Alfabetico A-Z
+                                        </option>
+                                        <option value="nomeProdotto,desc">
+                                            Ordine Alfabetico Z-A
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div
+                                    class="col-6 col-md-4 col-lg-3 mb-5"
+                                    *ngFor="let gioiello of gioielli"
+                                >
+                                    <div
+                                        class="card productCard"
+                                        [routerLink]="[
+                                            '/dettaglio',
+                                            { id: '${  }' }
+                                        ]"
+                                    >
+                                        <div
+                                            class="productCardImage"
+                                            [ngStyle]="{
+                                                'background-image':
+                                                    'url(' +
+                                                    convertFormat(
+                                                        gioiello.immagini[0]
+                                                    ) +
+                                                    gioiello.immagini[0].dati +
+                                                    ')'
+                                            }"
+                                        ></div>
+                                        <div
+                                            class="card-footer productCardInfo"
+                                        >
+                                            <h5>{{ gioiello.nomeProdotto }}</h5>
+
+                                            <p>{{ gioiello.price }}€</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center pb-5">
+                            <button
+                                type="button"
+                                class="btn button paginationButton"
+                                *ngFor="let page of pages"
+                                (click)="selectPage(page)"
+                                [ngClass]="{
+                                    activePageButton: page === paginaSelezionata
+                                }"
+                            >
+                                {{ page }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

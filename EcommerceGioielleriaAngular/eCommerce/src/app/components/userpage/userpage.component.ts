@@ -22,6 +22,8 @@ export class UserpageComponent implements OnInit {
     isModalOpen = false;
     editMode = false;
     utenteForm!: FormGroup;
+    indirizzoToasts: { [key: string]: boolean } = {};
+
 
     private modalCloseSubscription!: Subscription;
     private addedIndirizzoSubscription!: Subscription;
@@ -66,7 +68,6 @@ export class UserpageComponent implements OnInit {
         })
 
         this.addedIndirizzoSubscription = this.modalService.indirizzoAggiunto$.subscribe(() => {
-            console.log("Parto");
 
             this.authService.user$.subscribe(_user => {
                 this.user = _user;
@@ -81,6 +82,14 @@ export class UserpageComponent implements OnInit {
                 }
             })
         })
+
+        this.indirizzoToasts = {};
+
+        if (this.utente && this.utente.indirizzi) {
+            this.utente.indirizzi.forEach((indirizzo) => {
+            this.indirizzoToasts[indirizzo.id] = false;
+            });
+        }
 
 
     }
@@ -164,6 +173,13 @@ export class UserpageComponent implements OnInit {
             })
         }
     }
+
+    openToast(id: string) {
+        this.indirizzoToasts[id] = true;
+      }
+      closeToast(id: string) {
+        this.indirizzoToasts[id] = false;
+      }
 
 
 

@@ -1,6 +1,7 @@
 package CaptsoneProject.EcommerceGioielleria.prodotto.gioiello;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -33,10 +34,12 @@ public class GioielloService {
 		this.is = is;
 	}
 
+	@Transactional
 	public Gioiello saveGioiello(String nomeProdotto, String descrizione, double price, int quantita,
 			MultipartFile[] immagini, Categoria categoria) throws IOException {
 
-		Prodotto gioiello = gf.createProdotto(nomeProdotto, descrizione, price, quantita, new ArrayList<>());
+		Prodotto gioiello = gf.createProdotto(nomeProdotto, descrizione, price, quantita, LocalDateTime.now(),
+				new ArrayList<>());
 		gf.addCategory(gioiello, categoria);
 		Gioiello nuovoGioiello = gr.save((Gioiello) gioiello);
 
@@ -61,7 +64,12 @@ public class GioielloService {
 
 	@Transactional
 	public Page<Gioiello> findGioielliAndPage(int page, int size, String sort) {
-		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		String[] sortParts = sort.split(",");
+		String sortBy = sortParts[0];
+		String sortOrder = sortParts.length > 1 ? sortParts[1] : "asc";
+
+		Sort.Direction direction = sortOrder.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+		Pageable pageable = PageRequest.of(page, size, direction, sortBy);
 
 		return gr.findAll(pageable);
 	}
@@ -73,13 +81,23 @@ public class GioielloService {
 
 	@Transactional
 	public Page<Gioiello> findByCategoria(Categoria categoria, int page, int size, String sort) {
-		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		String[] sortParts = sort.split(",");
+		String sortBy = sortParts[0];
+		String sortOrder = sortParts.length > 1 ? sortParts[1] : "asc";
+
+		Sort.Direction direction = sortOrder.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+		Pageable pageable = PageRequest.of(page, size, direction, sortBy);
 		return gr.findByCategoria(categoria, pageable);
 	}
 
 	@Transactional
 	public Page<Gioiello> cercaGioiello(String nomeProdotto, int page, int size, String sort) {
-		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		String[] sortParts = sort.split(",");
+		String sortBy = sortParts[0];
+		String sortOrder = sortParts.length > 1 ? sortParts[1] : "asc";
+
+		Sort.Direction direction = sortOrder.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+		Pageable pageable = PageRequest.of(page, size, direction, sortBy);
 		return gr.cercaGioielli(nomeProdotto, pageable);
 	}
 

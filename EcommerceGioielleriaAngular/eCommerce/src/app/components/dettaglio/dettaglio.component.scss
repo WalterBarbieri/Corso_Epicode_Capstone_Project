@@ -1,0 +1,111 @@
+.container-fluid {
+    background-color: ghostwhite;
+
+}
+
+
+.carousel-item {
+    width: 100%;
+    height: 30em;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: ghostwhite;
+
+
+}
+
+
+.carouselButton {
+    background-color: #1a1a1a;
+}
+
+.prodottoInfo {
+    max-width: 100%; /* Imposta la larghezza massima al 100% del contenitore padre */
+    word-wrap: break-word; /* Abilita il riavvolgimento del testo se supera la larghezza */
+}
+
+
+.modal-dialog {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #1A1A1A;
+    color: ghostwhite;
+
+}
+
+.addCursor {
+    cursor: pointer;
+}
+
+.addUnderline:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.3em;
+}
+.registrazioneToast {
+    position: absolute;
+    z-index: 3;
+    width: 80%;
+    margin-top: 150px;
+    margin-right: 2em;
+    background-color: #ccccff;
+    .toast-header {
+        background-color: #ccccff;
+        h6 {
+            color: #1A1A1A;
+        }
+    }
+}
+
+a {
+    color: #1A1A1A;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 0.1em;
+        text-underline-offset: 0.5em;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .registrazioneToast{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .registrazioneToast{
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .registrazioneToast{
+        width: 20%;
+    }
+}
+
+
+@media screen and (max-width: 575px) {
+    .carousel-item {
+        height: 15em;
+    }
+}
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .carousel-item {
+        height: 20em;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .carousel-item {
+        height: 25em;
+    }
+}

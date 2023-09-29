@@ -78,9 +78,9 @@ public class UtenteController {
 	}
 
 	@DeleteMapping("/{email}")
-	public ResponseEntity<String> deleteUtente(@PathVariable String email) {
+	public ResponseEntity<Void> deleteUtente(@PathVariable String email) {
 		us.deleteUtente(email);
 
-		return ResponseEntity.ok("Utente eliminato con successo");
+		return ResponseEntity.noContent().build();
 	}
 }

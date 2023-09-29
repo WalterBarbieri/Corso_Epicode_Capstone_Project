@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { catchError, of } from 'rxjs';
 
@@ -12,10 +12,26 @@ import { catchError, of } from 'rxjs';
 export class LoginComponent implements OnInit {
     error!: string;
     showAlert = true;
+    showToast = false;
+    toastMessage: string = '';
+    gioielloRicordato: string | null = sessionStorage.getItem('prodottoId');
 
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(
+        private authService: AuthService,
+        private router: Router,
+        private route: ActivatedRoute
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.route.paramMap.subscribe((params) => {
+            const message = params.get('message');
+
+            if (message === 'Registrazione effettuata con successo!') {
+                this.toastMessage = message;
+                this.showToast = true;
+            }
+        });
+    }
 
     accedi(form: NgForm) {
         console.log(form.value);
@@ -32,18 +48,34 @@ export class LoginComponent implements OnInit {
             )
             .subscribe((response) => {
                 if (response) {
-                    sessionStorage.setItem('isFirstLoad', 'true');
-                    this.router.navigate(['/']);
+
+                    if (!this.gioielloRicordato) {
+                        this.router.navigate(['/'], {
+                            queryParams: {
+                                message: 'Login effettuato con successo!',
+                            },
+                        });
+                    } else {
+                        this.router.navigate(['/dettaglio', this.gioielloRicordato], {
+                            queryParams: {
+                                message: 'Login effettuato con successo!',
+                            },
+                        });
+                    }
                 }
             });
     }
     redirectToRegister() {
         this.router.navigate(['/register']);
-      }
+    }
 
-      chiudiAlert(){
+    chiudiAlert() {
         this.showAlert = false;
         this.error = '';
         this.showAlert = true;
-      }
+    }
+
+    chiudiToast() {
+        this.showToast = false;
+    }
 }
