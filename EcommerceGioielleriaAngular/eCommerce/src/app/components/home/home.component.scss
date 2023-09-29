@@ -1,5 +1,6 @@
 .pepeInfo {
-    background-color: ghostwhite;
+    background-color: #1a1a1a;
+    color: ghostwhite;
 }
 #section3{
     width: 100%;
@@ -59,7 +60,7 @@
 }
 
 a {
-    color: #1A1A1A;
+    color: ghostwhite;
     font-weight: bold;
 
     &:hover {
@@ -67,6 +68,10 @@ a {
         text-decoration-thickness: 0.1em;
         text-underline-offset: 0.5em;
     }
+}
+.pepeContainer {
+    width: 80%;
+    margin: auto;
 }
 
 @media screen and (min-width: 576px) {

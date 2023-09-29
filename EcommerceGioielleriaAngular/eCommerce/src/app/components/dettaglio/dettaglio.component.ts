@@ -87,7 +87,7 @@ aggiungiAlCarrello() {
     let utenteId = this.user.utenteTokenResponse.id;
     this.orderItemService.recuperaOrderItemByUtenteId(utenteId)
       .pipe(
-        catchError(error => {
+        catchError(() => {
           return this.orderItemService.creaOrderItem(utenteId);
         })
       )

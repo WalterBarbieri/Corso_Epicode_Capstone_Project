@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError, of } from 'rxjs';
 import { AuthData } from 'src/app/auth/auth.interface';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Immagine } from 'src/app/models/immagine.interface';
+import { Indirizzo } from 'src/app/models/indirizzo.interface';
 import { OrderItem } from 'src/app/models/order-item.interface';
 import { Utente } from 'src/app/models/utente.interface';
 import { IndirizzoService } from 'src/app/service/indirizzo.service';
@@ -16,13 +18,14 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class CarrelloComponent implements OnInit {
     user!: AuthData | null;
-    orderItem!: OrderItem;
+    orderItem!: OrderItem | null;
     utente!: Utente;
     indirizzoToasts: { [key: string]: boolean } = {};
     sub!: Subscription;
     isModalOpen = false;
     private modalCloseSubscription!: Subscription;
     private addedIndirizzoSubscription!: Subscription;
+    indirizzoSelezionato: Indirizzo | null = null;
 
     constructor(
         private authService: AuthService,
@@ -38,8 +41,12 @@ export class CarrelloComponent implements OnInit {
         });
 
         this.orderItemService
-            .recuperaOrderItemByUtenteId(this.user!.utenteTokenResponse.id)
-            .subscribe((response) => {
+            .recuperaOrderItemByUtenteId(this.user!.utenteTokenResponse.id).pipe(
+                catchError(() => {
+                    this.orderItem = null;
+                    return of(null);
+                })
+            ).subscribe((response) => {
                 this.orderItem = response;
                 this.utente = response.utente;
                 console.log(this.orderItem);
@@ -82,28 +89,14 @@ export class CarrelloComponent implements OnInit {
         this.modalCloseSubscription.unsubscribe();
     }
 
-    openToast(id: string) {
-        this.indirizzoToasts[id] = true;
-    }
-    closeToast(id: string) {
-        this.indirizzoToasts[id] = false;
-    }
+
     toggleModal() {
         this.isModalOpen = !this.isModalOpen;
     }
-    eliminaIndirizzo(id: string) {
-        this.sub = this.indirizzoService.eliminaIndirizzo(id).subscribe(
-            () => {
-                this.utente?.indirizzi?.splice(
-                    this.utente?.indirizzi?.findIndex(
-                        (indirizzo) => indirizzo.id === id
-                    ),
-                    1
-                );
-            },
-            (error) => {
-                console.error(error.error);
-            }
-        );
-    }
+
+    convertFormat(immagine: Immagine) {
+        let imageFormat = immagine.nomeImmagine.split('.').pop();
+        let imageInitialUrl = `data:image/${imageFormat};base64,`;
+        return imageInitialUrl + immagine.dati;
+      }
 }

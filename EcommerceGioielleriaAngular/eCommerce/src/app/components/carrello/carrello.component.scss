@@ -1,3 +1,42 @@
+.carrelloBody{
+    background-color: ghostwhite;
+}
 .card {
     border: none;
+    background-color: ghostwhite;
+}
+.prodottiCartItem {
+    height: 15em;
+}
+.productCartImage{
+    background-repeat:no-repeat ;
+    background-size: cover;
+    background-position: center;
+
+}
+a {
+    color: #1A1A1A;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 0.1em;
+        text-underline-offset: 0.5em;
+    }
+}
+
+.radioButton {
+    border: solid 2px #1A1A1A !important;
+    width: 1.5em;
+    height: 1.5em;
+}
+.radioButton:active {
+    background-color: #1A1A1A !important;
+}
+
+@media screen and (max-width: 767px) {
+    .infoBody {
+        width: 90%;
+        margin: auto;
+    }
 }

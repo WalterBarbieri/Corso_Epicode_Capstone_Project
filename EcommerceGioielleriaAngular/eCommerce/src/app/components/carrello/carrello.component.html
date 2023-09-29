@@ -1,14 +1,96 @@
-<div class="carrelloBody">
-    <h1 class="text-center">Il tuo Carrello</h1>
-    <h3 class="text-center">Benvenuto nel tuo carrello {{ user?.utenteTokenResponse?.nome }} {{ user?.utenteTokenResponse?.cognome }}</h3>
-    <div class="container">
-        <div class="col-12 col-md-6">
+<div class="carrelloBody py-3">
+    <h1 class="text-center pt-2">Il mio Carrello</h1>
+    <h3 class="text-center">
+        Benvenuto {{ user?.utenteTokenResponse?.nome }}
+        {{ user?.utenteTokenResponse?.cognome }}
+    </h3>
+    <div class="row container-fluid">
+        <div class="col-12 col-md-8">
             <div class="card">
-                <div class="card-body userInfoBody">
+                <div class="card-body infoBody">
+                    <div class="card-title text-center">
+                        <h3>I miei Gioielli</h3>
+                    </div>
+                    <div class="card-text">
+                        <div
+                            *ngIf="!orderItem; else prodottiUtente"
+                            class="text-center"
+                        >
+                            <p>Nessun gioiello trovato nel carrello</p>
+                            <p>
+                                <a [routerLink]="'/prodotti'"
+                                    >Vai allo shop per scoprire i nostri
+                                    prodotti!</a
+                                >
+                            </p>
+                        </div>
+                        <ng-template #prodottiUtente id="prodottiUtente">
+                            <div
+                                *ngFor="
+                                    let prodotto of orderItem?.prodotti;
+                                    let i = index
+                                "
+                                class="prodottiCartItem"
+                            >
+                                <div class="card h-100">
+                                    <div class="card-body productCartBody">
+                                        <div
+                                            class="row card-text text-decoration-underline h-100"
+                                        >
+                                            <div
+                                                class="col-3 col-xxl-3 p-0 text-center d-none d-lg-block"
+                                            >
+                                                <p>{{ i + 1 }}</p>
+                                            </div>
+                                            <div class="col-12 col-lg-9 col-xxl-7 p-0">
+                                                <div class="row h-100">
+                                                    <div
+                                                        class="col-8 productCartImage"
+                                                        [ngStyle]="{
+                                                            'background-image':
+                                                                'url(' +
+                                                                convertFormat(
+                                                                    prodotto
+                                                                        .immagini[0]
+                                                                ) +
+                                                                ')'
+                                                        }"
+                                                    ></div>
+                                                    <div
+                                                        class="col-4 d-flex flex-column justify-content-between"
+                                                    >
+                                                        <div>
+                                                            {{
+                                                                prodotto.nomeProdotto
+                                                            }}
+                                                        </div>
+                                                        <div>
+                                                            {{
+                                                                prodotto.price
+                                                            }}€
+                                                        </div>
+                                                        <div>
+                                                            <button type="button" class="btn button">Rimuovi</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <div class="card-body infoBody">
                     <div class="card-title text-center">
                         <h3>I miei Indirizzi</h3>
                     </div>
-                    <div class="card-text userFormBody">
+                    <div class="card-text">
                         <div
                             *ngIf="
                                 utente?.indirizzi &&
@@ -62,10 +144,11 @@
                                                     Cap {{ indirizzo.cap }}
                                                 </p>
                                                 <p>
-                                                   <span class="fw-bold">{{
+                                                    <span class="fw-bold">{{
                                                         indirizzo.comune
                                                             .denominazione
-                                                    }}</span>,
+                                                    }}</span
+                                                    >,
                                                     {{
                                                         indirizzo.comune
                                                             .siglaProvincia
@@ -79,12 +162,20 @@
                                             <div
                                                 class="col-2 d-flex flex-column p-0 justify-content-around align-items-center"
                                             >
-
+                                                <div class="form-check">
+                                                    <input
+                                                        class="radioButton form-check-input"
+                                                        type="radio"
+                                                        name="indirizzo"
+                                                        [(ngModel)]="
+                                                            indirizzoSelezionato
+                                                        "
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </ng-template>
                         <div
