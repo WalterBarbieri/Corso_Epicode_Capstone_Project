@@ -32,7 +32,6 @@ export class DettaglioComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
         const id = params.get('id');
 
-        console.log(id);
         if(id){
             this.gioielloService.recuperaProdotto(id).subscribe((response) => {
                 this.gioiello = response;
@@ -88,17 +87,22 @@ aggiungiAlCarrello() {
     this.orderItemService.recuperaOrderItemByUtenteId(utenteId)
       .pipe(
         catchError(() => {
+            console.log("qua?" );
+
           return this.orderItemService.creaOrderItem(utenteId);
         })
       )
       .subscribe(orderItem => {
 
         if (orderItem) {
+            console.log(orderItem);
           this.orderItemService.addProduct(orderItem.orderItemId, this.gioiello.id, this.quantitaSelezionata).subscribe(() => {
             this.showCartToast = true;
           });
         }
       });
+
+
   }
 
 ricordaOggetto(){

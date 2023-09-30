@@ -7,6 +7,7 @@
 }
 .prodottiCartItem {
     height: 15em;
+    margin-bottom: 0.7em;
 }
 .productCartImage{
     background-repeat:no-repeat ;
@@ -30,9 +31,51 @@ a {
     width: 1.5em;
     height: 1.5em;
 }
-.radioButton:active {
+.radioButton:checked {
     background-color: #1A1A1A !important;
 }
+
+.quantity-controls {
+
+    width: fit-content;
+
+}
+
+.myTooltip {
+    position: absolute;
+    border-radius: 20px;
+    display: none;
+
+}
+.buttonTooltip:hover .myTooltip{
+    display: block;
+    text-decoration: none;
+}
+
+.buttonTooltip {
+    width: fit-content;
+    padding-right: 0.5em ;
+    margin-top: 1em;
+}
+
+.buttonsContainer {
+    width: fit-content;
+}
+
+.prodottiAssenti {
+ background-color: ghostwhite;
+ .toast-header {
+    background-color: ghostwhite;
+ }
+}
+
+.indirizzoAssente {
+    background-color: ghostwhite;
+    .toast-header {
+       background-color: ghostwhite;
+    }
+   }
+
 
 @media screen and (max-width: 767px) {
     .infoBody {

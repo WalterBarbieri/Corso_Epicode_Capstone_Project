@@ -13,7 +13,10 @@
                     </div>
                     <div class="card-text">
                         <div
-                            *ngIf="!orderItem; else prodottiUtente"
+                            *ngIf="
+                                !orderItem || isEmpty(orderItem.prodotti);
+                                else prodottiUtente
+                            "
                             class="text-center"
                         >
                             <p>Nessun gioiello trovato nel carrello</p>
@@ -27,7 +30,7 @@
                         <ng-template #prodottiUtente id="prodottiUtente">
                             <div
                                 *ngFor="
-                                    let prodotto of orderItem?.prodotti;
+                                    let prodotto of prodottiArray;
                                     let i = index
                                 "
                                 class="prodottiCartItem"
@@ -38,39 +41,101 @@
                                             class="row card-text text-decoration-underline h-100"
                                         >
                                             <div
-                                                class="col-3 col-xxl-3 p-0 text-center d-none d-lg-block"
+                                                class="col-lg-3 p-0 text-center d-none d-lg-block"
                                             >
                                                 <p>{{ i + 1 }}</p>
                                             </div>
-                                            <div class="col-12 col-lg-9 col-xxl-7 p-0">
+                                            <div
+                                                class="col-12 col-lg-9 col-xxl-7 p-0"
+                                            >
                                                 <div class="row h-100">
                                                     <div
-                                                        class="col-8 productCartImage"
+                                                        class="col-7 col-md-8 productCartImage"
                                                         [ngStyle]="{
                                                             'background-image':
                                                                 'url(' +
                                                                 convertFormat(
                                                                     prodotto
+                                                                        .prodotto
                                                                         .immagini[0]
                                                                 ) +
                                                                 ')'
                                                         }"
                                                     ></div>
                                                     <div
-                                                        class="col-4 d-flex flex-column justify-content-between"
+                                                        class="col-5 col-md-4 d-flex flex-column justify-content-between"
                                                     >
                                                         <div>
                                                             {{
-                                                                prodotto.nomeProdotto
+                                                                prodotto
+                                                                    .prodotto
+                                                                    .nomeProdotto
                                                             }}
                                                         </div>
                                                         <div>
                                                             {{
-                                                                prodotto.price
+                                                                prodotto
+                                                                    .prodotto
+                                                                    .price
                                                             }}€
                                                         </div>
-                                                        <div>
-                                                            <button type="button" class="btn button">Rimuovi</button>
+                                                        <div class="d-flex flex-column align-items-center buttonsContainer">
+                                                            <div
+                                                                class="quantity-controls"
+                                                            >
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn ps-0 pb-0 pe-0 pe-md-1"
+                                                                    (click)="
+                                                                        decreaseQuantity(
+                                                                            prodotto
+                                                                        )
+                                                                    "
+                                                                >
+                                                                    -
+                                                                </button>
+                                                                <span
+                                                                    class="quantity mx-1 mx-md-2"
+                                                                    >{{
+                                                                        prodotto.quantita
+                                                                    }}</span
+                                                                >
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn pb-0 ps-0 ps-md-1"
+                                                                    (click)="
+                                                                        increaseQuantity(
+                                                                            prodotto
+                                                                        )
+                                                                    "
+                                                                >
+                                                                    +
+                                                                </button>
+                                                            </div>
+                                                            <div
+                                                                class="buttonTooltip"
+                                                            >
+                                                                <button
+                                                                    type="button"
+                                                                    (click)="
+                                                                        removeProdotto(
+                                                                            prodotto
+                                                                        )
+                                                                    "
+                                                                >
+                                                                    <img
+                                                                        class="changeUser"
+                                                                        src="assets/immagini/icons/x-lg.svg"
+                                                                        alt="X Icon"
+                                                                    />
+                                                                </button>
+                                                                <div
+                                                                    class="myTooltip button px-2 pt-1 bg-danger-subtle"
+                                                                    id="eliminaTooltip"
+                                                                >
+                                                                    Elimina
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -165,10 +230,15 @@
                                                 <div class="form-check">
                                                     <input
                                                         class="radioButton form-check-input"
-                                                        type="radio"
-                                                        name="indirizzo"
-                                                        [(ngModel)]="
-                                                            indirizzoSelezionato
+                                                        type="checkbox"
+                                                        [checked]="
+                                                            indirizzo.id ===
+                                                            indirizzoSelezionato?.id
+                                                        "
+                                                        (click)="
+                                                            selectCheckbox(
+                                                                indirizzo
+                                                            )
                                                         "
                                                     />
                                                 </div>
@@ -194,6 +264,47 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="totaleCarrello row">
+            <div class="col-12 col-md-6 text-center">
+                <h3> Totale: {{arrotondaTotale(totaleCarrello)}}€</h3>
+            </div>
+            <div class="col-12 col-md-6 text-center">
+                <button type="button" class="btn button mb-3" (click)="procediOrdine()">Procedi con l'ordine</button>
+                <div class="d-flex justify-content-center">
+                <ngb-toast *ngIf="showProdottiAssentiToast" class="prodottiAssenti" [autohide]="false">
+                    <div class="toast-header">
+                        <div class="d-flex flex-column text-center"><h6 class="me-auto">Nessun Prodotto nel Carrello!</h6>
+                            <h5> <a [routerLink]="'/prodotti'"
+                                >Visita lo Shop!</a
+                            ></h5>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            (click)="chiudiProdottiAssentiToast()"
+                        ></button>
+                    </div>
+                </ngb-toast>
+                <ngb-toast *ngIf="showIndirizzoAssenteToast" class="indirizzoAssente" [autohide]="true">
+                    <div class="toast-header">
+                        <div class="d-flex flex-column text-center">
+                            <h6 class="me-auto">Devi Selezionare un Indirizzo di Consegna!</h6>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            (click)="chiudiIndirizzoAssenteToast()"
+                        ></button>
+                    </div>
+                </ngb-toast>
+            </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <app-modalindirizzo *ngIf="isModalOpen"></app-modalindirizzo>

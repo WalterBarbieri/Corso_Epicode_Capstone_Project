@@ -1,6 +1,5 @@
 package CaptsoneProject.EcommerceGioielleria.utente;
 
-import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import com.sendgrid.Method;
-import com.sendgrid.Request;
-import com.sendgrid.Response;
-import com.sendgrid.SendGrid;
-import com.sendgrid.helpers.mail.Mail;
-import com.sendgrid.helpers.mail.objects.Content;
-import com.sendgrid.helpers.mail.objects.Email;
 
 import CaptsoneProject.EcommerceGioielleria.exceptions.BadRequestException;
 import CaptsoneProject.EcommerceGioielleria.exceptions.NotFoundException;
@@ -107,29 +98,29 @@ public class UtenteService {
 		return ur.save(utente);
 	}
 
-	public void invioEmail() throws IOException {
-
-		Email from = new Email("walter90@hotmail.it");
-		String subject = "Benvenuto su PepeFactory";
-		Email to = new Email("walter90@hotmail.it");
-		Content content = new Content("text/plain", "Benvenuto");
-		Mail mail = new Mail(from, subject, to, content);
-
-		SendGrid sg = new SendGrid(System.getenv("sendgrind_api_key"));
-		System.out.println("SENDGRID_API_KEY: " + System.getenv("sendgrind_api_key"));
-
-		Request request = new Request();
-		try {
-			request.setMethod(Method.POST);
-			request.setEndpoint("mail/send");
-			request.setBody(mail.build());
-			Response response = sg.api(request);
-			System.out.println(response.getStatusCode());
-			System.out.println(response.getBody());
-			System.out.println(response.getHeaders());
-		} catch (IOException ex) {
-			throw ex;
-		}
-	}
+//	public void invioEmail() throws IOException {
+//
+//		Email from = new Email("walter90@hotmail.it");
+//		String subject = "Benvenuto su PepeFactory";
+//		Email to = new Email("walter90@hotmail.it");
+//		Content content = new Content("text/plain", "Benvenuto");
+//		Mail mail = new Mail(from, subject, to, content);
+//
+//		SendGrid sg = new SendGrid(System.getenv("sendgrind_api_key"));
+//		System.out.println("SENDGRID_API_KEY: " + System.getenv("sendgrind_api_key"));
+//
+//		Request request = new Request();
+//		try {
+//			request.setMethod(Method.POST);
+//			request.setEndpoint("mail/send");
+//			request.setBody(mail.build());
+//			Response response = sg.api(request);
+//			System.out.println(response.getStatusCode());
+//			System.out.println(response.getBody());
+//			System.out.println(response.getHeaders());
+//		} catch (IOException ex) {
+//			throw ex;
+//		}
+//	}
 
 }

@@ -1,7 +1,7 @@
 import { Indirizzo } from "./indirizzo.interface";
 
 export interface Utente {
-    id?: string,
+    id: string,
     nome: string,
     cognome: string,
     dataNascita: Date,

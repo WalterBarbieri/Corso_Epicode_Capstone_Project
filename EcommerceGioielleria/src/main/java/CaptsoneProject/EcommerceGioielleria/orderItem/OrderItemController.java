@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import CaptsoneProject.EcommerceGioielleria.exceptions.NotFoundException;
 import CaptsoneProject.EcommerceGioielleria.prodotto.Prodotto;
 import CaptsoneProject.EcommerceGioielleria.prodotto.gioiello.GioielloService;
 
@@ -61,10 +63,52 @@ public class OrderItemController {
 		Prodotto prodotto = gs.findById(id);
 		if (prodotto != null) {
 			ois.addProduct(orderItemId, prodotto, quantita);
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(ois.findById(orderItemId), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+
+	}
+
+	@PostMapping("/{orderItemId}/plus")
+	public ResponseEntity<OrderItem> increaseProduct(@PathVariable UUID orderItemId, @RequestParam UUID id) {
+		Prodotto prodotto = gs.findById(id);
+		if (prodotto != null) {
+			ois.increaseProduct(orderItemId, prodotto);
+			return new ResponseEntity<>(ois.findById(orderItemId), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+	}
+
+	@PostMapping("/{orderItemId}/minus")
+	public ResponseEntity<OrderItem> decreaseProduct(@PathVariable UUID orderItemId, @RequestParam UUID id) {
+		Prodotto prodotto = gs.findById(id);
+		if (prodotto != null) {
+			ois.decreaseProduct(orderItemId, prodotto);
+			return new ResponseEntity<>(ois.findById(orderItemId), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+	}
+
+	@DeleteMapping("/{orderItemId}/remove-product")
+	public void removeProduct(@PathVariable UUID orderItemId, @RequestParam UUID id) {
+		Prodotto prodotto = gs.findById(id);
+		if (prodotto != null) {
+			ois.deleteProduct(orderItemId, prodotto);
+
+		} else {
+			throw new NotFoundException("Prodotto " + id + " non trovato");
+		}
+
+	}
+
+	@DeleteMapping("/{orderItemId}")
+	public void removeOrderItem(@PathVariable UUID orderItemId) {
+		ois.deleteOrderItem(orderItemId);
 
 	}
 
