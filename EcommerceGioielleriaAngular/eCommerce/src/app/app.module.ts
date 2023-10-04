@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -25,93 +24,147 @@ import { DettaglioComponent } from './components/dettaglio/dettaglio.component';
 import { GestioneProdottiComponent } from './components/adminpage/gestione-prodotti/gestione-prodotti.component';
 import { GestioneUtentiComponent } from './components/adminpage/gestione-utenti/gestione-utenti.component';
 import { CarrelloComponent } from './components/carrello/carrello.component';
-
-
+import { OrdineComponent } from './components/ordine/ordine.component';
+import { PaypalComponent } from './components/paypal/paypal.component';
+import { OrdineSuccessoComponent } from './components/ordine/ordine-successo/ordine-successo.component';
+import { OrdineAnnullatoComponent } from './components/ordine/ordine-annullato/ordine-annullato.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const route: Route[] = [
     {
         path: '',
-        component: HomeComponent
+        component: HomeComponent,
     },
 
     {
         path: 'register',
-        component: RegisterComponent
+        component: RegisterComponent,
     },
 
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
     },
 
     {
         path: 'login/:message',
-        component: LoginComponent
+        component: LoginComponent,
     },
 
     {
         path: 'contatti',
-        component: ContattiComponent
+        component: ContattiComponent,
     },
     {
         path: 'userpage',
-        component: UserpageComponent
+        component: UserpageComponent,
+        canActivate: [AuthGuard],
+        data: {
+            roles: ['USER', 'ADMIN']
+        }
     },
     {
         path: 'prodotti',
-        component: ProdottiComponent
+        component: ProdottiComponent,
     },
     {
         path: 'prodotti/:categoria',
-        component: ProdottiComponent
+        component: ProdottiComponent,
     },
     {
         path: 'adminpage',
-        component: AdminpageComponent
+        component: AdminpageComponent,
+        canActivate: [AuthGuard],
+        data: {
+            roles: ['ADMIN']
+        }
     },
     {
         path: 'history',
-        component: HistoryComponent
+        component: HistoryComponent,
     },
     {
         path: 'dettaglio/:id',
-        component: DettaglioComponent
+        component: DettaglioComponent,
     },
     {
         path: 'carrello',
-        component: CarrelloComponent
-    }
-]
+        component: CarrelloComponent,
+        canActivate: [AuthGuard],
+        data: {
+            roles: ['USER', 'ADMIN']
+        }
+    },
+    {
+        path: 'ordine/:id',
+        component: OrdineComponent,
+        canActivate: [AuthGuard],
+        data: {
+            roles: ['USER', 'ADMIN']
+        }
+    },
+    {
+        path: 'paypal/:ordineId',
+        component: PaypalComponent,
+        canActivate: [AuthGuard],
+        data: {
+            roles: ['USER', 'ADMIN']
+        }
+    },
+    {
+        path: 'ordineSuccesso',
+        component: OrdineSuccessoComponent,
+        canActivate: [AuthGuard],
+        data: {
+            roles: ['USER', 'ADMIN']
+        }
+    },
+    {
+        path: 'ordineAnnullato',
+        component: OrdineAnnullatoComponent,
+        canActivate: [AuthGuard],
+        data: {
+            roles: ['USER', 'ADMIN']
+        }
+    },
+];
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NavbarComponent,
-    FooterComponent,
-    RegisterComponent,
-    LoginComponent,
-    ContattiComponent,
-    TextareaAutoresizeDirective,
-    UserpageComponent,
-    ModalindirizzoComponent,
-    ProdottiComponent,
-    AdminpageComponent,
-    HistoryComponent,
-    DettaglioComponent,
-    GestioneProdottiComponent,
-    GestioneUtentiComponent,
-    CarrelloComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot(route),
-    ReactiveFormsModule,
-    NgbModule
-  ],
-  providers: [AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        NavbarComponent,
+        FooterComponent,
+        RegisterComponent,
+        LoginComponent,
+        ContattiComponent,
+        TextareaAutoresizeDirective,
+        UserpageComponent,
+        ModalindirizzoComponent,
+        ProdottiComponent,
+        AdminpageComponent,
+        HistoryComponent,
+        DettaglioComponent,
+        GestioneProdottiComponent,
+        GestioneUtentiComponent,
+        CarrelloComponent,
+        OrdineComponent,
+        PaypalComponent,
+        OrdineSuccessoComponent,
+        OrdineAnnullatoComponent,
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        RouterModule.forRoot(route),
+        ReactiveFormsModule,
+        NgbModule,
+    ],
+    providers: [
+        AuthService,
+        AuthGuard,
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

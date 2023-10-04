@@ -1,0 +1,51 @@
+<div class="bannercontrolpanel py-3">
+    <div class="form-box mx-auto">
+        <div class="title container-fluid text-center">
+            <img
+                src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png"
+            />
+        </div>
+        <div *ngIf="ordine" class="form-container paypalFormContainer">
+            <div class="py-3">
+                <div>
+                    <h4>Dati Utente</h4>
+                    <p>Nome: {{ utente.nome }}</p>
+                    <p>Cognome: {{ utente.cognome }}</p>
+                    <p>Email: {{ utente.email }}</p>
+                </div>
+                <div>
+                    <h4>Indirizzo di Consegna</h4>
+                    <p>Via/Piazza {{ ordine.indirizzoConsegna.via }} {{ ordine.indirizzoConsegna.civico }}, {{ ordine.indirizzoConsegna.cap }} </p>
+                    <p *ngIf="ordine.indirizzoConsegna.localita">Località: {{ ordine.indirizzoConsegna.localita }} </p>
+                    <p>{{ ordine.indirizzoConsegna.comune.denominazione }} ({{ ordine.indirizzoConsegna.comune.siglaProvincia }}), {{ ordine.indirizzoConsegna.comune.nomeRegione }}  </p>
+                </div>
+                <table class="w-100 py-3">
+                    <h4>Prodotti</h4>
+                    <tr class="tableHeader">
+                        <th>Nome Prodotto</th>
+                        <th>Prezzo</th>
+                        <th>Quantità</th>
+                        <th>Totale</th>
+                    </tr>
+                    <tr class="tableRow" *ngFor="let prodotto of prodottiArray">
+                        <td>{{ prodotto.prodotto.nomeProdotto }}</td>
+                        <td>{{ prodotto.prodotto.price }}€</td>
+                        <td>{{ prodotto.quantita }}</td>
+                        <td>
+                            {{ prodotto.prodotto.price * prodotto.quantita }}€
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="amount">
+                <h4>Dettaglio Costo</h4>
+                <h6>Importo: {{ ordine.importo }}€</h6>
+                <h6>Iva: {{ ordine.iva }}€</h6>
+                <h5>Totale: {{ ordine.totale }}€</h5></div>
+        </div>
+        <div class="paypalButton py-3">
+            <div #paymentRef></div>
+        </div>
+    </div>
+
+</div>

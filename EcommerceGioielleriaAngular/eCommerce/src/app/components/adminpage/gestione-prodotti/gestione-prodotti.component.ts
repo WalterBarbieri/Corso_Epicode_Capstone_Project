@@ -23,6 +23,8 @@ export class GestioneProdottiComponent implements OnInit {
     sortSelezionato: string = '';
     paginaSelezionata: number = 1;
 
+    prodottoToasts: { [key: string]: boolean } = {};
+
   constructor(private gioielloService: GioielloService, private formBuilder: FormBuilder) {
     this.newProductForm = this.formBuilder.group({
         nomeProdotto: ['', Validators.required],
@@ -35,6 +37,16 @@ export class GestioneProdottiComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.prodottoToasts = {};
+
+    if (this.gioielli) {
+        this.gioielli.forEach((gioiello) => {
+            if(gioiello.id){
+                this.prodottoToasts[gioiello.id] = false;
+            }
+
+        });
+    }
   }
     //METODI PER IL CARICAMENTO DI UN NUOVO PRODOTTO
   onFileSelected(event: any) {
@@ -123,6 +135,22 @@ export class GestioneProdottiComponent implements OnInit {
     this.paginaSelezionata = page;
 
     this.filterByCategoria();
+  }
+
+  openToast(id: string) {
+    this.prodottoToasts[id] = true;
+  }
+  closeToast(id: string) {
+    this.prodottoToasts[id] = false;
+  }
+
+  eliminaProdotto(id: string){
+    this.gioielloService.eliminaProdotto(id).subscribe(() => {
+        console.log('Gioiello eliminato con successo');
+        this.filterByCategoria();
+    }, (error: any) => {
+        console.error('Errore durante l\'eliminazione del prodotto', error);
+      } );
   }
 
 }

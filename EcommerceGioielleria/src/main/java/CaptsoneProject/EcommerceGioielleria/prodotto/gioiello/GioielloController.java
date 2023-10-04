@@ -68,6 +68,7 @@ public class GioielloController {
 	}
 
 	@PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<Gioiello> saveGioiello(@RequestParam String nomeProdotto, @RequestParam String descrizione,
 			@RequestParam double price, @RequestParam int quantita, @RequestParam MultipartFile[] immagini,
 			@RequestParam Categoria categoria) throws IOException {
@@ -90,7 +91,7 @@ public class GioielloController {
 		try {
 			gs.deleteGioiello(id);
 
-			return ResponseEntity.ok("Gioiello eliminato con successo");
+			return ResponseEntity.noContent().build();
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

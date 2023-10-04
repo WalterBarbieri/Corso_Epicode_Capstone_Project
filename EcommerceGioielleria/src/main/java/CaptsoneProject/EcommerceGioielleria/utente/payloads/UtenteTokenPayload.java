@@ -2,6 +2,7 @@ package CaptsoneProject.EcommerceGioielleria.utente.payloads;
 
 import java.util.UUID;
 
+import CaptsoneProject.EcommerceGioielleria.utente.Ruolo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,6 @@ public class UtenteTokenPayload {
 	private String nome;
 	private String cognome;
 	private String email;
+	private Ruolo ruolo;
 
 }

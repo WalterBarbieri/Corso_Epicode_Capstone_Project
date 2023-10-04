@@ -261,6 +261,17 @@
                     >
                         Carrello
                     </h2>
+                    <div *ngIf="user!.utenteTokenResponse.ruolo === 'ADMIN'">
+                        <hr />
+                        <h2
+                            class="fs-5 addCursor addUnderline"
+                            [routerLink]="'/adminpage'"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            Admin Page
+                        </h2>
+                    </div>
                     <hr />
                     <h2
                         class="fs-5 addCursor addUnderline text-danger"

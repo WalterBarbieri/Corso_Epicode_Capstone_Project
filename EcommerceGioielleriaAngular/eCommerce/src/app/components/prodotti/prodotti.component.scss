@@ -16,6 +16,7 @@
 }
 .prodottiBody {
     background-color: ghostwhite;
+    min-height: 45%;
 }
 
 
@@ -57,6 +58,12 @@ option {
     text-decoration: underline;
     text-decoration-thickness: 0.1em;
     text-underline-offset: 0.3em;
+}
+
+@media screen and (min-height: 1000px) {
+    .prodottiBody{
+        min-height: 65%;
+    }
 }
 
 

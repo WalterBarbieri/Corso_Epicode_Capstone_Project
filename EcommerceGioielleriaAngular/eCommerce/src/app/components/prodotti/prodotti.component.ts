@@ -11,7 +11,7 @@ import { GioielloService } from 'src/app/service/gioiello.service';
   styleUrls: ['./prodotti.component.scss']
 })
 export class ProdottiComponent implements OnInit {
-    gioielli!: Gioiello[];
+    gioielli: Gioiello[] = [];
     pages: number[] = [];
     categoriaSelezionata: string = '';
     sortSelezionato: string = '';

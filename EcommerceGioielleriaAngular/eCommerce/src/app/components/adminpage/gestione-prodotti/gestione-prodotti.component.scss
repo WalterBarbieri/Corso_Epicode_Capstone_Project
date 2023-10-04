@@ -70,3 +70,34 @@
     background-color: #7c83bc;
     ;
 }
+
+.myTooltip {
+    display: none;
+    width: fit-content;
+}
+
+
+
+.buttonTooltip:hover .myTooltip{
+    display: block;
+    text-decoration: none;
+}
+
+#eliminaTooltip {
+   position: absolute;
+   z-index: 3;
+}
+.changeUser {
+    width: 1.5em;
+}
+
+.eliminaToast {
+    background-color: ghostwhite;
+}
+.eliminaToast .toast-header {
+    background-color: ghostwhite;
+}
+
+.searchUtenteInput{
+    width: 100%;
+}

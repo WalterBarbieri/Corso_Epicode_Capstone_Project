@@ -2,8 +2,14 @@
     <h1 class="text-center pt-2">Pepe Jewels</h1>
     <div class="d-flex justify-content-center flex-column flex-md-row">
         <div class="selectContainer pe-md-4">
-            <h5>Filtra per: </h5>
-            <select id="categoria" name="categoria" class="form-control categoriaSelect" [(ngModel)]="categoriaSelezionata" (change)="filterByCategoria()">
+            <h5>Filtra per:</h5>
+            <select
+                id="categoria"
+                name="categoria"
+                class="form-control categoriaSelect"
+                [(ngModel)]="categoriaSelezionata"
+                (change)="filterByCategoria()"
+            >
                 <option value="">Tutti i Prodotti</option>
                 <option value="COLLANE">Collane</option>
                 <option value="PENDENTI">Pendenti</option>
@@ -11,12 +17,17 @@
                 <option value="ORECCHINI">Orecchini</option>
                 <option value="BRACCIALI">Bracciali</option>
                 <option value="MATERIALE_CLIENTE">Materiale del Cliente</option>
-
             </select>
         </div>
         <div class="selectContainer">
-            <h5>Ordina per: </h5>
-            <select id="sort" name="sort" class="form-control sortSelect" [(ngModel)]="sortSelezionato" (change)="filterByCategoria()">
+            <h5>Ordina per:</h5>
+            <select
+                id="sort"
+                name="sort"
+                class="form-control sortSelect"
+                [(ngModel)]="sortSelezionato"
+                (change)="filterByCategoria()"
+            >
                 <option value="">Più Recente</option>
                 <option value="dataInserimento">Meno Recente</option>
                 <option value="price">Prezzo Crescente</option>
@@ -26,33 +37,51 @@
             </select>
         </div>
     </div>
-    <div class="container-fluid p-5">
-        <div class="row">
-            <div
-                class="col-12 col-lg-6 col-xxl-4 mb-5"
-                *ngFor="let gioiello of gioielli"
-            >
-                <div class="card productCard" [routerLink]="['/dettaglio', gioiello.id]">
+    <div *ngIf="gioielli.length > 0; else noProdotti">
+        <div class="container-fluid p-5">
+            <div class="row">
+                <div
+                    class="col-12 col-lg-6 col-xxl-4 mb-5"
+                    *ngFor="let gioiello of gioielli"
+                >
                     <div
-                        class="productCardImage"
-                        [ngStyle]="{
-                            'background-image':
-                                'url(' +
-                                convertFormat(gioiello.immagini[0]) +
-                                gioiello.immagini[0].dati +
-                                ')'
-                        }"
-                    ></div>
-                    <div class="card-footer productCardInfo">
-                        <h5>{{ gioiello.nomeProdotto }}</h5>
+                        class="card productCard"
+                        [routerLink]="['/dettaglio', gioiello.id]"
+                    >
+                        <div
+                            class="productCardImage"
+                            [ngStyle]="{
+                                'background-image':
+                                    'url(' +
+                                    convertFormat(gioiello.immagini[0]) +
+                                    gioiello.immagini[0].dati +
+                                    ')'
+                            }"
+                        ></div>
+                        <div class="card-footer productCardInfo">
+                            <h5>{{ gioiello.nomeProdotto }}</h5>
 
-                        <p>{{ gioiello.price }}€</p>
+                            <p>{{ gioiello.price }}€</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <ng-template #noProdotti id="noProdotti">
+        <div class="container text-center py-5">
+            <h5>Non ci sono Prodotti disponibili al momento</h5>
+        </div>
+    </ng-template>
     <div class="d-flex justify-content-center pb-5">
-        <button type="button" class="btn button" *ngFor="let page of pages" (click)="selectPage(page)" [ngClass]="{'activePageButton': page === paginaSelezionata}">{{page}}</button>
+        <button
+            type="button"
+            class="btn button"
+            *ngFor="let page of pages"
+            (click)="selectPage(page)"
+            [ngClass]="{ activePageButton: page === paginaSelezionata }"
+        >
+            {{ page }}
+        </button>
     </div>
 </div>

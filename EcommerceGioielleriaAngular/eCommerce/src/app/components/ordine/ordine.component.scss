@@ -1,0 +1,63 @@
+.ordineBody{
+    background-color: ghostwhite;
+}
+.ordineCard{
+    background-color: ghostwhite;
+    border: none;
+}
+.tableHeader {
+    height: 5em;
+    text-decoration: underline;
+
+}
+.tableRow {
+    height: 4em;
+}
+
+.ivaTotal {
+    border-bottom: solid 1px #1a1a1a;
+}
+
+td {
+    border-bottom: solid 1px #1a1a1a;
+}
+li {
+    list-style: none;
+    margin-bottom: 1em;
+}
+
+.paypalImg {
+    width: 80%;
+}
+
+
+@media screen and (min-width: 576px) {
+    .indirizzoOrdineCard{
+        width: 70%;
+        margin: auto;
+    }
+}
+@media screen and (min-width: 768px) {
+    .indirizzoOrdineCard{
+        width: 100%;
+        margin: auto;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .indirizzoOrdineCard{
+        width: 65%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .indirizzoOrdineCard{
+        width: 50%;
+        margin: auto;
+    }
+}
+@media screen and (min-height: 1000px) {
+    .ordineBody{
+        min-height: 65%;
+    }
+}

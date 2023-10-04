@@ -1,0 +1,20 @@
+.paypalFormContainer {
+    width: fit-content;
+    margin: auto;
+}
+
+.paypalButton {
+    width: 15em;
+    margin: auto;
+}
+
+.bannercontrolpanel {
+    background-color: ghostwhite;
+}
+
+@media screen and (min-height: 1000px) {
+    .bannercontrolpanel{
+        min-height: 65%;
+    }
+}
+

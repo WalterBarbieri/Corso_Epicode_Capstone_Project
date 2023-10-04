@@ -17,6 +17,8 @@ public class TokenResponse {
 		this.utenteTokenResponse.setNome(utente.getNome());
 		this.utenteTokenResponse.setCognome(utente.getCognome());
 		this.utenteTokenResponse.setEmail(utente.getEmail());
+		this.utenteTokenResponse.setRuolo(utente.getRuolo());
+		;
 	}
 
 }

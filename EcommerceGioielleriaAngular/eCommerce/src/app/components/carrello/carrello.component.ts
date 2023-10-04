@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthData } from 'src/app/auth/auth.interface';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -30,12 +31,14 @@ export class CarrelloComponent implements OnInit {
     totaleCarrello: number = 0;
     showProdottiAssentiToast = false;
     showIndirizzoAssenteToast = false;
+    private timeout: any;
 
     constructor(
         private authService: AuthService,
         private orderItemService: OrderItemService,
         private modalService: ModalService,
-        private userService: UserService
+        private userService: UserService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -94,8 +97,6 @@ export class CarrelloComponent implements OnInit {
         } else {
             this.indirizzoSelezionato = indirizzo;
         }
-
-        console.log(this.indirizzoSelezionato);
     }
 
     recuperaOrderItem(): void {
@@ -161,12 +162,11 @@ export class CarrelloComponent implements OnInit {
                     }
                 );
         } else {
-            console.log('Quantità richiesta superiore a quella in magazzino');
+            alert('Quantità richiesta superiore a quella in magazzino');
         }
     }
 
     decreaseQuantity(prodotto: any): void {
-        console.log(prodotto);
 
         if (prodotto.quantita > 1) {
             this.orderItemService
@@ -187,7 +187,7 @@ export class CarrelloComponent implements OnInit {
                     }
                 );
         } else {
-            console.log('Non puoi scendere sotto 1');
+            alert('Quantità Minima, impossibile ridurre ulteriormente');
         }
     }
 
@@ -198,7 +198,7 @@ export class CarrelloComponent implements OnInit {
                 this.prodottiArray = [];
                 this.recuperaOrderItem();
                 this.calcolaTotaleCarrello();
-                console.log('Prodotto eliminato con successo');
+                alert('Prodotto eliminato con successo');
             });
     }
 
@@ -212,7 +212,7 @@ export class CarrelloComponent implements OnInit {
                 totale + prodotto.quantita * prodotto.prodotto.price,
             0
         );
-        console.log('Totale del carrello calcolato:', this.totaleCarrello);
+
     }
 
     arrotondaTotale(totale: number) {
@@ -229,20 +229,30 @@ export class CarrelloComponent implements OnInit {
     procediOrdine(){
         if(!this.orderItem || this.isEmpty(this.orderItem.prodotti)){
             this.showProdottiAssentiToast = true;
-            return
+            this.timeout = setTimeout(() => {
+                this.showProdottiAssentiToast = false;
+            }, 4000)
+
         } else if (this.indirizzoSelezionato == null){
             this.showIndirizzoAssenteToast = true;
-            return
+            this.timeout = setTimeout(() => {
+                this.showIndirizzoAssenteToast = false;
+            }, 4000);
+
+
         } else {
-            console.log('Ottimo');
+            this.router.navigate(['/ordine', this.indirizzoSelezionato.id]);
 
         }
     }
 
     chiudiProdottiAssentiToast() {
         this.showProdottiAssentiToast = false;
+        clearTimeout(this.timeout);
     }
     chiudiIndirizzoAssenteToast() {
         this.showIndirizzoAssenteToast = false;
+        clearTimeout(this.timeout);
+
     }
 }

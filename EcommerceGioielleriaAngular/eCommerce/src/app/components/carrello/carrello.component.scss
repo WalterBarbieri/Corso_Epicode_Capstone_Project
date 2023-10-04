@@ -63,16 +63,16 @@ a {
 }
 
 .prodottiAssenti {
- background-color: ghostwhite;
+ background-color: #ccccff;
  .toast-header {
-    background-color: ghostwhite;
+    background-color: #ccccff;
  }
 }
 
 .indirizzoAssente {
-    background-color: ghostwhite;
+    background-color: #ccccff;
     .toast-header {
-       background-color: ghostwhite;
+       background-color: #ccccff;
     }
    }
 
@@ -81,5 +81,11 @@ a {
     .infoBody {
         width: 90%;
         margin: auto;
+    }
+}
+
+@media screen and (min-height: 1000px) {
+    .carrelloBody{
+        min-height: 65%;
     }
 }

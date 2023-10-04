@@ -43,4 +43,8 @@ export class GioielloService {
 
     return this.http.post(`${this.baseUrl}gioielli`, formData);
   }
+
+  eliminaProdotto(id: string){
+    return this.http.delete(`http://localhost:3001/gioielli/${id}`)
+  }
 }

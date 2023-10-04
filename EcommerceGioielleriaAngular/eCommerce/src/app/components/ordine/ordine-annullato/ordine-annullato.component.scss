@@ -1,0 +1,23 @@
+.ordineAnnullatoBody {
+    min-height: 50%;
+    background-color: ghostwhite;
+    display: flex;
+    align-items: center;
+}
+
+a {
+    color: #1a1a1a;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 0.1em;
+        text-underline-offset: 0.5em;
+    }
+}
+
+@media screen and (min-height: 1000px) {
+    .ordineAnnullatoBody{
+        min-height: 65%;
+    }
+}

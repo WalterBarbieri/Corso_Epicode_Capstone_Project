@@ -1,0 +1,166 @@
+<div class="ordineBody py-3">
+    <h1 class="text-center pt-2">Riepilogo Ordine</h1>
+    <div class="container-fluid row">
+        <div class="col-12 col-md-6">
+            <div class="card ordineCard">
+                <div class="card-body infoBody">
+                    <div class="card-title text-center">
+                        <h3>Dettaglio</h3>
+                    </div>
+                    <div class="card-text">
+                        <table class="w-100">
+                            <tr class="tableHeader">
+                                <th>Nome Prodotto</th>
+                                <th>Prezzo</th>
+                                <th>Quantità</th>
+                                <th>Totale</th>
+                            </tr>
+                            <tr
+                                class="tableRow"
+                                *ngFor="let prodotto of prodottiArray"
+                            >
+                                <td>{{ prodotto.prodotto.nomeProdotto }}</td>
+                                <td>{{ prodotto.prodotto.price }}€</td>
+                                <td>{{ prodotto.quantita }}</td>
+                                <td>
+                                    {{
+                                        prodotto.prodotto.price *
+                                            prodotto.quantita
+                                    }}€
+                                </td>
+                            </tr>
+                            <tr class="tableTotal">
+                                <th><h4>Totale:</h4></th>
+                                <th></th>
+                                <th>Importo</th>
+                                <th>
+                                    {{
+                                        arrotondaTotale(totaleCarrello * 0.78)
+                                    }}€
+                                </th>
+                            </tr>
+                            <tr class="tableTotal">
+                                <th><h4></h4></th>
+                                <th></th>
+                                <th class="ivaTotal">Iva</th>
+                                <th class="ivaTotal">
+                                    {{
+                                        arrotondaTotale(totaleCarrello * 0.22)
+                                    }}€
+                                </th>
+                            </tr>
+                            <tr class="tableTotal">
+                                <th><h4></h4></th>
+                                <th></th>
+                                <th>Totale</th>
+                                <th>{{ arrotondaTotale(totaleCarrello) }}€</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card ordineCard">
+                <div class="card-body infoBody">
+                    <div class="card-title text-center">
+                        <h3>Indirizzo di Consegna</h3>
+                    </div>
+                    <div class="card-text indirizzoOrdineCard">
+                        <ul>
+                            <li>
+                                <div class="row">
+                                    <div class="col-4">Via:</div>
+                                    <div
+                                        class="col-8 text-decoration-underline"
+                                    >
+                                        {{ indirizzoConsegna?.via }}
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-4">Civico:</div>
+                                    <div
+                                        class="col-8 text-decoration-underline"
+                                    >
+                                        {{ indirizzoConsegna?.civico }}
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-4">Cap:</div>
+                                    <div
+                                        class="col-8 text-decoration-underline"
+                                    >
+                                        {{ indirizzoConsegna?.cap }}
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-4">Località:</div>
+                                    <div
+                                        class="col-8 text-decoration-underline"
+                                    >
+                                        {{ indirizzoConsegna?.localita }}
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-4">Comune:</div>
+                                    <div
+                                        class="col-8 text-decoration-underline"
+                                    >
+                                        {{
+                                            indirizzoConsegna?.comune
+                                                ?.denominazione
+                                        }}
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-4">Provincia:</div>
+                                    <div
+                                        class="col-8 text-decoration-underline"
+                                    >
+                                        {{
+                                            indirizzoConsegna?.comune
+                                                ?.nomeProvincia
+                                        }}
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="row">
+                                    <div class="col-4">Regione:</div>
+                                    <div
+                                        class="col-8 text-decoration-underline"
+                                    >
+                                        {{
+                                            indirizzoConsegna?.comune
+                                                ?.nomeRegione
+                                        }}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="text-center pt-3">Procedi con il Pagamento</h2>
+        <div class="d-flex justify-content-center">
+
+            <button type="button" class="btn button" (click)="creaOrdine()">
+                <img class="paypalImg"
+                    src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png"
+                />
+            </button>
+        </div>
+    </div>
+</div>
