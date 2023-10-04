@@ -4,50 +4,50 @@ Al momento ha tutte le funzionalità incluso il carrello.
 FUNZIONALITA' DA INCLUDERE:
 
 - INVIO EMAIL TRAMITE BACKEND
-#Back-End
+- #Back-End
 Per strutturare il progetto lato back-end sono state utilizzate le seguenti tecnologie:
-1.Java 17
-2.Spring Boot
-3.PostgreSQL
+- Java 17
+- Spring Boot
+- PostgreSQL
 
 Dependency importate in Java:
-1.Lombok
-2.Spring Boot Dev Tools
-3.PostgreSQL Driver
-4.Spring Web
-5.Spring Data JPA
-6.Spring Security
-7.JJWT: API
-8.JJWT: IMPL
-9.JJWT: EXTENTIONS: JACKSON
+- Lombok
+- Spring Boot Dev Tools
+- PostgreSQL Driver
+- Spring Web
+- Spring Data JPA
+- Spring Security
+- JJWT: API
+- JJWT: IMPL
+- JJWT: EXTENTIONS: JACKSON
 
-#Front-End
+- #Front-End
 Per strutturare il progetto lato front-end sono state utilizzate le seguenti tecnologie:
-1.Angular
-2.Bootstrap
+- Angular
+- Bootstrap
 
 Dependency importate in Angular:
-1.Auth-JWT
+- Auth-JWT
 
-#Per eseguire il progetto
-* Back-End
-1. Creare file env.properties con queste proprietà:
+- #Per eseguire il progetto
+- * Back-End
+- Creare file env.properties con queste proprietà:
 PG_USERNAME=  ****
 PG_PASSWORD=  ****
 PG_DB=  ****
 PORT=  ****
 JWT_SECRET= ****
 
-2. Popolare database con la lista dei comuni
+- Popolare database con la lista dei comuni
 Far partire il seguente runner, rimuovendo il commento al converter:
 /EcommerceGioielleria/src/main/java/CaptsoneProject/EcommerceGioielleria/runner/ComuneRunner.java
 
-2.1 Popolare database con utenti random
+- Popolare database con utenti random
 Far partire il seguente runner, rimuovendo il commento al generator:
 /EcommerceGioielleria/src/main/java/CaptsoneProject/EcommerceGioielleria/runner/ComuneRunner.java
 
-* Front-End
-1. Fare Run del progetto:
+- * Front-End
+- Fare Run del progetto:
 ng s -o
 
 
