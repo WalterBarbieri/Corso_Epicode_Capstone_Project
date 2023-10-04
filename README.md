@@ -2,9 +2,11 @@
 Progetto CapstoneProject di Barbieri Walter basato su un sito con funzionalità di ecommerce per una gioielleria artigianale. Utilizzo Trello per la suddivisione dei compiti, DrawIo e Excalidraw per diagrammi e progettazione architettura. Utilizzo GitHub desktop. Utilizzo di Postman per simulare le chiamate Http.
 Al momento ha tutte le funzionalità incluso il carrello.
 FUNZIONALITA' DA INCLUDERE:
+- Invio email tramite server
 
-- INVIO EMAIL TRAMITE BACKEND
-- #Back-End
+STRUTTURA PROGETTO
+
+- * Back-End
 Per strutturare il progetto lato back-end sono state utilizzate le seguenti tecnologie:
 - Java 17
 - Spring Boot
@@ -21,7 +23,7 @@ Dependency importate in Java:
 - JJWT: IMPL
 - JJWT: EXTENTIONS: JACKSON
 
-- #Front-End
+- * Front-End
 Per strutturare il progetto lato front-end sono state utilizzate le seguenti tecnologie:
 - Angular
 - Bootstrap
@@ -29,7 +31,8 @@ Per strutturare il progetto lato front-end sono state utilizzate le seguenti tec
 Dependency importate in Angular:
 - Auth-JWT
 
-- #Per eseguire il progetto
+PER ESEGUIRE IL PROGETTO
+
 - * Back-End
 - Creare file env.properties con queste proprietà:
 PG_USERNAME=  ****
