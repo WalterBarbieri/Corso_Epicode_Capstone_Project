@@ -2,8 +2,7 @@
 Progetto CapstoneProject di Barbieri Walter basato su un sito con funzionalità di ecommerce per una gioielleria artigianale. Utilizzo Trello per la suddivisione dei compiti, DrawIo e Excalidraw per diagrammi e progettazione architettura. Utilizzo GitHub desktop. Utilizzo di Postman per simulare le chiamate Http.
 Al momento ha tutte le funzionalità incluso il carrello.
 FUNZIONALITA' DA INCLUDERE:
-- INTEGRAZIONE SISTEMA DI PAGAMENTO
-- PROCESSO DELL'ORDINE
+
 - INVIO EMAIL TRAMITE BACKEND
 - 
 #Back-End
