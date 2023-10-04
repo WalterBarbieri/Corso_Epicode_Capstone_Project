@@ -4,7 +4,6 @@ Al momento ha tutte le funzionalità incluso il carrello.
 FUNZIONALITA' DA INCLUDERE:
 
 - INVIO EMAIL TRAMITE BACKEND
-- 
 #Back-End
 Per strutturare il progetto lato back-end sono state utilizzate le seguenti tecnologie:
 1.Java 17
